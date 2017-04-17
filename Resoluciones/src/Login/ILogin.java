@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista;
+package Login;
 
-import Controlador.ControladorPrincipal;
-import Controlador.ISolicitud;
+import DTOs.DTOUsuario;
 
 /**
  *
  * @author Armando
  */
-public abstract class Facade implements ISolicitud {
+public interface ILogin {
 
-    private ControladorPrincipal controlador;
+    public DTOUsuario Login(String id, String contrasenha);
 }

@@ -3,16 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista;
 
-import Controlador.ControladorPrincipal;
-import Controlador.ISolicitud;
 
 /**
  *
  * @author Armando
  */
-public abstract class Facade implements ISolicitud {
+public class Main {
 
-    private ControladorPrincipal controlador;
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+    }
+    
 }

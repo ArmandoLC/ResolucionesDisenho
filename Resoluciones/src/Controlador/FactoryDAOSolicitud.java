@@ -3,16 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista;
+package Controlador;
 
-import Controlador.ControladorPrincipal;
-import Controlador.ISolicitud;
+import Controlador.IDAOSolicitud;
+import Enums.Recurso;
 
 /**
  *
  * @author Armando
  */
-public abstract class Facade implements ISolicitud {
+public class FactoryDAOSolicitud {
 
-    private ControladorPrincipal controlador;
+    public IDAOSolicitud CrearDAOSolicitud(Recurso recurso) {
+        return null;
+    }
+
 }

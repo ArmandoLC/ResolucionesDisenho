@@ -5,7 +5,7 @@
  */
 package Vista;
 
-import Interfaces.ILogin;
+import Login.ILogin;
 
 /**
  *

@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista;
-
-import Controlador.ControladorPrincipal;
-import Controlador.ISolicitud;
+package Modelo;
 
 /**
  *
  * @author Armando
  */
-public abstract class Facade implements ISolicitud {
-
-    private ControladorPrincipal controlador;
+public class Curso {
+    private String id;
+    private String nombre;
+    private int creditos;
+    
 }

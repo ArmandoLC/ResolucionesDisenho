@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import Vista.BackofficeEstudiante;
+import Vista.FacadeEstudiante;
+
 /**
  *
  * @author Armando

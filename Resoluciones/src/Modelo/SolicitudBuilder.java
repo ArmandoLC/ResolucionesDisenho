@@ -3,16 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista;
+package Modelo;
 
-import Controlador.ControladorPrincipal;
-import Controlador.ISolicitud;
+import DTOs.DTOSolicitud;
 
 /**
  *
  * @author Armando
  */
-public abstract class Facade implements ISolicitud {
+public class SolicitudBuilder {
 
-    private ControladorPrincipal controlador;
+    public void setDTOSolicitud(DTOSolicitud dtoSolicitud){}
+    
+    public Solicitud create() {
+        return null;
+    }
 }
