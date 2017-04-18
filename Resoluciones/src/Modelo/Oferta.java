@@ -19,4 +19,5 @@ public class Oferta {
     private int nGrupo;
     private String horario;
     private String aula;
+    
 }

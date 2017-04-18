@@ -22,6 +22,8 @@ public interface ICoordinador extends IEstadisticas {
     public DTOResolucion ConsultarResolucion(int nSolicitud);
 
     public ArrayList<String> ConsultarAnotaciones(int nSolicitud);
+    
+    public boolean TramitarSolicitud(int nSolicitud);
 
     public boolean RegistrarSolicitudesGoogleForm();
 

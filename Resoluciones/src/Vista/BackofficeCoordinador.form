@@ -11,25 +11,21 @@
             <Property name="text" type="java.lang.String" value="Principal"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mitemRegistrarSolicitud">
+            <MenuItem class="javax.swing.JMenuItem" name="mitemInconsistencia">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Registrar nueva solicitud"/>
+                <Property name="text" type="java.lang.String" value="Registrar inconsistencia"/>
               </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mitemRegistrarDesdeGoogle">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Registrar desde Google Forms"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mitemGenerarResolucion">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Generar resoluci&#xf3;n"/>
-              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mitemInconsistenciaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mitemSalir">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salir"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mitemSalirActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -93,6 +89,8 @@
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="dpHasta" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="linkEstadisticas1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="linkEstadisticas" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -121,6 +119,7 @@
                       <Component id="dpHasta" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="linkEstadisticas1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="378" max="-2" attributes="0"/>
@@ -160,6 +159,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Extraer solicitudes del Excel"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExtraerExcelActionPerformed"/>
+          </Events>
         </Component>
         <Component class="org.jdesktop.swingx.JXDatePicker" name="dpDesde">
         </Component>
@@ -169,6 +171,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Estad&#xed;sticas"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkEstadisticasActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -201,6 +206,14 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="org.jdesktop.swingx.JXHyperlink" name="linkEstadisticas1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Reporte de solicitudes seg&#xfa;n las fechas indicadas"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkEstadisticas1ActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

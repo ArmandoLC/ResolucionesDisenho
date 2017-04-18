@@ -5,8 +5,10 @@
  */
 package Vista;
 
+import DTOs.DTOSolicitud;
 import Vista.BackofficeCoordinador;
 import Vista.FacadeEstudiante;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,11 +16,18 @@ import Vista.FacadeEstudiante;
  */
 public class UIBackofficeCoordinador {
 
-    private FacadeEstudiante facade;
+    private FacadeCoordinador facade;
     private BackofficeCoordinador backoffice;
 
+    public UIBackofficeCoordinador(Backoffice backoffice){
+        this.facade = new FacadeCoordinador();
+        this.backoffice = (BackofficeCoordinador) backoffice;
+    }
     
     public void ConsultarSolicitudes() {
+        //if(backoffice.)
+        ArrayList<DTOSolicitud> solicitudes;
+        //backoffice.tabModelSolicitudes.setSolicitudes(solicitudes);
     }
 
     public void ConsultarResolucion() {
@@ -45,12 +54,22 @@ public class UIBackofficeCoordinador {
     public void RegistrarAnotacion() {
     }
 
-    public void AnularSolicitud() {
+    public void AnularSolicitud(DTOSolicitud solicitud, String aclaracion) {
+        boolean respuesta = facade.AnularSolicitud(0, aclaracion);
+        //if()
     }
 
-    public void TramitarSolicitud() {
+    public void TramitarSolicitud(DTOSolicitud solicitud) {
+        boolean respuesta = facade.TramitarSolicitud(solicitud.getId());
+        if(respuesta){
+            backoffice.showMessage("Solicitud tramitada\n");
+            ConsultarSolicitudes();
+            
+        }
     }
 
     public void GenerarResolucion() {
+        
     }
+    
 }

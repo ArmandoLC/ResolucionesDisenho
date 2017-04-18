@@ -7,39 +7,71 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Date;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import javax.swing.table.DefaultTableModel;
 
-public class BackofficeCoordinador extends Backoffice implements ActionListener {
+public class BackofficeCoordinador extends Backoffice{
+    
+    UIBackofficeCoordinador uibackoffice;
     
     JPopupMenu popup;
+    TableModelSolicitud tabModelSolicitudes;
             
     public BackofficeCoordinador() {
         
         initLookAndFeel();
         initComponents();
         setEstados();
-        
-        String columnas[] = {"Id","Fecha","Solicitante", "Nombre", "Periodo", "Curso", "Grupo"};
-        TableModelSolicitud tabModelo = new TableModelSolicitud();
-        
-        
-        DTOSolicitud solicitud1 = new DTOSolicitud();
-        solicitud1.setId(123456);
-        solicitud1.setFecha(new Date(20170417));
-        solicitud1.setIdSolicitante("1546468");
-        solicitud1.setNombreSolicitante("Julian");
-        solicitud1.setPeriodo("IS2017");
-        solicitud1.setnGrupo(4);
-        solicitud1.setCodigoCurso("156485fr");
-        tabModelo.addRow(solicitud1);
-        tabModelo.addRow(solicitud1);
-        //tabSolicitudes.setModel(tabModelo);
+       
+        uibackoffice = new UIBackofficeCoordinador(this);
+        tabModelSolicitudes = new TableModelSolicitud(tabSolicitudes);  
+        tabSolicitudes.setModel(tabModelSolicitudes);
         tabSolicitudes.addMouseListener(mouseAdapter);
+        loadTestData();
         
+    }
+    
+    private void loadTestData(){
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+            DTOSolicitud solicitud1 = new DTOSolicitud();
+            solicitud1.setId(123);
+            solicitud1.setFecha(sdf.parse("15/10/2013"));
+            solicitud1.setIdSolicitante("1546468");
+            solicitud1.setNombreSolicitante("Julian");
+            solicitud1.setPeriodo("IS2017");
+            solicitud1.setnGrupo(4);
+            solicitud1.setCodigoCurso("156485fr");
+            solicitud1.setEstado("Tramitada");
+            DTOSolicitud solicitud2 = new DTOSolicitud();
+            solicitud2.setId(456);
+            solicitud2.setFecha(sdf.parse("13/10/2013"));
+            solicitud2.setIdSolicitante("1546468");
+            solicitud2.setNombreSolicitante("Julian");
+            solicitud2.setPeriodo("IS2017");
+            solicitud2.setnGrupo(4);
+            solicitud2.setCodigoCurso("156485fr");
+            solicitud2.setEstado("Anulada");
+            DTOSolicitud solicitud3 = new DTOSolicitud();
+            solicitud3.setId(789);
+            solicitud3.setFecha(sdf.parse("12/10/2013"));
+            solicitud3.setIdSolicitante("1546468");
+            solicitud3.setNombreSolicitante("Julian");
+            solicitud3.setPeriodo("IS2017");
+            solicitud3.setnGrupo(4);
+            solicitud3.setCodigoCurso("156485fr");
+            solicitud3.setEstado("Pendiente");
+            tabModelSolicitudes.addRow(solicitud1);
+            tabModelSolicitudes.addRow(solicitud2);
+            tabModelSolicitudes.addRow(solicitud3);
+            tabSolicitudes.setModel(tabModelSolicitudes);
+        }
+        catch(Exception e){
+            System.out.println("Error al colocar la hora");
+        }
     }
     
     private final MouseAdapter mouseAdapter = new MouseAdapter() {
@@ -48,6 +80,7 @@ public class BackofficeCoordinador extends Backoffice implements ActionListener 
         public void mousePressed(MouseEvent e) {
             System.out.println("pressed");
         }
+        
         @Override
         public void mouseReleased(MouseEvent e) {
             if (e.isPopupTrigger()) {
@@ -64,23 +97,66 @@ public class BackofficeCoordinador extends Backoffice implements ActionListener 
     };
     
     public void addPopupMenuOptions(JPopupMenu popup){
-        int fila = tabSolicitudes.getSelectedRow();
         
-        popup.add(new JMenuItem("ohla"));
-        popup.add(new JMenuItem("ohla"));
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Component c = (Component)e.getSource();
-        JPopupMenu popup = (JPopupMenu)c.getParent();
-        System.out.println(tabSolicitudes.getSelectedRow() + " : " + tabSolicitudes.getSelectedColumn());
+        int fila = tabSolicitudes.getSelectedRow();
+        DTOSolicitud solicitud = tabModelSolicitudes.getSolicitud(fila);
+        popup.add(new JMenuItem("#Solicitud " + String.valueOf(solicitud.getId())));
+        
+        if("Anulada".equals(solicitud.getEstado())){
+            JMenuItem item = new JMenuItem("Ver aclaración");
+            item.addActionListener((ActionEvent e) -> {
+                System.out.println("Abriendo aclaracion");
+            });
+            popup.add(item);
+        }
+        
+        else if("Tramitada".equals(solicitud.getEstado())){
+            
+            JMenuItem itemGenerar = new JMenuItem("Generar resolución");
+            itemGenerar.addActionListener((ActionEvent e) -> {
+                System.out.println("Generar resolución");
+            }); popup.add(itemGenerar);
+            
+            JMenuItem itemVer = new JMenuItem("Ver resolución");
+            itemVer.addActionListener((ActionEvent e) -> {
+                System.out.println("Ver resolución");
+            }); popup.add(itemVer);
+   
+        }
+        else if("Pendiente".equals(solicitud.getEstado())){
+        
+            JMenuItem itemGenerar = new JMenuItem("Tramitar");
+            itemGenerar.addActionListener((ActionEvent e) -> {
+                uibackoffice.TramitarSolicitud(solicitud);
+            }); popup.add(itemGenerar);
+            
+            JMenuItem itemVer = new JMenuItem("Anular");
+            itemVer.addActionListener((ActionEvent e) -> {
+                System.out.println("Anulando");
+            }); popup.add(itemVer);
+            
+        }
+        
+        JMenuItem itemVer = new JMenuItem("Ver detalles");
+        itemVer.addActionListener((ActionEvent e) -> {
+            System.out.println("Desplegando detalles");
+        }); popup.add(itemVer);
     }
     
     public void setEstados(){
         for(Estado estado : Estado.values())
             cbEstado.addItem(estado.toString());
         cbEstado.addItem("Todas");
+    }
+    
+    public static void main(String args[]) {
+        //</editor-fold>
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new BackofficeCoordinador().setVisible(true);
+            }
+        });
     }
     
     @SuppressWarnings("unchecked")
@@ -100,11 +176,10 @@ public class BackofficeCoordinador extends Backoffice implements ActionListener 
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabSolicitudes = new org.jdesktop.swingx.JXTable();
+        linkEstadisticas1 = new org.jdesktop.swingx.JXHyperlink();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        mitemRegistrarSolicitud = new javax.swing.JMenuItem();
-        mitemRegistrarDesdeGoogle = new javax.swing.JMenuItem();
-        mitemGenerarResolucion = new javax.swing.JMenuItem();
+        mitemInconsistencia = new javax.swing.JMenuItem();
         mitemSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -116,8 +191,18 @@ public class BackofficeCoordinador extends Backoffice implements ActionListener 
         btnRegistrarSolicitud.setText("Registrar");
 
         btnExtraerExcel.setText("Extraer solicitudes del Excel");
+        btnExtraerExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExtraerExcelActionPerformed(evt);
+            }
+        });
 
         linkEstadisticas.setText("Estadísticas");
+        linkEstadisticas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkEstadisticasActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Desde:");
 
@@ -136,6 +221,13 @@ public class BackofficeCoordinador extends Backoffice implements ActionListener 
         ));
         jScrollPane1.setViewportView(tabSolicitudes);
 
+        linkEstadisticas1.setText("Reporte de solicitudes según las fechas indicadas");
+        linkEstadisticas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkEstadisticas1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
         panelFondo.setLayout(panelFondoLayout);
         panelFondoLayout.setHorizontalGroup(
@@ -151,6 +243,8 @@ public class BackofficeCoordinador extends Backoffice implements ActionListener 
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dpHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(linkEstadisticas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(linkEstadisticas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelFondoLayout.createSequentialGroup()
@@ -173,7 +267,8 @@ public class BackofficeCoordinador extends Backoffice implements ActionListener 
                     .addComponent(dpDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dpHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(linkEstadisticas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -189,16 +284,20 @@ public class BackofficeCoordinador extends Backoffice implements ActionListener 
 
         jMenu1.setText("Principal");
 
-        mitemRegistrarSolicitud.setText("Registrar nueva solicitud");
-        jMenu1.add(mitemRegistrarSolicitud);
-
-        mitemRegistrarDesdeGoogle.setText("Registrar desde Google Forms");
-        jMenu1.add(mitemRegistrarDesdeGoogle);
-
-        mitemGenerarResolucion.setText("Generar resolución");
-        jMenu1.add(mitemGenerarResolucion);
+        mitemInconsistencia.setText("Registrar inconsistencia");
+        mitemInconsistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitemInconsistenciaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mitemInconsistencia);
 
         mitemSalir.setText("Salir");
+        mitemSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitemSalirActionPerformed(evt);
+            }
+        });
         jMenu1.add(mitemSalir);
 
         jMenuBar1.add(jMenu1);
@@ -221,6 +320,31 @@ public class BackofficeCoordinador extends Backoffice implements ActionListener 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void linkEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkEstadisticasActionPerformed
+        DialogEstadisticas dialog = new DialogEstadisticas(this, true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_linkEstadisticasActionPerformed
+
+    private void mitemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemSalirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mitemSalirActionPerformed
+
+    private void mitemInconsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemInconsistenciaActionPerformed
+        DialogInconsistencia dialog = new DialogInconsistencia(this, true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_mitemInconsistenciaActionPerformed
+
+    private void linkEstadisticas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkEstadisticas1ActionPerformed
+        DialogSolicitudesAtendidas dialog = new DialogSolicitudesAtendidas(this, true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_linkEstadisticas1ActionPerformed
+
+    private void btnExtraerExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtraerExcelActionPerformed
+        JFileChooser file=new JFileChooser();
+        file.showOpenDialog(this);
+        File archivo = file.getSelectedFile();
+    }//GEN-LAST:event_btnExtraerExcelActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExtraerExcel;
     private javax.swing.JButton btnRegistrarSolicitud;
@@ -235,9 +359,8 @@ public class BackofficeCoordinador extends Backoffice implements ActionListener 
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXHyperlink linkEstadisticas;
-    private javax.swing.JMenuItem mitemGenerarResolucion;
-    private javax.swing.JMenuItem mitemRegistrarDesdeGoogle;
-    private javax.swing.JMenuItem mitemRegistrarSolicitud;
+    private org.jdesktop.swingx.JXHyperlink linkEstadisticas1;
+    private javax.swing.JMenuItem mitemInconsistencia;
     private javax.swing.JMenuItem mitemSalir;
     private javax.swing.JPanel panelFondo;
     private org.jdesktop.swingx.JXTable tabSolicitudes;

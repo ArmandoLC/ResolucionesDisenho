@@ -63,6 +63,11 @@ public class ControladorPrincipal implements ISolicitud,ICoordinador{
     public ArrayList<DTOSolicitud> ConsultarSolicitudes(Estado estado) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    @Override
+    public boolean TramitarSolicitud(int nSolicitud) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
     public DTOResolucion ConsultarResolucion(int nSolicitud) {

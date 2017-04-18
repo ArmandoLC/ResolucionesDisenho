@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Controlador.ControladorPrincipal;
 import DTOs.DTOCurso;
 import DTOs.DTOPersona;
 import DTOs.DTOResolucion;
@@ -15,12 +16,14 @@ import Enums.Formato;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author Armando
- */
 public class FacadeCoordinador extends Facade implements ICoordinador{
 
+    ControladorPrincipal control;
+    
+    public FacadeCoordinador(){
+        control = new ControladorPrincipal();
+    }
+    
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -30,6 +33,8 @@ public class FacadeCoordinador extends Facade implements ICoordinador{
     public int RegistrarSolicitud(DTOSolicitud dtoSolicitud) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
 
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes(Estado estado) {
@@ -44,6 +49,11 @@ public class FacadeCoordinador extends Facade implements ICoordinador{
     @Override
     public ArrayList<String> ConsultarAnotaciones(int nSolicitud) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public boolean TramitarSolicitud(int nSolicitud) {
+        return control.TramitarSolicitud(nSolicitud);
     }
 
     @Override

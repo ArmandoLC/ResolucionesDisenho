@@ -28,6 +28,7 @@ public class DTOSolicitud {
     private String tipoSituacion;
     private String descripcionDetallada;
     private String rutaArchivoAdjunto;
+    private String estado;
     private String aclaracion;
     private int nResolucion;
     private int fechaResolucion;
@@ -148,6 +149,16 @@ public class DTOSolicitud {
     public void setRutaArchivoAdjunto(String rutaArchivoAdjunto) {
         this.rutaArchivoAdjunto = rutaArchivoAdjunto;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
+    
 
     public String getAclaracion() {
         return aclaracion;

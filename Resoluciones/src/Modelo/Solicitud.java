@@ -18,7 +18,7 @@ public class Solicitud {
     private Resolucion resolucion;
     private Estudiante afectado;
     private Persona solicitante;
-    private Oferta inforCurso; //Por medio de este atributo se pueden obtener datos del curso y profesor
+    private Oferta infoCurso; //Por medio de este atributo se pueden obtener datos del curso y profesor
     
     //Atributos propios de esta clase
     private int id;
