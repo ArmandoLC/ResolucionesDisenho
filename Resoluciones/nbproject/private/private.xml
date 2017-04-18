@@ -3,8 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Armando/Documents/I%20Semestre%202017/Diseño%20de%20Software/Proyectos/Proyecto%231/Código/Resoluciones/src/Login_Sesion/Sesion.java</file>
-            <file>file:/C:/Users/Armando/Documents/I%20Semestre%202017/Diseño%20de%20Software/Proyectos/Proyecto%231/Código/Resoluciones/src/Login_Sesion/LoginMySQL.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/BackofficeEstudiante.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/DTOs/DTOResolucion.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Login/LoginMySQL.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/DTOs/DTOSolicitud.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/DTOs/DTOferta.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/BackofficeCoordinador.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/UIBackofficeCoordinador.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/DTOs/DTOUsuario.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/DTOs/DTOCurso.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Login/Sesion.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/UIBackofficeEstudiante.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Login/ILogin.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/DTOs/DTOPersona.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/Backoffice.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/BackofficeLogin.java</file>
         </group>
     </open-files>
 </project-private>

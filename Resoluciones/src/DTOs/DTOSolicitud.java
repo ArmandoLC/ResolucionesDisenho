@@ -14,27 +14,205 @@ import java.util.Date;
  */
 public class DTOSolicitud {
 
-    public int id;
-    public Date fecha;
-    public String idSolicitante;
-    public String nombreSolicitante;
-    public String periodo;
-    public String codigoCurso;
-    public int nGrupo;
-    public String idAfectado;
-    public String nombreAfectado;
-    public String correoAfectado;
-    public String telefonoAfectado;
-    public String tipoSituacion;
-    public String descripcionDetallada;
-    public String rutaArchivoAdjunto;
-    public String aclaracion;
-    public int nResolucion;
-    public int fechaResolucion;
-    public String nombreCoordinadorResolucion;
-    public String nombreDirectorEscuelaResolucion;
-    public String nombreDirectorAdmYRegResolucion;
-    public ArrayList<String> listaAnotaciones;
-    public ArrayList<String> listaResueltosResolucion;
+    private int id;
+    private Date fecha;
+    private String idSolicitante;
+    private String nombreSolicitante;
+    private String periodo;
+    private String codigoCurso;
+    private int nGrupo;
+    private String idAfectado;
+    private String nombreAfectado;
+    private String correoAfectado;
+    private String telefonoAfectado;
+    private String tipoSituacion;
+    private String descripcionDetallada;
+    private String rutaArchivoAdjunto;
+    private String aclaracion;
+    private int nResolucion;
+    private int fechaResolucion;
+    private String nombreCoordinadorResolucion;
+    private String nombreDirectorEscuelaResolucion;
+    private String nombreDirectorAdmYRegResolucion;
+    private ArrayList<String> listaAnotaciones;
+    private ArrayList<String> listaResueltosResolucion;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getIdSolicitante() {
+        return idSolicitante;
+    }
+
+    public void setIdSolicitante(String idSolicitante) {
+        this.idSolicitante = idSolicitante;
+    }
+
+    public String getNombreSolicitante() {
+        return nombreSolicitante;
+    }
+
+    public void setNombreSolicitante(String nombreSolicitante) {
+        this.nombreSolicitante = nombreSolicitante;
+    }
+
+    public String getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
+
+    public String getCodigoCurso() {
+        return codigoCurso;
+    }
+
+    public void setCodigoCurso(String codigoCurso) {
+        this.codigoCurso = codigoCurso;
+    }
+
+    public int getnGrupo() {
+        return nGrupo;
+    }
+
+    public void setnGrupo(int nGrupo) {
+        this.nGrupo = nGrupo;
+    }
+
+    public String getIdAfectado() {
+        return idAfectado;
+    }
+
+    public void setIdAfectado(String idAfectado) {
+        this.idAfectado = idAfectado;
+    }
+
+    public String getNombreAfectado() {
+        return nombreAfectado;
+    }
+
+    public void setNombreAfectado(String nombreAfectado) {
+        this.nombreAfectado = nombreAfectado;
+    }
+
+    public String getCorreoAfectado() {
+        return correoAfectado;
+    }
+
+    public void setCorreoAfectado(String correoAfectado) {
+        this.correoAfectado = correoAfectado;
+    }
+
+    public String getTelefonoAfectado() {
+        return telefonoAfectado;
+    }
+
+    public void setTelefonoAfectado(String telefonoAfectado) {
+        this.telefonoAfectado = telefonoAfectado;
+    }
+
+    public String getTipoSituacion() {
+        return tipoSituacion;
+    }
+
+    public void setTipoSituacion(String tipoSituacion) {
+        this.tipoSituacion = tipoSituacion;
+    }
+
+    public String getDescripcionDetallada() {
+        return descripcionDetallada;
+    }
+
+    public void setDescripcionDetallada(String descripcionDetallada) {
+        this.descripcionDetallada = descripcionDetallada;
+    }
+
+    public String getRutaArchivoAdjunto() {
+        return rutaArchivoAdjunto;
+    }
+
+    public void setRutaArchivoAdjunto(String rutaArchivoAdjunto) {
+        this.rutaArchivoAdjunto = rutaArchivoAdjunto;
+    }
+
+    public String getAclaracion() {
+        return aclaracion;
+    }
+
+    public void setAclaracion(String aclaracion) {
+        this.aclaracion = aclaracion;
+    }
+
+    public int getnResolucion() {
+        return nResolucion;
+    }
+
+    public void setnResolucion(int nResolucion) {
+        this.nResolucion = nResolucion;
+    }
+
+    public int getFechaResolucion() {
+        return fechaResolucion;
+    }
+
+    public void setFechaResolucion(int fechaResolucion) {
+        this.fechaResolucion = fechaResolucion;
+    }
+
+    public String getNombreCoordinadorResolucion() {
+        return nombreCoordinadorResolucion;
+    }
+
+    public void setNombreCoordinadorResolucion(String nombreCoordinadorResolucion) {
+        this.nombreCoordinadorResolucion = nombreCoordinadorResolucion;
+    }
+
+    public String getNombreDirectorEscuelaResolucion() {
+        return nombreDirectorEscuelaResolucion;
+    }
+
+    public void setNombreDirectorEscuelaResolucion(String nombreDirectorEscuelaResolucion) {
+        this.nombreDirectorEscuelaResolucion = nombreDirectorEscuelaResolucion;
+    }
+
+    public String getNombreDirectorAdmYRegResolucion() {
+        return nombreDirectorAdmYRegResolucion;
+    }
+
+    public void setNombreDirectorAdmYRegResolucion(String nombreDirectorAdmYRegResolucion) {
+        this.nombreDirectorAdmYRegResolucion = nombreDirectorAdmYRegResolucion;
+    }
+
+    public ArrayList<String> getListaAnotaciones() {
+        return listaAnotaciones;
+    }
+
+    public void setListaAnotaciones(ArrayList<String> listaAnotaciones) {
+        this.listaAnotaciones = listaAnotaciones;
+    }
+
+    public ArrayList<String> getListaResueltosResolucion() {
+        return listaResueltosResolucion;
+    }
+
+    public void setListaResueltosResolucion(ArrayList<String> listaResueltosResolucion) {
+        this.listaResueltosResolucion = listaResueltosResolucion;
+    }
+    
+    
 
 }

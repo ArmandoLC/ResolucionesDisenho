@@ -7,15 +7,22 @@ package Login;
 
 import DTOs.DTOUsuario;
 
-/**
- *
- * @author Armando
- */
 public class LoginMySQL implements ILogin{
+    
     private String stringConexion;
 
     @Override
-    public DTOUsuario Login(String id, String contrasenha) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public DTOUsuario Login(String id, String contrasenha) throws Exception {
+
+        //Informacion temporal
+        DTOUsuario usuario =  new DTOUsuario();
+        usuario.setId(Integer.parseInt(id));
+        if("305000681".equals(id) && "1234".equals(contrasenha))
+             usuario.setTipoUsuario("Coordinador");
+        else usuario.setTipoUsuario("Estudiante"); 
+        Sesion.getInstance().setUsuario(usuario);
+        return usuario;
+      
     }
+    
 }

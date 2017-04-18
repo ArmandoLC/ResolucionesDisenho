@@ -13,5 +13,6 @@ import DTOs.DTOUsuario;
  */
 public interface ILogin {
 
-    public DTOUsuario Login(String id, String contrasenha);
+    public DTOUsuario Login(String id, String contrasenha) throws Exception ;
+    
 }
