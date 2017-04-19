@@ -16,7 +16,4 @@ public interface IDAOSolicitud {
 
     public ArrayList<DTOSolicitud> ConsultarSolicitudes();
 
-    public int RegistrarSolicitud(DTOSolicitud dtoSolicitud);
-
-    public ArrayList<DTOSolicitud> RegistrarSolicitudes(ArrayList<DTOSolicitud> dtoSolicitudes);
 }

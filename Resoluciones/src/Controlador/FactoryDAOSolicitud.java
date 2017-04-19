@@ -14,8 +14,22 @@ import Enums.Recurso;
  */
 public class FactoryDAOSolicitud {
 
+    public FactoryDAOSolicitud() {
+    }
+    
     public IDAOSolicitud CrearDAOSolicitud(Recurso recurso) {
-        return null;
+        IDAOSolicitud daoSolicitud;
+        
+        try{
+            String name = IDAOSolicitud.class.getPackage().getName();            
+            daoSolicitud = (IDAOSolicitud) Class.forName(name + "." + recurso.name()).newInstance();
+            
+            return daoSolicitud;       
+            
+        }catch (Exception e) {
+            //throw new Exception("Tipo de DAO desconocido.");
+            return null;
+        }
     }
 
 }

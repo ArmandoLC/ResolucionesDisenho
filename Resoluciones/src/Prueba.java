@@ -32,13 +32,13 @@ public class Prueba {
              DTOPersona dtoSolicitante = new DTOPersona("IDArmando","Armando","Email","84317926");
              DTOPersona dtoProfesor = new DTOPersona("IDLuis","Luis","Correo","87942212");
              Date d = Date.valueOf(LocalDate.now());
-             DTOSolicitud dtoSolicitud = new DTOSolicitud(1,d,"IDArmando","Armando", "I", "IC400", 4,"IDArmando" ,"NA", "CA", "TA","Situacion" , "Desc", "ruta", "Pendiente", "aclaracion", 1, 20, "Coordinador", "Director", "AdmyReg", new ArrayList(), new ArrayList());
+             //DTOSolicitud dtoSolicitud = new DTOSolicitud(1,d,"IDArmando","Armando", "I", "IC400", 4,"IDArmando" ,"NA", "CA", "TA","Situacion" , "Desc", "ruta", "Pendiente", "aclaracion", 1, 20, "Coordinador", "Director", "AdmyReg", new ArrayList(), new ArrayList());
              DTOferta dtoOferta = new DTOferta("I","IC400",1,"IDLuis","Horario","Aula");
              
-             sol.setDatosSolicitud(dtoSolicitud, dtoCurso, dtoOferta, dtoProfesor, dtoSolicitante);
-             Solicitud s = sol.create();
+             //sol.setDatosSolicitud(dtoSolicitud, dtoCurso, dtoOferta, dtoProfesor, dtoSolicitante);
+             //Solicitud s = sol.create();
              
-             System.out.println(s.toString());
+             //System.out.println(s.toString());
                     
         } catch (Exception e) {
             System.out.println(e.getMessage());
