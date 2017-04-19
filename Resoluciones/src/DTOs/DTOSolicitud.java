@@ -36,36 +36,7 @@ public class DTOSolicitud {
     private String nombreDirectorEscuelaResolucion;
     private String nombreDirectorAdmYRegResolucion;
     private ArrayList<String> listaAnotaciones;
-    private ArrayList<String> listaResueltosResolucion;
-
-    public DTOSolicitud(int id, Date fecha, String idSolicitante, String nombreSolicitante, String periodo, String codigoCurso, int nGrupo, String idAfectado, String nombreAfectado, String correoAfectado, String telefonoAfectado, String tipoSituacion, String descripcionDetallada, String rutaArchivoAdjunto, String estado, String aclaracion, int nResolucion, int fechaResolucion, String nombreCoordinadorResolucion, String nombreDirectorEscuelaResolucion, String nombreDirectorAdmYRegResolucion, ArrayList<String> listaAnotaciones, ArrayList<String> listaResueltosResolucion) {
-        this.id = id;
-        this.fecha = fecha;
-        this.idSolicitante = idSolicitante;
-        this.nombreSolicitante = nombreSolicitante;
-        this.periodo = periodo;
-        this.codigoCurso = codigoCurso;
-        this.nGrupo = nGrupo;
-        this.idAfectado = idAfectado;
-        this.nombreAfectado = nombreAfectado;
-        this.correoAfectado = correoAfectado;
-        this.telefonoAfectado = telefonoAfectado;
-        this.tipoSituacion = tipoSituacion;
-        this.descripcionDetallada = descripcionDetallada;
-        this.rutaArchivoAdjunto = rutaArchivoAdjunto;
-        this.estado = estado;
-        this.aclaracion = aclaracion;
-        this.nResolucion = nResolucion;
-        this.fechaResolucion = fechaResolucion;
-        this.nombreCoordinadorResolucion = nombreCoordinadorResolucion;
-        this.nombreDirectorEscuelaResolucion = nombreDirectorEscuelaResolucion;
-        this.nombreDirectorAdmYRegResolucion = nombreDirectorAdmYRegResolucion;
-        this.listaAnotaciones = listaAnotaciones;
-        this.listaResueltosResolucion = listaResueltosResolucion;
-    }
-
-    
-    
+    private ArrayList<String> listaResueltosResolucion; 
     
     public int getId() {
         return id;
@@ -251,6 +222,11 @@ public class DTOSolicitud {
 
     public void setListaResueltosResolucion(ArrayList<String> listaResueltosResolucion) {
         this.listaResueltosResolucion = listaResueltosResolucion;
+    }
+
+    @Override
+    public String toString() {
+        return "DTOSolicitud{" + "id=" + id + ", fecha=" + fecha + ", idSolicitante=" + idSolicitante + ", nombreSolicitante=" + nombreSolicitante + ", periodo=" + periodo + ", codigoCurso=" + codigoCurso + ", nGrupo=" + nGrupo + ", idAfectado=" + idAfectado + ", nombreAfectado=" + nombreAfectado + ", correoAfectado=" + correoAfectado + ", telefonoAfectado=" + telefonoAfectado + ", tipoSituacion=" + tipoSituacion + ", descripcionDetallada=" + descripcionDetallada + ", rutaArchivoAdjunto=" + rutaArchivoAdjunto + ", estado=" + estado + ", aclaracion=" + aclaracion + ", nResolucion=" + nResolucion + ", fechaResolucion=" + fechaResolucion + ", nombreCoordinadorResolucion=" + nombreCoordinadorResolucion + ", nombreDirectorEscuelaResolucion=" + nombreDirectorEscuelaResolucion + ", nombreDirectorAdmYRegResolucion=" + nombreDirectorAdmYRegResolucion + ", listaAnotaciones=" + listaAnotaciones + ", listaResueltosResolucion=" + listaResueltosResolucion + '}';
     }
     
     

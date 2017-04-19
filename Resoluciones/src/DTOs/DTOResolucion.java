@@ -19,18 +19,7 @@ public class DTOResolucion {
     private String nombreCoordinador;
     private String nombreDirectorEscuela;
     private String nombreDirectorAdmYReg;
-    private ArrayList<String> listaResueltos;
-
-    public DTOResolucion(int nResolucion, Date fecha, String nombreCoordinador, String nombreDirectorEscuela, String nombreDirectorAdmYReg, ArrayList<String> listaResueltos) {
-        this.nResolucion = nResolucion;
-        this.fecha = fecha;
-        this.nombreCoordinador = nombreCoordinador;
-        this.nombreDirectorEscuela = nombreDirectorEscuela;
-        this.nombreDirectorAdmYReg = nombreDirectorAdmYReg;
-        this.listaResueltos = listaResueltos;
-    }
-
-    
+    private ArrayList<String> listaResueltos; 
     
     public int getnResolucion() {
         return nResolucion;
@@ -78,6 +67,11 @@ public class DTOResolucion {
 
     public void setListaResueltos(ArrayList<String> listaResueltos) {
         this.listaResueltos = listaResueltos;
+    }
+
+    @Override
+    public String toString() {
+        return "DTOResolucion{" + "nResolucion=" + nResolucion + ", fecha=" + fecha + ", nombreCoordinador=" + nombreCoordinador + ", nombreDirectorEscuela=" + nombreDirectorEscuela + ", nombreDirectorAdmYReg=" + nombreDirectorAdmYReg + ", listaResueltos=" + listaResueltos + '}';
     }
     
     

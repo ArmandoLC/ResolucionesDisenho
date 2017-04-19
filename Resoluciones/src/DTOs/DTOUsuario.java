@@ -12,16 +12,17 @@ package DTOs;
 public class DTOUsuario extends DTOPersona{
     private String tipoUsuario;
 
-    public DTOUsuario(String id, String nombre, String correo, String telefono) {
-        super(id, nombre, correo, telefono);
-    }
-
     public String getTipoUsuario() {
         return tipoUsuario;
     }
 
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    @Override
+    public String toString() {
+        return "DTOUsuario{" + "tipoUsuario=" + tipoUsuario + '}';
     }
     
     

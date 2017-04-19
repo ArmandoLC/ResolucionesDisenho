@@ -15,13 +15,6 @@ public class DTOCurso {
     private String nombre;
     private int creditos;
 
-    public DTOCurso(String id, String nombre, int creditos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.creditos = creditos;
-    }
-
-    
     
     public String getId() {
         return id;
@@ -45,6 +38,11 @@ public class DTOCurso {
 
     public void setCreditos(int creditos) {
         this.creditos = creditos;
+    }
+
+    @Override
+    public String toString() {
+        return "DTOCurso{" + "id=" + id + ", nombre=" + nombre + ", creditos=" + creditos + '}';
     }
     
     

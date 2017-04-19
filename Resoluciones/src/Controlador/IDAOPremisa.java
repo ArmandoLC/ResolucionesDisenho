@@ -16,11 +16,11 @@ import java.util.ArrayList;
  */
 public interface IDAOPremisa {
 
-    public ArrayList<DTOPersona> ConsultarCarteraDocente();
+    public ArrayList<DTOPersona> ConsultarCarteraDocente() throws Exception;
 
-    public ArrayList<DTOCurso> ConsultarPlanEstudios();
+    public ArrayList<DTOCurso> ConsultarPlanEstudios() throws Exception;
 
-    public ArrayList<DTOferta> ConsultarOfertaAcademica();
+    public ArrayList<DTOferta> ConsultarOfertaAcademica() throws Exception;
 
-    public ArrayList<String> ConsultarSituaciones();
+    public ArrayList<String> ConsultarSituaciones() throws Exception;
 }

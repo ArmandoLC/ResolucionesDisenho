@@ -15,15 +15,6 @@ public class DTOPersona {
     protected String nombre;
     protected String correo;
     protected String telefono;
-
-    public DTOPersona(String id, String nombre, String correo, String telefono) {
-        this.id = id;
-        this.nombre = nombre;
-        this.correo = correo;
-        this.telefono = telefono;
-    }
-
-    
     
     public String getId() {
         return id;
@@ -56,4 +47,11 @@ public class DTOPersona {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    @Override
+    public String toString() {
+        return "DTOPersona{" + "id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", telefono=" + telefono + '}';
+    }
+    
+    
 }

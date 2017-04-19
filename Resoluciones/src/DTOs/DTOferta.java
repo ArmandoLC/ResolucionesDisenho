@@ -17,17 +17,6 @@ public class DTOferta {
     private String idProfesor;
     private String horario;
     private String aula;
-
-    public DTOferta(String periodo, String idCurso, int nGrupo, String idProfesor, String horario, String aula) {
-        this.periodo = periodo;
-        this.idCurso = idCurso;
-        this.nGrupo = nGrupo;
-        this.idProfesor = idProfesor;
-        this.horario = horario;
-        this.aula = aula;
-    }
-
-    
     
     public String getPeriodo() {
         return periodo;
@@ -75,6 +64,11 @@ public class DTOferta {
 
     public void setAula(String aula) {
         this.aula = aula;
+    }
+
+    @Override
+    public String toString() {
+        return "DTOferta{" + "periodo=" + periodo + ", idCurso=" + idCurso + ", nGrupo=" + nGrupo + ", idProfesor=" + idProfesor + ", horario=" + horario + ", aula=" + aula + '}';
     }
     
     

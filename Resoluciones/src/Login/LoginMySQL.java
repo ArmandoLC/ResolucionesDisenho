@@ -16,7 +16,8 @@ public class LoginMySQL implements ILogin{
 
         //Informacion temporal
         DTOUsuario usuario =  new DTOUsuario();
-        usuario.setId(Integer.parseInt(id));
+        //usuario.setId(Integer.parseInt(id));
+        usuario.setId(id);
         if("305000681".equals(id) && "1234".equals(contrasenha))
              usuario.setTipoUsuario("Coordinador");
         else usuario.setTipoUsuario("Estudiante"); 
