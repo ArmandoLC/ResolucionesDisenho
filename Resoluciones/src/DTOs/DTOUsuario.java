@@ -11,7 +11,11 @@ package DTOs;
  */
 public class DTOUsuario extends DTOPersona{
     private String tipoUsuario;
-
+    
+    public DTOUsuario(){
+    
+    }
+    
     public DTOUsuario(String id, String nombre, String correo, String telefono) {
         super(id, nombre, correo, telefono);
     }

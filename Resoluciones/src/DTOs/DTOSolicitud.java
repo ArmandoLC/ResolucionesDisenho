@@ -38,6 +38,10 @@ public class DTOSolicitud {
     private ArrayList<String> listaAnotaciones;
     private ArrayList<String> listaResueltosResolucion;
 
+    public DTOSolicitud(){
+    
+    }
+    
     public DTOSolicitud(int id, Date fecha, String idSolicitante, String nombreSolicitante, String periodo, String codigoCurso, int nGrupo, String idAfectado, String nombreAfectado, String correoAfectado, String telefonoAfectado, String tipoSituacion, String descripcionDetallada, String rutaArchivoAdjunto, String estado, String aclaracion, int nResolucion, int fechaResolucion, String nombreCoordinadorResolucion, String nombreDirectorEscuelaResolucion, String nombreDirectorAdmYRegResolucion, ArrayList<String> listaAnotaciones, ArrayList<String> listaResueltosResolucion) {
         this.id = id;
         this.fecha = fecha;
@@ -63,9 +67,6 @@ public class DTOSolicitud {
         this.listaAnotaciones = listaAnotaciones;
         this.listaResueltosResolucion = listaResueltosResolucion;
     }
-
-    
-    
     
     public int getId() {
         return id;

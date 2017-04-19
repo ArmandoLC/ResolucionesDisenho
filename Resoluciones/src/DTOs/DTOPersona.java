@@ -15,6 +15,10 @@ public class DTOPersona {
     protected String nombre;
     protected String correo;
     protected String telefono;
+    
+    public DTOPersona(){
+    
+    }
 
     public DTOPersona(String id, String nombre, String correo, String telefono) {
         this.id = id;
@@ -22,8 +26,6 @@ public class DTOPersona {
         this.correo = correo;
         this.telefono = telefono;
     }
-
-    
     
     public String getId() {
         return id;
