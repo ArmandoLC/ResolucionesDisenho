@@ -2,10 +2,12 @@ package Vista;
 
 import Controlador.FactoryDAOSolicitud;
 import Controlador.DAOSolicitud;
+import DTOs.DTOSolicitud;
 import DTOs.DTOUsuario;
 import Enums.Recurso;
 import Login.ILogin;
 import Login.LoginMySQL;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
@@ -140,13 +142,7 @@ public class BackofficeLogin extends Backoffice {
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        
-        FactoryDAOSolicitud factory = new FactoryDAOSolicitud();
-        
-        DAOSolicitud solicitud = factory.CrearDAOSolicitud(Recurso.GoogleForm);
-        
-        //ArrayList<DTOSolicitud> a = solicitud.ConsultarSolicitudes();
-        
+     
         try{ 
             String id = txtUsuario.getText();
             String pass = txtContrasenha.getText();

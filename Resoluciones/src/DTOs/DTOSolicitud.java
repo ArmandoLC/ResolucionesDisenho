@@ -314,7 +314,5 @@ public class DTOSolicitud {
     public void setListaResueltosResolucion(ArrayList<String> listaResueltosResolucion) {
         this.listaResueltosResolucion = listaResueltosResolucion;
     }
-    
-    
 
 }
