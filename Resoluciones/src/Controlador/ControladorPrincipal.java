@@ -100,7 +100,12 @@ public class ControladorPrincipal implements ISolicitud,ICoordinador{
     }
 
     @Override
-    public boolean GenerarResolucion(int nSolicitud, int nResolucion, Formato formato) {
+    public boolean SolicitarTemplateResolucion(int nSolicitud) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public boolean GenerarResolucion(int nSolicitud, int nResolucion, String ruta, Formato formato) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

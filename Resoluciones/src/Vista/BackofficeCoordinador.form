@@ -90,7 +90,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="dpHasta" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="linkEstadisticas1" min="-2" max="-2" attributes="0"/>
+                          <Component id="linkReporteSolicitudes" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="linkEstadisticas" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -119,7 +119,7 @@
                       <Component id="dpHasta" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="linkEstadisticas1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="linkReporteSolicitudes" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="378" max="-2" attributes="0"/>
@@ -141,6 +141,9 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JComboBox" name="cbEstado">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEstadoActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -209,12 +212,12 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="org.jdesktop.swingx.JXHyperlink" name="linkEstadisticas1">
+        <Component class="org.jdesktop.swingx.JXHyperlink" name="linkReporteSolicitudes">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reporte de solicitudes seg&#xfa;n las fechas indicadas"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkEstadisticas1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkReporteSolicitudesActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
