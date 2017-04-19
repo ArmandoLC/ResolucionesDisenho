@@ -1,5 +1,6 @@
 package Vista;
 
+import Controlador.FacadeCoordinador;
 import DTOs.DTOCurso;
 import DTOs.DTOSolicitud;
 import Enums.Estado;
@@ -79,15 +80,6 @@ public class UIBackofficeCoordinador {
     
     }
 
-    public void ConsultarResolucion(JDialog dialog) {
-        try{
-            
-        }
-        catch(Exception e){
-            backoffice.showMessage(e.getMessage());
-        }
-    }
-
     public void ConsultarAnotaciones(DTOSolicitud solicitud) {
         try{
             
@@ -97,18 +89,24 @@ public class UIBackofficeCoordinador {
         }
     }
 
-    public void ConsultarTopProfesores(JDialog dialog) {
+    public void ConsultarTopProfesores(JDialog dialogEstadisticas) {
         try{
-            
+            DialogEstadisticas dialog = (DialogEstadisticas) dialogEstadisticas;
+            TableModelProfesor model = new TableModelProfesor(dialog.getTabProfesores()); 
+            model.setPersonas( facade.ConsultarTopProfesores(3) );
+            dialog.getTabProfesores().setModel(model);
         }
         catch(Exception e){
             backoffice.showMessage(e.getMessage());
         }
     }
 
-    public void ConsultarTopCursos(JDialog dialog) {
+    public void ConsultarTopCursos(JDialog dialogEstadisticas) {
         try{
-            
+            DialogEstadisticas dialog = (DialogEstadisticas) dialogEstadisticas;
+            TableModelCurso model = new TableModelCurso(dialog.getTabCursos()); 
+            model.setCursos( facade.ConsultarTopCursos(5) );
+            dialog.getTabProfesores().setModel(model);
         }
         catch(Exception e){
             backoffice.showMessage(e.getMessage());
@@ -190,29 +188,56 @@ public class UIBackofficeCoordinador {
     }
 
     public void AnularSolicitud(JDialog dialogAclaracion) {
-        DialogAclaracion dialog = (DialogAclaracion) dialogAclaracion;
-        String aclaracion = dialog.getTxtAclaracion().getText();
-        int nSolicitud = dialog.getSolicitud().getId();
-        boolean respuesta = facade.AnularSolicitud(nSolicitud, aclaracion);
-        if(respuesta){
-            backoffice.showMessage("Solicitud tramitada");
-            ConsultarSolicitudes();
+        try{
+            DialogAclaracion dialog = (DialogAclaracion) dialogAclaracion;
+            String aclaracion = dialog.getTxtAclaracion().getText();
+            int nSolicitud = dialog.getSolicitud().getId();
+            boolean respuesta = facade.AnularSolicitud(nSolicitud, aclaracion);
+            if(respuesta){
+                backoffice.showMessage("Solicitud tramitada");
+                ConsultarSolicitudes();
+            }
+            else backoffice.showMessage("No se ha podido realizar la acción");
         }
-        else backoffice.showMessage("No se ha podido realizar la acción");
+        catch(Exception e){
+            backoffice.showMessage(e.getMessage());
+        }
         
     }
 
     public void TramitarSolicitud(DTOSolicitud solicitud) {
-        boolean respuesta = facade.TramitarSolicitud(solicitud.getId());
-        if(respuesta){
-            backoffice.showMessage("Solicitud anulada");
-            ConsultarSolicitudes();
+        try{
+            boolean respuesta = facade.TramitarSolicitud(solicitud.getId());
+            if(respuesta){
+                backoffice.showMessage("Solicitud anulada");
+                ConsultarSolicitudes();
+            }
+            else backoffice.showMessage("No se ha podido realizar la acción");
         }
-        else backoffice.showMessage("No se ha podido realizar la acción");
-        
+        catch(Exception e){
+            backoffice.showMessage(e.getMessage());
+        }
+    }
+    
+    public void ConsultarTemplateResolucion(JDialog dialog){
+        try{
+            
+        }
+        catch(Exception e){
+            backoffice.showMessage(e.getMessage());
+        }
+    }
+    
+    public void GenerarResolucion(JDialog dialog) {
+        try{
+            
+        }
+        catch(Exception e){
+            backoffice.showMessage(e.getMessage());
+        }
     }
 
-    public void GenerarResolucion(JDialog dialog) {
+    public void ConsultarResolucion(JDialog dialog) {
         try{
             
         }
