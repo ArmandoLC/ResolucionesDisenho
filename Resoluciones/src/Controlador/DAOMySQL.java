@@ -6,14 +6,14 @@
 package Controlador;
 
 import DTOs.DTOSolicitud;
-import Controlador.IDAOSolicitud;
+import Controlador.DAOSolicitud;
 import java.util.ArrayList;
 
 /**
  *
  * @author Armando
  */
-public class DAOMySQL implements IDAOSolicitud{
+public class DAOMySQL extends DAOSolicitud{
 
     private String stringConexion;
 

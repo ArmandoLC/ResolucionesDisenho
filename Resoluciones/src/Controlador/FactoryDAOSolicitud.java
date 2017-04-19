@@ -5,7 +5,7 @@
  */
 package Controlador;
 
-import Controlador.IDAOSolicitud;
+import Controlador.DAOSolicitud;
 import Enums.Recurso;
 
 /**
@@ -17,12 +17,12 @@ public class FactoryDAOSolicitud {
     public FactoryDAOSolicitud() {
     }
     
-    public IDAOSolicitud CrearDAOSolicitud(Recurso recurso) {
-        IDAOSolicitud daoSolicitud;
+    public DAOSolicitud CrearDAOSolicitud(Recurso recurso) {
+        DAOSolicitud daoSolicitud;
         
         try{
-            String name = IDAOSolicitud.class.getPackage().getName();            
-            daoSolicitud = (IDAOSolicitud) Class.forName(name + "." + recurso.name()).newInstance();
+            String name = DAOSolicitud.class.getPackage().getName();            
+            daoSolicitud = (DAOSolicitud) Class.forName(name + "." + recurso.name()).newInstance();
             
             return daoSolicitud;       
             

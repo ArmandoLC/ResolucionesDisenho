@@ -1,7 +1,7 @@
 package Vista;
 
 import Controlador.FactoryDAOSolicitud;
-import Controlador.IDAOSolicitud;
+import Controlador.DAOSolicitud;
 import DTOs.DTOUsuario;
 import Enums.Recurso;
 import Login.ILogin;
@@ -143,7 +143,7 @@ public class BackofficeLogin extends Backoffice {
         
         FactoryDAOSolicitud factory = new FactoryDAOSolicitud();
         
-        IDAOSolicitud solicitud = factory.CrearDAOSolicitud(Recurso.GoogleForm);
+        DAOSolicitud solicitud = factory.CrearDAOSolicitud(Recurso.GoogleForm);
         
         //ArrayList<DTOSolicitud> a = solicitud.ConsultarSolicitudes();
         

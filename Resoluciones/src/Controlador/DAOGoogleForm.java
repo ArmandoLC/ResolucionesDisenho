@@ -6,7 +6,7 @@
 package Controlador;
 
 import DTOs.DTOSolicitud;
-import Controlador.IDAOSolicitud;
+import Controlador.DAOSolicitud;
 import java.util.ArrayList;
 
 import java.io.BufferedReader;
@@ -21,17 +21,11 @@ import java.util.Date;
  *
  * @author Armando
  */
-public class DAOGoogleForm implements IDAOSolicitud{
+public class DAOGoogleForm extends DAOSolicitud{
 
-    private String rutaArchivo;
-    
     public DAOGoogleForm() {
     }
 
-    public DAOGoogleForm(String rutaArchivo) {
-        this.rutaArchivo = rutaArchivo;
-    }
-    
     
     // Extrae todas las solicitudes de un archivo CSV, las inserta en un DTOSolicitudes
     @Override
@@ -46,7 +40,7 @@ public class DAOGoogleForm implements IDAOSolicitud{
         
         try {
             
-            reader = new BufferedReader(new FileReader(rutaArchivo));
+            reader = new BufferedReader(new FileReader(rutaConexion));
             while ((linea = reader.readLine()) != null){
                 
                 if (cont >= 1)

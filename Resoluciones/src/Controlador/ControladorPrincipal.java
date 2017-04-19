@@ -16,7 +16,7 @@ import Modelo.Solicitud;
 import Modelo.SolicitudBuilder;
 import Controlador.ICoordinador;
 import Controlador.IDAOPremisa;
-import Controlador.IDAOSolicitud;
+import Controlador.DAOSolicitud;
 import Controlador.IGeneradorResolucion;
 import Controlador.ISolicitud;
 import Enums.Estado;
@@ -30,7 +30,7 @@ import java.util.Date;
  */
 public class ControladorPrincipal implements ISolicitud,ICoordinador{
     //Atributos propios del controlador
-    private IDAOSolicitud daoSolicitud;
+    private DAOSolicitud daoSolicitud;
     private ArrayList<String> situaciones;
     
     //Atributos de las relaciones con las otras clases (COMPOSICIONES)
