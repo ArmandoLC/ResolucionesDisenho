@@ -54,7 +54,9 @@ public class ControladorPrincipal implements ISolicitud,ICoordinador{
         carteraDocente = new ArrayList<>();
     }
     
-    private void CargarPremisas(){}
+    private void CargarPremisas(){
+        
+    }
     
 
     @Override

@@ -147,12 +147,10 @@ public class BackofficeCoordinador extends Backoffice{
         
         else if("Tramitada".equals(solicitud.getEstado())){
             
-            if(solicitud.getnResolucion() != 0){
-                JMenuItem itemGenerar = new JMenuItem("Generar resolución");
-                itemGenerar.addActionListener((ActionEvent e) -> {
-                    System.out.println("Generar resolución");
-                }); popup.add(itemGenerar);
-            }
+            JMenuItem itemGenerar = new JMenuItem("Generar resolución");
+            itemGenerar.addActionListener((ActionEvent e) -> {
+                System.out.println("Generar resolución");
+            }); popup.add(itemGenerar);
             
             JMenuItem itemVer = new JMenuItem("Ver resolución");
             itemVer.addActionListener((ActionEvent e) -> {
