@@ -44,20 +44,11 @@ public class ControladorPrincipal implements ISolicitud,ICoordinador{
     private ArrayList<Oferta> ofertaAcademica;
     private ArrayList<Curso> planEstudios;
     private ArrayList<Profesor> carteraDocente;
-    
-    //Por mientras para que no den nullpointer
-    public ControladorPrincipal () {
-        situaciones = new ArrayList<>();
-        solicitudes = new ArrayList<>();
-        ofertaAcademica = new ArrayList<>();
-        planEstudios = new ArrayList<>();
-        carteraDocente = new ArrayList<>();
-    }
+
     
     private void CargarPremisas(){
         
     }
-    
 
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes() {
@@ -70,46 +61,22 @@ public class ControladorPrincipal implements ISolicitud,ICoordinador{
     }
 
     @Override
-    public ArrayList<DTOSolicitud> ConsultarSolicitudes(Estado estado) {
+    public DTOCurso ConsultarCurso(int nSolicitud) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public DTOCurso ConsultarCurso(int idSolicitud) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public ArrayList<DTOCurso> ConsultarCursos(){
+    public ArrayList<DTOCurso> ConsultarCursos() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ArrayList<String> ConsultarSituaciones() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        situaciones.add("TOME");
-        situaciones.add("ESTA");
-        return situaciones;
-    }
-    
-    
-    @Override
-    public boolean TramitarSolicitud(int nSolicitud) {
+    public DTOPersona ConsultarProfesor(int nSolicitud) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public DTOResolucion ConsultarResolucion(int nSolicitud) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ArrayList<String> ConsultarAnotaciones(int nSolicitud) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean RegistrarSolicitudesGoogleForm() {
+    public ArrayList<String> ConsultarInconsistencias() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -119,7 +86,17 @@ public class ControladorPrincipal implements ISolicitud,ICoordinador{
     }
 
     @Override
-    public boolean RegistrarAnotacion(int nSolicitud, String anotacion) {
+    public ArrayList<DTOSolicitud> ConsultarSolicitudes(Estado estado) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean RegistrarSolicitudes(String ruta) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean TramitarSolicitud(int nSolicitud) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -129,12 +106,17 @@ public class ControladorPrincipal implements ISolicitud,ICoordinador{
     }
 
     @Override
-    public boolean SolicitarTemplateResolucion(int nSolicitud) {
+    public boolean RegistrarResolucion(DTOResolucion resolucion) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
-    public boolean GenerarResolucion(int nSolicitud, int nResolucion, String ruta, Formato formato) {
+    public DTOResolucion ConsultarResolucion(int nSolicitud) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean GenerarResolucion(DTOResolucion resolucion, Formato formato, String ruta) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

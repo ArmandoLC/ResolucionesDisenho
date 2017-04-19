@@ -31,7 +31,7 @@ public class DAOGoogleForm extends DAOSolicitud{
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes() {
         
-        ArrayList<DTOSolicitud> solicitudes = new ArrayList<>();
+       /* ArrayList<DTOSolicitud> solicitudes = new ArrayList<>();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         BufferedReader reader = null;
         String linea = "";
@@ -104,6 +104,7 @@ public class DAOGoogleForm extends DAOSolicitud{
         }
         
         System.out.println(solicitudes.size());
-        return solicitudes;
+        return solicitudes;*/
+       return null;
     }
 }

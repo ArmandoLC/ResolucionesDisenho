@@ -14,5 +14,11 @@ import Controlador.ISolicitud;
  */
 public abstract class Facade implements ISolicitud {
 
-    private ControladorPrincipal controlador;
+    protected ControladorPrincipal controlador;
+
+    public Facade() {
+        this.controlador = new ControladorPrincipal();
+    }
+    
+    
 }

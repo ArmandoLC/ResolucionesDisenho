@@ -6,6 +6,7 @@
 package Controlador;
 
 import DTOs.DTOCurso;
+import DTOs.DTOPersona;
 import DTOs.DTOResolucion;
 import DTOs.DTOSolicitud;
 import Enums.Estado;
@@ -17,30 +18,29 @@ import java.util.ArrayList;
  * @author Armando
  */
 public interface ICoordinador extends IEstadisticas {
-
-    public ArrayList<DTOSolicitud> ConsultarSolicitudes(Estado estado);
-
-    public DTOResolucion ConsultarResolucion(int nSolicitud);
-
-    public ArrayList<String> ConsultarAnotaciones(int nSolicitud);
     
-    public DTOCurso ConsultarCurso(int nSolicitud);
+    public DTOCurso ConsultarCurso(int nSolicitud);    
     
     public ArrayList<DTOCurso> ConsultarCursos();
     
-    public ArrayList<String> ConsultarSituaciones();
+    public DTOPersona ConsultarProfesor(int nSolicitud);
+    
+    public ArrayList<String> ConsultarInconsistencias();
+    
+    public boolean RegistrarInconsistencia(String incosistencia);
+    
+    public ArrayList<DTOSolicitud> ConsultarSolicitudes(Estado estado);
+    
+    public boolean RegistrarSolicitudes(String ruta);
     
     public boolean TramitarSolicitud(int nSolicitud);
-
-    public boolean RegistrarSolicitudesGoogleForm();
-
-    public boolean RegistrarInconsistencia(String incosistencia);
-
-    public boolean RegistrarAnotacion(int nSolicitud, String anotacion);
-
+    
     public boolean AnularSolicitud(int nSolicitud, String aclaracion);
     
-    public boolean SolicitarTemplateResolucion(int nSolicitud);
-
-    public boolean GenerarResolucion(int nSolicitud, int nResolucion, String ruta, Formato formato);
+    public boolean RegistrarResolucion(DTOResolucion resolucion);
+    
+    public DTOResolucion ConsultarResolucion(int nSolicitud);
+    
+    public boolean GenerarResolucion(DTOResolucion resolucion, Formato formato, String ruta);  
+    
 }

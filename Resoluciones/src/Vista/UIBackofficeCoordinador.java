@@ -14,8 +14,8 @@ import javax.swing.JDialog;
 
 public class UIBackofficeCoordinador {
       
-    Properties prop;
-    InputStream input;
+    //Properties prop;
+    //InputStream input;
     
     private FacadeCoordinador facade;
     private BackofficeCoordinador backoffice;
@@ -23,10 +23,10 @@ public class UIBackofficeCoordinador {
     public UIBackofficeCoordinador(Backoffice backoffice){
         this.facade = new FacadeCoordinador();
         this.backoffice = (BackofficeCoordinador) backoffice;
-        initPropertiesFile();
+        //initPropertiesFile();
     }
     
-    private void initPropertiesFile (){
+    /*private void initPropertiesFile (){
         try{
             prop = new Properties();
             input = this.getClass().getResourceAsStream("PropertiesFile.properties");
@@ -36,7 +36,7 @@ public class UIBackofficeCoordinador {
         catch(IOException e){
             backoffice.showMessage("Error al cargar el archivo de configuración");
         }
-    }
+    }*/
     
     public void ConsultarSolicitudes() {
         try{
@@ -123,9 +123,9 @@ public class UIBackofficeCoordinador {
             dtoSolicitud.setIdSolicitante(dialog.getTxtIdSolicitante().getText());
             dtoSolicitud.setNombreSolicitante(dialog.getTxtNombreSolicitante().getText());
             dtoSolicitud.setEstado(Estado.Pendiente.name());
-            dtoSolicitud.setNombreDirectorAdmYRegResolucion(prop.getProperty("nombreDirectorAdmYReg"));
-            dtoSolicitud.setNombreDirectorEscuelaResolucion(prop.getProperty("nombreDirectorEscuela"));
-            dtoSolicitud.setNombreCoordinadorResolucion("nombreCoordinador");
+            //dtoSolicitud.setNombreDirectorAdmYRegResolucion(prop.getProperty("nombreDirectorAdmYReg"));
+            //dtoSolicitud.setNombreDirectorEscuelaResolucion(prop.getProperty("nombreDirectorEscuela"));
+            //dtoSolicitud.setNombreCoordinadorResolucion("nombreCoordinador");
            
             String nPeriodo =  dialog.getTxtPeriodo().getText();
             String modalidad = (String) dialog.getCbModalidad().getSelectedItem();
@@ -260,7 +260,7 @@ public class UIBackofficeCoordinador {
     public void ConsultarSituaciones(JDialog dialogRegistrarSolicitud) {
         try{
             DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) dialogRegistrarSolicitud;
-            ArrayList<String> situaciones = facade.ConsultarSituaciones();
+            ArrayList<String> situaciones = facade.ConsultarInconsistencias();
             for(String situacion : situaciones) dialog.getCbSituacion().addItem(situacion);
         }
         catch(Exception e){

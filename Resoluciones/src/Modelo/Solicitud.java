@@ -23,12 +23,12 @@ public class Solicitud {
     //Atributos propios de esta clase
     private int id;
     private Date fecha ;
-    private String tipoSituacion;
-    private String descripcionDetallada;
-    private ArrayList<String> listaAnotaciones;
+    private String inconsistencia;
+    private String descripcion;
     private String rutaArchivoAdjunto;
     private Estado estado;
     private String aclaracion;
+    
     
     public Resolucion getResolucion() {
         return resolucion;
@@ -78,28 +78,20 @@ public class Solicitud {
         this.fecha = fecha;
     }
 
-    public String getTipoSituacion() {
-        return tipoSituacion;
+    public String getInconsistencia() {
+        return inconsistencia;
     }
 
-    public void setTipoSituacion(String tipoSituacion) {
-        this.tipoSituacion = tipoSituacion;
+    public void setInconsistencia(String inconsistencia) {
+        this.inconsistencia = inconsistencia;
     }
 
-    public String getDescripcionDetallada() {
-        return descripcionDetallada;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescripcionDetallada(String descripcionDetallada) {
-        this.descripcionDetallada = descripcionDetallada;
-    }
-
-    public ArrayList<String> getListaAnotaciones() {
-        return listaAnotaciones;
-    }
-
-    public void setListaAnotaciones(ArrayList<String> listaAnotaciones) {
-        this.listaAnotaciones = listaAnotaciones;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getRutaArchivoAdjunto() {
@@ -125,16 +117,11 @@ public class Solicitud {
     public void setAclaracion(String aclaracion) {
         this.aclaracion = aclaracion;
     }
-    
-    
-    public void RegistrarAnotacion(String anotacion){
-        listaAnotaciones.add(anotacion);
 
-    }
-    
-    
     @Override
     public String toString() {
-        return "Solicitud{" + "resolucion=" + resolucion + ", afectado=" + afectado + ", solicitante=" + solicitante + ", infoCurso=" + infoCurso + ", id=" + id + ", fecha=" + fecha + ", tipoSituacion=" + tipoSituacion + ", descripcionDetallada=" + descripcionDetallada + ", listaAnotaciones=" + listaAnotaciones + ", rutaArchivoAdjunto=" + rutaArchivoAdjunto + ", estado=" + estado + ", aclaracion=" + aclaracion + '}';
+        return "Solicitud{" + "resolucion=" + resolucion + ", afectado=" + afectado + ", solicitante=" + solicitante + ", infoCurso=" + infoCurso + ", id=" + id + ", fecha=" + fecha + ", inconsistencia=" + inconsistencia + ", descripcion=" + descripcion + ", rutaArchivoAdjunto=" + rutaArchivoAdjunto + ", estado=" + estado + ", aclaracion=" + aclaracion + '}';
     }
+    
+    
 }

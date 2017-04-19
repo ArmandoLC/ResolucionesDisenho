@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DTOs;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author Armando
- */
+
 public class DTOSolicitud {
 
     // Solicitud
@@ -32,27 +24,12 @@ public class DTOSolicitud {
     private String estado;
     private String aclaracion;
     private int nResolucion;
-    private int fechaResolucion;
-    private String nombreCoordinadorResolucion;
-    private String nombreDirectorEscuelaResolucion;
-    private String nombreDirectorAdmYRegResolucion;
-    private ArrayList<String> listaAnotaciones;
-    private ArrayList<String> listaResueltosResolucion; 
-    
     
 
     public DTOSolicitud() {
     }
 
-    //Constructor con campos de resolucion
-    public DTOSolicitud(int id, Date fecha, String idSolicitante, String nombreSolicitante, 
-                        String periodo, String codigoCurso, int nGrupo, String idAfectado, 
-                        String nombreAfectado, String correoAfectado, String telefonoAfectado, 
-                        String tipoSituacion, String descripcionDetallada, String rutaArchivoAdjunto, 
-                        String aclaracion, int nResolucion, int fechaResolucion, 
-                        String nombreCoordinadorResolucion, String nombreDirectorEscuelaResolucion, 
-                        String nombreDirectorAdmYRegResolucion, ArrayList<String> listaAnotaciones, 
-                        ArrayList<String> listaResueltosResolucion) {
+    public DTOSolicitud(int id, Date fecha, String idSolicitante, String nombreSolicitante, String periodo, String codigoCurso, int nGrupo, String idAfectado, String nombreAfectado, String correoAfectado, String telefonoAfectado, String tipoSituacion, String descripcionDetallada, String rutaArchivoAdjunto, String estado, String aclaracion, int nResolucion) {
         this.id = id;
         this.fecha = fecha;
         this.idSolicitante = idSolicitante;
@@ -67,65 +44,10 @@ public class DTOSolicitud {
         this.tipoSituacion = tipoSituacion;
         this.descripcionDetallada = descripcionDetallada;
         this.rutaArchivoAdjunto = rutaArchivoAdjunto;
+        this.estado = estado;
         this.aclaracion = aclaracion;
         this.nResolucion = nResolucion;
-        this.fechaResolucion = fechaResolucion;
-        this.nombreCoordinadorResolucion = nombreCoordinadorResolucion;
-        this.nombreDirectorEscuelaResolucion = nombreDirectorEscuelaResolucion;
-        this.nombreDirectorAdmYRegResolucion = nombreDirectorAdmYRegResolucion;
-        this.listaAnotaciones = listaAnotaciones;
-        this.listaResueltosResolucion = listaResueltosResolucion;
     }
-    
-    //Constructor sin campos de la resolucion
-    public DTOSolicitud(int id, Date fecha, String idSolicitante, String nombreSolicitante, 
-                        String periodo, String codigoCurso, int nGrupo, String idAfectado, 
-                        String nombreAfectado, String correoAfectado, String telefonoAfectado, 
-                        String tipoSituacion, String descripcionDetallada, String rutaArchivoAdjunto, 
-                        String aclaracion, ArrayList<String> listaAnotaciones) {
-        this.id = id;
-        this.fecha = fecha;
-        this.idSolicitante = idSolicitante;
-        this.nombreSolicitante = nombreSolicitante;
-        this.periodo = periodo;
-        this.codigoCurso = codigoCurso;
-        this.nGrupo = nGrupo;
-        this.idAfectado = idAfectado;
-        this.nombreAfectado = nombreAfectado;
-        this.correoAfectado = correoAfectado;
-        this.telefonoAfectado = telefonoAfectado;
-        this.tipoSituacion = tipoSituacion;
-        this.descripcionDetallada = descripcionDetallada;
-        this.rutaArchivoAdjunto = rutaArchivoAdjunto;
-        this.aclaracion = aclaracion;
-        this.listaAnotaciones = listaAnotaciones;
-    }
-    
-    //Constructor sin campos de la resolucion ni ID de la solicitud.
-    // Está pensada para extraer solicitudes del CSV, sin haber ingresado a la
-    // base de datos, por lo que no tiene una identificaciónn aún.
-    public DTOSolicitud(Date fecha, String idSolicitante, String nombreSolicitante, 
-                        String periodo, String codigoCurso, int nGrupo, String idAfectado, 
-                        String nombreAfectado, String correoAfectado, String telefonoAfectado, 
-                        String tipoSituacion, String descripcionDetallada, String rutaArchivoAdjunto, 
-                        String aclaracion, ArrayList<String> listaAnotaciones) {
-        this.fecha = fecha;
-        this.idSolicitante = idSolicitante;
-        this.nombreSolicitante = nombreSolicitante;
-        this.periodo = periodo;
-        this.codigoCurso = codigoCurso;
-        this.nGrupo = nGrupo;
-        this.idAfectado = idAfectado;
-        this.nombreAfectado = nombreAfectado;
-        this.correoAfectado = correoAfectado;
-        this.telefonoAfectado = telefonoAfectado;
-        this.tipoSituacion = tipoSituacion;
-        this.descripcionDetallada = descripcionDetallada;
-        this.rutaArchivoAdjunto = rutaArchivoAdjunto;
-        this.aclaracion = aclaracion;
-        this.listaAnotaciones = listaAnotaciones;
-    }
-
 
     public int getId() {
         return id;
@@ -246,8 +168,6 @@ public class DTOSolicitud {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
-    
 
     public String getAclaracion() {
         return aclaracion;
@@ -265,59 +185,9 @@ public class DTOSolicitud {
         this.nResolucion = nResolucion;
     }
 
-    public int getFechaResolucion() {
-        return fechaResolucion;
-    }
-
-    public void setFechaResolucion(int fechaResolucion) {
-        this.fechaResolucion = fechaResolucion;
-    }
-
-    public String getNombreCoordinadorResolucion() {
-        return nombreCoordinadorResolucion;
-    }
-
-    public void setNombreCoordinadorResolucion(String nombreCoordinadorResolucion) {
-        this.nombreCoordinadorResolucion = nombreCoordinadorResolucion;
-    }
-
-    public String getNombreDirectorEscuelaResolucion() {
-        return nombreDirectorEscuelaResolucion;
-    }
-
-    public void setNombreDirectorEscuelaResolucion(String nombreDirectorEscuelaResolucion) {
-        this.nombreDirectorEscuelaResolucion = nombreDirectorEscuelaResolucion;
-    }
-
-    public String getNombreDirectorAdmYRegResolucion() {
-        return nombreDirectorAdmYRegResolucion;
-    }
-
-    public void setNombreDirectorAdmYRegResolucion(String nombreDirectorAdmYRegResolucion) {
-        this.nombreDirectorAdmYRegResolucion = nombreDirectorAdmYRegResolucion;
-    }
-
-    public ArrayList<String> getListaAnotaciones() {
-        return listaAnotaciones;
-    }
-
-    public void setListaAnotaciones(ArrayList<String> listaAnotaciones) {
-        this.listaAnotaciones = listaAnotaciones;
-    }
-
-    public ArrayList<String> getListaResueltosResolucion() {
-        return listaResueltosResolucion;
-    }
-
-    public void setListaResueltosResolucion(ArrayList<String> listaResueltosResolucion) {
-        this.listaResueltosResolucion = listaResueltosResolucion;
-    }
-
     @Override
     public String toString() {
-        return "DTOSolicitud{" + "id=" + id + ", fecha=" + fecha + ", idSolicitante=" + idSolicitante + ", nombreSolicitante=" + nombreSolicitante + ", periodo=" + periodo + ", codigoCurso=" + codigoCurso + ", nGrupo=" + nGrupo + ", idAfectado=" + idAfectado + ", nombreAfectado=" + nombreAfectado + ", correoAfectado=" + correoAfectado + ", telefonoAfectado=" + telefonoAfectado + ", tipoSituacion=" + tipoSituacion + ", descripcionDetallada=" + descripcionDetallada + ", rutaArchivoAdjunto=" + rutaArchivoAdjunto + ", estado=" + estado + ", aclaracion=" + aclaracion + ", nResolucion=" + nResolucion + ", fechaResolucion=" + fechaResolucion + ", nombreCoordinadorResolucion=" + nombreCoordinadorResolucion + ", nombreDirectorEscuelaResolucion=" + nombreDirectorEscuelaResolucion + ", nombreDirectorAdmYRegResolucion=" + nombreDirectorAdmYRegResolucion + ", listaAnotaciones=" + listaAnotaciones + ", listaResueltosResolucion=" + listaResueltosResolucion + '}';
-    }
-    
-    
+        return "DTOSolicitud{" + "id=" + id + ", fecha=" + fecha + ", idSolicitante=" + idSolicitante + ", nombreSolicitante=" + nombreSolicitante + ", periodo=" + periodo + ", codigoCurso=" + codigoCurso + ", nGrupo=" + nGrupo + ", idAfectado=" + idAfectado + ", nombreAfectado=" + nombreAfectado + ", correoAfectado=" + correoAfectado + ", telefonoAfectado=" + telefonoAfectado + ", tipoSituacion=" + tipoSituacion + ", descripcionDetallada=" + descripcionDetallada + ", rutaArchivoAdjunto=" + rutaArchivoAdjunto + ", estado=" + estado + ", aclaracion=" + aclaracion + ", nResolucion=" + nResolucion + '}';
+    } 
 
 }

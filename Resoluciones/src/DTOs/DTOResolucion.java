@@ -1,79 +1,72 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DTOs;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author Armando
- */
+
 public class DTOResolucion {
 
-    private int nResolucion;
-    private Date fecha;
-    private String nombreCoordinador;
-    private String nombreDirectorEscuela;
-    private String nombreDirectorAdmYReg;
-    private ArrayList<String> listaResueltos; 
+    private int idSolicitud;
+    private String introduccion;
+    private String resultado;
+    private String considerandos;
+    private String resuelvo; 
+
+    public DTOResolucion() {
+    }
+
+    public DTOResolucion(int idSolicitud, String introduccion, String resultado, 
+                         String considerandos, String resuelvo) {
+        this.idSolicitud = idSolicitud;
+        this.introduccion = introduccion;
+        this.resultado = resultado;
+        this.considerandos = considerandos;
+        this.resuelvo = resuelvo;
+    }
     
-    public int getnResolucion() {
-        return nResolucion;
+    public int getIdSolicitud() {
+        return idSolicitud;
     }
 
-    public void setnResolucion(int nResolucion) {
-        this.nResolucion = nResolucion;
+    public void setIdSolicitud(int idSolicitud) {
+        this.idSolicitud = idSolicitud;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public String getIntroduccion() {
+        return introduccion;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setIntroduccion(String introduccion) {
+        this.introduccion = introduccion;
     }
 
-    public String getNombreCoordinador() {
-        return nombreCoordinador;
+    public String getResultado() {
+        return resultado;
     }
 
-    public void setNombreCoordinador(String nombreCoordinador) {
-        this.nombreCoordinador = nombreCoordinador;
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
     }
 
-    public String getNombreDirectorEscuela() {
-        return nombreDirectorEscuela;
+    public String getConsiderandos() {
+        return considerandos;
     }
 
-    public void setNombreDirectorEscuela(String nombreDirectorEscuela) {
-        this.nombreDirectorEscuela = nombreDirectorEscuela;
+    public void setConsiderandos(String considerandos) {
+        this.considerandos = considerandos;
     }
 
-    public String getNombreDirectorAdmYReg() {
-        return nombreDirectorAdmYReg;
+    public String getResuelvo() {
+        return resuelvo;
     }
 
-    public void setNombreDirectorAdmYReg(String nombreDirectorAdmYReg) {
-        this.nombreDirectorAdmYReg = nombreDirectorAdmYReg;
-    }
-
-    public ArrayList<String> getListaResueltos() {
-        return listaResueltos;
-    }
-
-    public void setListaResueltos(ArrayList<String> listaResueltos) {
-        this.listaResueltos = listaResueltos;
+    public void setResuelvo(String resuelvo) {
+        this.resuelvo = resuelvo;
     }
 
     @Override
     public String toString() {
-        return "DTOResolucion{" + "nResolucion=" + nResolucion + ", fecha=" + fecha + ", nombreCoordinador=" + nombreCoordinador + ", nombreDirectorEscuela=" + nombreDirectorEscuela + ", nombreDirectorAdmYReg=" + nombreDirectorAdmYReg + ", listaResueltos=" + listaResueltos + '}';
+        return "DTOResolucion{" + "idSolicitud=" + idSolicitud + ", introduccion=" + introduccion + ", resultado=" + resultado + ", considerandos=" + considerandos + ", resuelvo=" + resuelvo + '}';
     }
-    
-    
     
 }
