@@ -3,15 +3,19 @@ package Vista;
 import DTOs.DTOSolicitud;
 import Enums.Estado;
 import java.awt.Component;
+import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import static java.lang.System.exit;
 import java.text.SimpleDateFormat;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import org.jdesktop.swingx.JXDatePicker;
 
 public class BackofficeCoordinador extends Backoffice{
     
@@ -32,6 +36,12 @@ public class BackofficeCoordinador extends Backoffice{
         tabSolicitudes.addMouseListener(mouseAdapter);
         loadTestData();
         
+    }
+    
+    public void setEstados(){
+        for(Estado estado : Estado.values())
+            cbEstado.addItem(estado.toString());
+        cbEstado.addItem("Todas");
     }
     
     private void loadTestData(){
@@ -67,7 +77,6 @@ public class BackofficeCoordinador extends Backoffice{
             tabModelSolicitudes.addRow(solicitud1);
             tabModelSolicitudes.addRow(solicitud2);
             tabModelSolicitudes.addRow(solicitud3);
-            tabSolicitudes.setModel(tabModelSolicitudes);
         }
         catch(Exception e){
             System.out.println("Error al colocar la hora");
@@ -106,8 +115,7 @@ public class BackofficeCoordinador extends Backoffice{
             JMenuItem item = new JMenuItem("Ver aclaración");
             item.addActionListener((ActionEvent e) -> {
                 System.out.println("Abriendo aclaracion");
-            });
-            popup.add(item);
+            }); popup.add(item);
         }
         
         else if("Tramitada".equals(solicitud.getEstado())){
@@ -132,7 +140,8 @@ public class BackofficeCoordinador extends Backoffice{
             
             JMenuItem itemVer = new JMenuItem("Anular");
             itemVer.addActionListener((ActionEvent e) -> {
-                System.out.println("Anulando");
+                Dialog dialog = new DialogAclaracion(this, true, solicitud);
+                dialog.setVisible(true);
             }); popup.add(itemVer);
             
         }
@@ -141,12 +150,6 @@ public class BackofficeCoordinador extends Backoffice{
         itemVer.addActionListener((ActionEvent e) -> {
             System.out.println("Desplegando detalles");
         }); popup.add(itemVer);
-    }
-    
-    public void setEstados(){
-        for(Estado estado : Estado.values())
-            cbEstado.addItem(estado.toString());
-        cbEstado.addItem("Todas");
     }
     
     public static void main(String args[]) {
@@ -158,7 +161,39 @@ public class BackofficeCoordinador extends Backoffice{
             }
         });
     }
-    
+
+    public JComboBox<String> getCbEstado() {
+        return cbEstado;
+    }
+
+    public void setCbEstado(JComboBox<String> cbEstado) {
+        this.cbEstado = cbEstado;
+    }
+
+    public JXDatePicker getDpDesde() {
+        return dpDesde;
+    }
+
+    public void setDpDesde(JXDatePicker dpDesde) {
+        this.dpDesde = dpDesde;
+    }
+
+    public JXDatePicker getDpHasta() {
+        return dpHasta;
+    }
+
+    public void setDpHasta(JXDatePicker dpHasta) {
+        this.dpHasta = dpHasta;
+    }
+
+    public TableModelSolicitud getTabModelSolicitudes() {
+        return tabModelSolicitudes;
+    }
+
+    public void setTabModelSolicitudes(TableModelSolicitud tabModelSolicitudes) {
+        this.tabModelSolicitudes = tabModelSolicitudes;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -189,6 +224,11 @@ public class BackofficeCoordinador extends Backoffice{
         jLabel1.setText("Filtrar por estado:");
 
         btnRegistrarSolicitud.setText("Registrar");
+        btnRegistrarSolicitud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarSolicitudActionPerformed(evt);
+            }
+        });
 
         btnExtraerExcel.setText("Extraer solicitudes del Excel");
         btnExtraerExcel.addActionListener(new java.awt.event.ActionListener() {
@@ -326,16 +366,16 @@ public class BackofficeCoordinador extends Backoffice{
     }//GEN-LAST:event_linkEstadisticasActionPerformed
 
     private void mitemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemSalirActionPerformed
-        // TODO add your handling code here:
+        exit(0);
     }//GEN-LAST:event_mitemSalirActionPerformed
 
     private void mitemInconsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemInconsistenciaActionPerformed
-        DialogInconsistencia dialog = new DialogInconsistencia(this, true);
+        Dialog dialog = new DialogInconsistencia(this, true);
         dialog.setVisible(true);
     }//GEN-LAST:event_mitemInconsistenciaActionPerformed
 
     private void linkEstadisticas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkEstadisticas1ActionPerformed
-        DialogSolicitudesAtendidas dialog = new DialogSolicitudesAtendidas(this, true);
+        Dialog dialog = new DialogSolicitudesAtendidas(this, true);
         dialog.setVisible(true);
     }//GEN-LAST:event_linkEstadisticas1ActionPerformed
 
@@ -344,6 +384,11 @@ public class BackofficeCoordinador extends Backoffice{
         file.showOpenDialog(this);
         File archivo = file.getSelectedFile();
     }//GEN-LAST:event_btnExtraerExcelActionPerformed
+
+    private void btnRegistrarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarSolicitudActionPerformed
+        Dialog dialog = new DialogRegistrarSolicitud(this, true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_btnRegistrarSolicitudActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExtraerExcel;

@@ -1,11 +1,21 @@
 
 package Vista;
 
+import javax.swing.JTextField;
+
 public class DialogInconsistencia extends javax.swing.JDialog {
 
     public DialogInconsistencia(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    public JTextField getTxtRegistrarInconsistencia() {
+        return txtRegistrarInconsistencia;
+    }
+
+    public void setTxtRegistrarInconsistencia(JTextField txtRegistrarInconsistencia) {
+        this.txtRegistrarInconsistencia = txtRegistrarInconsistencia;
     }
 
     @SuppressWarnings("unchecked")

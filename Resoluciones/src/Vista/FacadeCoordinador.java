@@ -48,7 +48,8 @@ public class FacadeCoordinador extends Facade implements ICoordinador{
 
     @Override
     public ArrayList<String> ConsultarAnotaciones(int nSolicitud) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //return control.consultarAnotaciones(nSolicitud);
+        return null;
     }
     
     @Override
@@ -58,22 +59,22 @@ public class FacadeCoordinador extends Facade implements ICoordinador{
 
     @Override
     public boolean RegistrarSolicitudesGoogleForm() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return control.RegistrarSolicitudesGoogleForm();
     }
 
     @Override
     public boolean RegistrarInconsistencia(String incosistencia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return control.RegistrarInconsistencia(incosistencia);
     }
 
     @Override
     public boolean RegistrarAnotacion(int nSolicitud, String anotacion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return control.RegistrarAnotacion(nSolicitud, anotacion);
     }
 
     @Override
     public boolean AnularSolicitud(int nSolicitud, String aclaracion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return control.AnularSolicitud(nSolicitud, aclaracion);
     }
 
     @Override

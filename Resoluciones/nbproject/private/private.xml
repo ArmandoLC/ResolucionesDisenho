@@ -4,20 +4,23 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/BackofficeEstudiante.java</file>
-            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/DTOs/DTOResolucion.java</file>
-            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Login/LoginMySQL.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/TableModelProfesor.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogEstadisticas.java</file>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/DTOs/DTOSolicitud.java</file>
-            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/DTOs/DTOferta.java</file>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/BackofficeCoordinador.java</file>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/UIBackofficeCoordinador.java</file>
-            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/DTOs/DTOUsuario.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogInconsistencia.java</file>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/DTOs/DTOCurso.java</file>
-            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Login/Sesion.java</file>
-            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/UIBackofficeEstudiante.java</file>
-            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Login/ILogin.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogRegistrarSolicitud.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/FacadeCoordinador.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/TableModelSolicitud.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogAclaracion.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogSolicitudesAtendidas.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/ControladorPrincipal.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/TableModelCurso.java</file>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/DTOs/DTOPersona.java</file>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/Backoffice.java</file>
-            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/BackofficeLogin.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/FacadeEstudiante.java</file>
         </group>
     </open-files>
 </project-private>
