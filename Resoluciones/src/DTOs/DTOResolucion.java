@@ -21,6 +21,17 @@ public class DTOResolucion {
     private String nombreDirectorAdmYReg;
     private ArrayList<String> listaResueltos;
 
+    public DTOResolucion(int nResolucion, Date fecha, String nombreCoordinador, String nombreDirectorEscuela, String nombreDirectorAdmYReg, ArrayList<String> listaResueltos) {
+        this.nResolucion = nResolucion;
+        this.fecha = fecha;
+        this.nombreCoordinador = nombreCoordinador;
+        this.nombreDirectorEscuela = nombreDirectorEscuela;
+        this.nombreDirectorAdmYReg = nombreDirectorAdmYReg;
+        this.listaResueltos = listaResueltos;
+    }
+
+    
+    
     public int getnResolucion() {
         return nResolucion;
     }

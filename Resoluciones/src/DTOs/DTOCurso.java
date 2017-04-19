@@ -15,6 +15,14 @@ public class DTOCurso {
     private String nombre;
     private int creditos;
 
+    public DTOCurso(String id, String nombre, int creditos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.creditos = creditos;
+    }
+
+    
+    
     public String getId() {
         return id;
     }
