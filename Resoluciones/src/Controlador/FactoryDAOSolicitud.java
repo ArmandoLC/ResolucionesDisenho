@@ -5,7 +5,7 @@
  */
 package Controlador;
 
-import Controlador.IDAOSolicitud;
+import Controlador.DAOSolicitud;
 import Enums.Recurso;
 
 /**
@@ -14,8 +14,22 @@ import Enums.Recurso;
  */
 public class FactoryDAOSolicitud {
 
-    public IDAOSolicitud CrearDAOSolicitud(Recurso recurso) {
-        return null;
+    public FactoryDAOSolicitud() {
+    }
+    
+    public DAOSolicitud CrearDAOSolicitud(Recurso recurso) {
+        DAOSolicitud daoSolicitud;
+        
+        try{
+            String name = DAOSolicitud.class.getPackage().getName();            
+            daoSolicitud = (DAOSolicitud) Class.forName(name + "." + "DAO" + recurso.name()).newInstance();
+            
+            return daoSolicitud;       
+            
+        }catch (Exception e) {
+            //throw new Exception("Tipo de DAO desconocido.");
+            return null;
+        }
     }
 
 }

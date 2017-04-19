@@ -68,6 +68,7 @@ public class TableModelSolicitud extends AbstractTableModel{
     
     public void addRow(DTOSolicitud solicitud){
         solicitudes.add(solicitud);
+        table.setModel(this);
     }
     
     public DTOSolicitud getSolicitud(int row){ 

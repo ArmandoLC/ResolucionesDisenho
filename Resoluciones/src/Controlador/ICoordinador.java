@@ -32,6 +32,8 @@ public interface ICoordinador extends IEstadisticas {
     public boolean RegistrarAnotacion(int nSolicitud, String anotacion);
 
     public boolean AnularSolicitud(int nSolicitud, String aclaracion);
+    
+    public boolean SolicitarTemplateResolucion(int nSolicitud);
 
-    public boolean GenerarResolucion(int nSolicitud, int nResolucion, Formato formato);
+    public boolean GenerarResolucion(int nSolicitud, int nResolucion, String ruta, Formato formato);
 }

@@ -6,28 +6,28 @@
 package Controlador;
 
 import DTOs.DTOSolicitud;
-import Controlador.IDAOSolicitud;
+import Controlador.DAOSolicitud;
 import java.util.ArrayList;
 
 /**
  *
  * @author Armando
  */
-public class DAOMySQL implements IDAOSolicitud{
-
-    private String stringConexion;
+public class DAOMySQL extends DAOSolicitud{
 
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return null;
+    
     }
 
-    @Override
+    
     public int RegistrarSolicitud(DTOSolicitud dtoSolicitud) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+    
     public ArrayList<DTOSolicitud> RegistrarSolicitudes(ArrayList<DTOSolicitud> dtoSolicitudes) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

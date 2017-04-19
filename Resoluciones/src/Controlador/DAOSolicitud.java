@@ -12,11 +12,18 @@ import java.util.ArrayList;
  *
  * @author Armando
  */
-public interface IDAOSolicitud {
+public abstract class DAOSolicitud {
 
-    public ArrayList<DTOSolicitud> ConsultarSolicitudes();
+    protected String rutaConexion;
 
-    public int RegistrarSolicitud(DTOSolicitud dtoSolicitud);
+    public DAOSolicitud() {
+    }
 
-    public ArrayList<DTOSolicitud> RegistrarSolicitudes(ArrayList<DTOSolicitud> dtoSolicitudes);
+    public void setRutaConexion(String rutaConexion) {
+        this.rutaConexion = rutaConexion;
+    }
+    
+    
+    public abstract ArrayList<DTOSolicitud> ConsultarSolicitudes();
+
 }
