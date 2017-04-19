@@ -14,6 +14,7 @@ import java.util.Date;
  */
 public class DTOSolicitud {
 
+    // Solicitud
     private int id;
     private Date fecha;
     private String idSolicitante;
@@ -30,19 +31,30 @@ public class DTOSolicitud {
     private String rutaArchivoAdjunto;
     private String estado;
     private String aclaracion;
+    private ArrayList<String> listaAnotaciones;
+    
+    // Resolucion
     private int nResolucion;
     private int fechaResolucion;
     private String nombreCoordinadorResolucion;
     private String nombreDirectorEscuelaResolucion;
     private String nombreDirectorAdmYRegResolucion;
-    private ArrayList<String> listaAnotaciones;
     private ArrayList<String> listaResueltosResolucion;
 
-    public DTOSolicitud(){
     
+
+    public DTOSolicitud() {
     }
-    
-    public DTOSolicitud(int id, Date fecha, String idSolicitante, String nombreSolicitante, String periodo, String codigoCurso, int nGrupo, String idAfectado, String nombreAfectado, String correoAfectado, String telefonoAfectado, String tipoSituacion, String descripcionDetallada, String rutaArchivoAdjunto, String estado, String aclaracion, int nResolucion, int fechaResolucion, String nombreCoordinadorResolucion, String nombreDirectorEscuelaResolucion, String nombreDirectorAdmYRegResolucion, ArrayList<String> listaAnotaciones, ArrayList<String> listaResueltosResolucion) {
+
+    //Constructor con campos de resolucion
+    public DTOSolicitud(int id, Date fecha, String idSolicitante, String nombreSolicitante, 
+                        String periodo, String codigoCurso, int nGrupo, String idAfectado, 
+                        String nombreAfectado, String correoAfectado, String telefonoAfectado, 
+                        String tipoSituacion, String descripcionDetallada, String rutaArchivoAdjunto, 
+                        String aclaracion, int nResolucion, int fechaResolucion, 
+                        String nombreCoordinadorResolucion, String nombreDirectorEscuelaResolucion, 
+                        String nombreDirectorAdmYRegResolucion, ArrayList<String> listaAnotaciones, 
+                        ArrayList<String> listaResueltosResolucion) {
         this.id = id;
         this.fecha = fecha;
         this.idSolicitante = idSolicitante;
@@ -57,7 +69,6 @@ public class DTOSolicitud {
         this.tipoSituacion = tipoSituacion;
         this.descripcionDetallada = descripcionDetallada;
         this.rutaArchivoAdjunto = rutaArchivoAdjunto;
-        this.estado = estado;
         this.aclaracion = aclaracion;
         this.nResolucion = nResolucion;
         this.fechaResolucion = fechaResolucion;
@@ -68,6 +79,56 @@ public class DTOSolicitud {
         this.listaResueltosResolucion = listaResueltosResolucion;
     }
     
+    //Constructor sin campos de la resolucion
+    public DTOSolicitud(int id, Date fecha, String idSolicitante, String nombreSolicitante, 
+                        String periodo, String codigoCurso, int nGrupo, String idAfectado, 
+                        String nombreAfectado, String correoAfectado, String telefonoAfectado, 
+                        String tipoSituacion, String descripcionDetallada, String rutaArchivoAdjunto, 
+                        String aclaracion, ArrayList<String> listaAnotaciones) {
+        this.id = id;
+        this.fecha = fecha;
+        this.idSolicitante = idSolicitante;
+        this.nombreSolicitante = nombreSolicitante;
+        this.periodo = periodo;
+        this.codigoCurso = codigoCurso;
+        this.nGrupo = nGrupo;
+        this.idAfectado = idAfectado;
+        this.nombreAfectado = nombreAfectado;
+        this.correoAfectado = correoAfectado;
+        this.telefonoAfectado = telefonoAfectado;
+        this.tipoSituacion = tipoSituacion;
+        this.descripcionDetallada = descripcionDetallada;
+        this.rutaArchivoAdjunto = rutaArchivoAdjunto;
+        this.aclaracion = aclaracion;
+        this.listaAnotaciones = listaAnotaciones;
+    }
+    
+    //Constructor sin campos de la resolucion ni ID de la solicitud.
+    // Está pensada para extraer solicitudes del CSV, sin haber ingresado a la
+    // base de datos, por lo que no tiene una identificaciónn aún.
+    public DTOSolicitud(Date fecha, String idSolicitante, String nombreSolicitante, 
+                        String periodo, String codigoCurso, int nGrupo, String idAfectado, 
+                        String nombreAfectado, String correoAfectado, String telefonoAfectado, 
+                        String tipoSituacion, String descripcionDetallada, String rutaArchivoAdjunto, 
+                        String aclaracion, ArrayList<String> listaAnotaciones) {
+        this.fecha = fecha;
+        this.idSolicitante = idSolicitante;
+        this.nombreSolicitante = nombreSolicitante;
+        this.periodo = periodo;
+        this.codigoCurso = codigoCurso;
+        this.nGrupo = nGrupo;
+        this.idAfectado = idAfectado;
+        this.nombreAfectado = nombreAfectado;
+        this.correoAfectado = correoAfectado;
+        this.telefonoAfectado = telefonoAfectado;
+        this.tipoSituacion = tipoSituacion;
+        this.descripcionDetallada = descripcionDetallada;
+        this.rutaArchivoAdjunto = rutaArchivoAdjunto;
+        this.aclaracion = aclaracion;
+        this.listaAnotaciones = listaAnotaciones;
+    }
+
+
     public int getId() {
         return id;
     }
