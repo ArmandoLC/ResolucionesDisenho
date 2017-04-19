@@ -54,7 +54,7 @@ public class TableModelSolicitud extends AbstractTableModel{
     @Override
     public Object getValueAt(int row, int col) {
         Object temp = null; 
-        SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         if (col == 0) temp = solicitudes.get(row).getId(); 
         else if (col == 1) temp = sdf.format(solicitudes.get(row).getFecha()); 
         else if (col == 2) temp = solicitudes.get(row).getIdSolicitante(); 

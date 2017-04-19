@@ -4,6 +4,7 @@ import DTOs.DTOSolicitud;
 import Enums.Estado;
 import java.awt.Dialog;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
@@ -12,7 +13,6 @@ import java.io.File;
 import static java.lang.System.exit;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -137,16 +137,22 @@ public class BackofficeCoordinador extends Backoffice{
         if("Anulada".equals(solicitud.getEstado())){
             JMenuItem item = new JMenuItem("Ver aclaración");
             item.addActionListener((ActionEvent e) -> {
-                System.out.println("Abriendo aclaracion");
+                DialogAclaracion dialog = new DialogAclaracion(BackofficeCoordinador.this, true, solicitud);
+                dialog.getBtnConfirmar().setVisible(false);
+                dialog.getBtnCancelar().setVisible(false);
+                dialog.getTxtAclaracion().setEditable(false);
+                dialog.setVisible(true);
             }); popup.add(item);
         }
         
         else if("Tramitada".equals(solicitud.getEstado())){
             
-            JMenuItem itemGenerar = new JMenuItem("Generar resolución");
-            itemGenerar.addActionListener((ActionEvent e) -> {
-                System.out.println("Generar resolución");
-            }); popup.add(itemGenerar);
+            if(solicitud.getnResolucion() != 0){
+                JMenuItem itemGenerar = new JMenuItem("Generar resolución");
+                itemGenerar.addActionListener((ActionEvent e) -> {
+                    System.out.println("Generar resolución");
+                }); popup.add(itemGenerar);
+            }
             
             JMenuItem itemVer = new JMenuItem("Ver resolución");
             itemVer.addActionListener((ActionEvent e) -> {
@@ -171,7 +177,8 @@ public class BackofficeCoordinador extends Backoffice{
         
         JMenuItem itemVer = new JMenuItem("Ver detalles");
         itemVer.addActionListener((ActionEvent e) -> {
-            System.out.println("Desplegando detalles");
+            Dialog dialog = new DialogDetallesSolicitud(this, true, solicitud);
+            dialog.setVisible(true);
         }); popup.add(itemVer);
     }
     
