@@ -11,16 +11,25 @@ package DTOs;
  */
 public class DTOPersona {
 
-    protected int id;
+    protected String id;
     protected String nombre;
     protected String correo;
     protected String telefono;
 
-    public int getId() {
+    public DTOPersona(String id, String nombre, String correo, String telefono) {
+        this.id = id;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.telefono = telefono;
+    }
+
+    
+    
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -47,6 +56,4 @@ public class DTOPersona {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
-    
 }

@@ -10,5 +10,11 @@ package Modelo;
  * @author Armando
  */
 public class Estudiante extends Persona {
-    
+
+    public Estudiante(String id, String nombre, String correo, String telefono) {
+        super(id, nombre, correo, telefono);
+    }
+    //Por el momento el estudiante no tiene ningún método ni atributo propio
+    //no obstante se decide crear esta clase con la finalidad de brindar escalabilidad al proyecto.
+
 }

@@ -12,6 +12,10 @@ package DTOs;
 public class DTOUsuario extends DTOPersona{
     private String tipoUsuario;
 
+    public DTOUsuario(String id, String nombre, String correo, String telefono) {
+        super(id, nombre, correo, telefono);
+    }
+
     public String getTipoUsuario() {
         return tipoUsuario;
     }
@@ -19,5 +23,6 @@ public class DTOUsuario extends DTOPersona{
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
+    
     
 }

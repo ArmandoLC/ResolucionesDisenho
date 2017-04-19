@@ -14,10 +14,21 @@ public class DTOferta {
     private String periodo;
     private String idCurso;
     private int nGrupo;
-    private int idProfesor;
+    private String idProfesor;
     private String horario;
     private String aula;
 
+    public DTOferta(String periodo, String idCurso, int nGrupo, String idProfesor, String horario, String aula) {
+        this.periodo = periodo;
+        this.idCurso = idCurso;
+        this.nGrupo = nGrupo;
+        this.idProfesor = idProfesor;
+        this.horario = horario;
+        this.aula = aula;
+    }
+
+    
+    
     public String getPeriodo() {
         return periodo;
     }
@@ -42,11 +53,11 @@ public class DTOferta {
         this.nGrupo = nGrupo;
     }
 
-    public int getIdProfesor() {
+    public String getIdProfesor() {
         return idProfesor;
     }
 
-    public void setIdProfesor(int idProfesor) {
+    public void setIdProfesor(String idProfesor) {
         this.idProfesor = idProfesor;
     }
 
