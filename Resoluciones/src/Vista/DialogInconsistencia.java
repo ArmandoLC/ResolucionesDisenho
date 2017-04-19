@@ -5,8 +5,11 @@ import javax.swing.JTextField;
 
 public class DialogInconsistencia extends javax.swing.JDialog {
 
+    UIBackofficeCoordinador uibackoffice;
+    
     public DialogInconsistencia(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
         initComponents();
     }
 
@@ -79,6 +82,7 @@ public class DialogInconsistencia extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarInconsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarInconsistenciaActionPerformed
+        uibackoffice.RegistrarInconsistencia(this);
         this.setVisible(false);
     }//GEN-LAST:event_btnRegistrarInconsistenciaActionPerformed
 

@@ -7,8 +7,8 @@ import javax.swing.UIManager;
 public class Backoffice extends JFrame {
     
     protected void initLookAndFeel(){
-        try{
-            //setLocationRelativeTo(null);
+       
+        try{ 
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         }
         catch(Exception e){

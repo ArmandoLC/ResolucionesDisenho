@@ -1,5 +1,6 @@
 package Vista;
 
+import DTOs.DTOCurso;
 import DTOs.DTOSolicitud;
 import Enums.Estado;
 import java.io.IOException;
@@ -57,11 +58,19 @@ public class UIBackofficeCoordinador {
             DialogSolicitudesAtendidas dialog = (DialogSolicitudesAtendidas) dialogSolicitudesAtendidas;
             Date desde = backoffice.getDpDesde().getDate();
             Date hasta = backoffice.getDpHasta().getDate();
+            dialog.getEditor().setContentType("text/html"); 
             ArrayList<DTOSolicitud> solicitudes = facade.ConsultarSolicitudesAtendidas(desde, hasta);
+            String reporte = "<b><font color=\"#CD5C5C\">ID</font></b><br><br>";
             for(DTOSolicitud solicitud : solicitudes){
-            
+                DTOCurso curso = facade.ConsultarCurso(solicitud.getId());
+                reporte += "<b><font color=\"#FA8072\">ID</font></b>" + solicitud.getId() + "\n";
+                reporte += "<b>Período: <b> " + solicitud.getId() + "\n";
+                reporte += "<b>Tipo de situación: <b> " + solicitud.getTipoSituacion() + "\n";
+                reporte += "<b>Número de resolución: <b> " + String.valueOf(solicitud.getnResolucion()) + "\n";
+                reporte += "<b>Curso: <b> " + curso.getId() + "  " + curso.getNombre() + "\n";
+                reporte += "<b>Grupo: <b> " + String.valueOf(solicitud.getnGrupo()) + "\n";
             }
-            dialog.getTxtSolicitudesAtendidas();
+            dialog.getEditor().setText(reporte);
             
         }
         catch(Exception e){
@@ -71,19 +80,39 @@ public class UIBackofficeCoordinador {
     }
 
     public void ConsultarResolucion(JDialog dialog) {
-        
+        try{
+            
+        }
+        catch(Exception e){
+            backoffice.showMessage(e.getMessage());
+        }
     }
 
     public void ConsultarAnotaciones(DTOSolicitud solicitud) {
-        
+        try{
+            
+        }
+        catch(Exception e){
+            backoffice.showMessage(e.getMessage());
+        }
     }
 
     public void ConsultarTopProfesores(JDialog dialog) {
-        
+        try{
+            
+        }
+        catch(Exception e){
+            backoffice.showMessage(e.getMessage());
+        }
     }
 
     public void ConsultarTopCursos(JDialog dialog) {
-        
+        try{
+            
+        }
+        catch(Exception e){
+            backoffice.showMessage(e.getMessage());
+        }
     }
         
     public void RegistrarSolicitud(JDialog dialogRegistrarSolicitud) {
@@ -117,35 +146,47 @@ public class UIBackofficeCoordinador {
             
             Integer idSolicitud = facade.RegistrarSolicitud(dtoSolicitud);
             if(idSolicitud != 0) backoffice.showMessage("La identificación de la solicitud es " + idSolicitud.toString());
-            else throw new Exception("No se ha podido registrar la solicitud");
+            else backoffice.showMessage("No se ha podido registrar la solicitud");
             
         }
         catch(NumberFormatException e){
             backoffice.showMessage("Espacio inválido");
-        }
-        catch(IOException e ){
-            backoffice.showMessage("El archivo de propiedades no se ha encontrado");
-        }
-        catch(Exception e ){
-            backoffice.showMessage(e.getMessage());
-        }
+        }      
+        catch(Exception e){
+            backoffice.showMessage("Espacio inválido");
+        }   
         
     }
 
     public void RegistrarInconsistencia(JDialog dialogInconsistencia) {
-        DialogInconsistencia dialog = (DialogInconsistencia) dialogInconsistencia;
-        String nuevaInconsistencia = dialog.getTxtRegistrarInconsistencia().getText();
-        boolean respuesta = facade.RegistrarInconsistencia(nuevaInconsistencia);
-        if(respuesta) backoffice.showMessage("Nueva inconsistencia registrada");
-        else backoffice.showMessage("No se ha podido registrar la inconsistencia");
+        try{
+            DialogInconsistencia dialog = (DialogInconsistencia) dialogInconsistencia;
+            String nuevaInconsistencia = dialog.getTxtRegistrarInconsistencia().getText();
+            boolean respuesta = facade.RegistrarInconsistencia(nuevaInconsistencia);
+            if(respuesta) backoffice.showMessage("Nueva inconsistencia registrada");
+            else backoffice.showMessage("No se ha podido registrar la inconsistencia");
+        }
+        catch(Exception e){
+            backoffice.showMessage(e.getMessage());
+        }
     }
 
     public void RegistrarSolicitudesGoogleForm(JDialog dialog) {
-
+        try{
+            
+        }
+        catch(Exception e){
+            backoffice.showMessage(e.getMessage());
+        }
     }
 
-    public void RegistrarAnotacion() {
-        
+    public void RegistrarAnotacion(JDialog dialog) {
+        try{
+            
+        }
+        catch(Exception e){
+            backoffice.showMessage(e.getMessage());
+        }
     }
 
     public void AnularSolicitud(JDialog dialogAclaracion) {
@@ -172,7 +213,34 @@ public class UIBackofficeCoordinador {
     }
 
     public void GenerarResolucion(JDialog dialog) {
-        //facade.GenerarResolucion(solicitud.getId(), prop.getProperty("nResolucionActual"), ruta, Formato.HTML);
+        try{
+            
+        }
+        catch(Exception e){
+            backoffice.showMessage(e.getMessage());
+        }
+    }
+
+    public void ConsultarCursos(JDialog dialogRegistrarSolicitud) {
+        try{
+            DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) dialogRegistrarSolicitud;
+            ArrayList<DTOCurso> cursos = facade.ConsultarCursos();
+            for(DTOCurso curso : cursos) dialog.getCbCurso().addItem(curso.getId());
+        }
+        catch(Exception e){
+            backoffice.showMessage(e.getMessage());
+        }
+    }
+    
+    public void ConsultarSituaciones(JDialog dialogRegistrarSolicitud) {
+        try{
+            DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) dialogRegistrarSolicitud;
+            ArrayList<String> situaciones = facade.ConsultarSituaciones();
+            for(String situacion : situaciones) dialog.getCbSituacion().addItem(situacion);
+        }
+        catch(Exception e){
+            backoffice.showMessage(e.getMessage());
+        }
     }
     
 }
