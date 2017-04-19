@@ -109,14 +109,4 @@ public class DAOGoogleForm implements IDAOSolicitud{
         
         return solicitudes;
     }
-
-    @Override
-    public int RegistrarSolicitud(DTOSolicitud dtoSolicitud) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ArrayList<DTOSolicitud> RegistrarSolicitudes(ArrayList<DTOSolicitud> dtoSolicitudes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
