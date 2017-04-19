@@ -1,7 +1,6 @@
 package Vista;
 
 import DTOs.DTOPersona;
-import DTOs.DTOSolicitud;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JTable;
@@ -27,7 +26,7 @@ public class TableModelProfesor extends AbstractTableModel{
         return personas;
     }
 
-    public void setSolicitudes(ArrayList<DTOPersona> personas) {
+    public void setPersonas(ArrayList<DTOPersona> personas) {
         this.personas = personas;
     }
     

@@ -45,6 +45,7 @@ public class DAOGoogleForm extends DAOSolicitud{
                 
                 if (cont >= 1)
                 {
+                    System.out.println("\tAtendiendo solicitud...");
                     String[] solicitud = linea.split(delimitador);
                 
                     String fechaStr = solicitud[0].substring(1, 11);
@@ -56,17 +57,18 @@ public class DAOGoogleForm extends DAOSolicitud{
                     String nombreAfectado = solicitud[4].substring(1, solicitud[4].length() - 1);
                     String correoAfectado = solicitud[5].substring(1, solicitud[5].length() - 1);
                     String telefAfectado = solicitud[6].substring(1, solicitud[6].length() - 1);
-                    String periodo = solicitud[7].substring(1, solicitud[7].length() - 1) + 
-                                     solicitud[8].substring(1, solicitud[8].length() - 1);
-                    String codCurso = solicitud[9].substring(1, solicitud[9].length() - 1);
-                    int nGrupo = Integer.parseInt(solicitud[10].substring(1, solicitud[10].length() - 1));
-                    String tipoSituacion = solicitud[11].substring(1, solicitud[11].length() - 1);
-                    String descripDetallada = solicitud[12].substring(1, solicitud[12].length());
+                    String oferta = solicitud[7].substring(1, solicitud[7].length() - 1) + 
+                                    solicitud[8].substring(1, solicitud[8].length() - 1) + 
+                                    solicitud[9].substring(1, solicitud[9].length() - 1) ;
+                    String codCurso = solicitud[10].substring(1, solicitud[10].length() - 1);
+                    int nGrupo = Integer.parseInt(solicitud[11].substring(1, solicitud[11].length() - 1));
+                    String tipoSituacion = solicitud[12].substring(1, solicitud[12].length() - 1);
+                    String descripDetallada = solicitud[13].substring(1, solicitud[13].length());
                     
                     
                     // Se concatena las oraciones de la descripcion detallada en caso que hubieran comas en medio.
-                    if (solicitud.length > 13){
-                        int actual = 13;
+                    if (solicitud.length > 14){
+                        int actual = 14;
                         
                         while (actual < solicitud.length){
                             descripDetallada += "," + solicitud[actual].substring(0, solicitud[actual].length());
@@ -75,7 +77,7 @@ public class DAOGoogleForm extends DAOSolicitud{
                     }
 
                     DTOSolicitud dtoSolicitud = 
-                            new DTOSolicitud(fecha, idSolicitante, nombreSolicitante, periodo, codCurso,
+                            new DTOSolicitud(fecha, idSolicitante, nombreSolicitante, oferta, codCurso,
                                              nGrupo, idAfectado, nombreAfectado, correoAfectado, telefAfectado, 
                                              tipoSituacion, descripDetallada, "", "", new ArrayList<String>());
                     
@@ -101,6 +103,7 @@ public class DAOGoogleForm extends DAOSolicitud{
             }
         }
         
+        System.out.println(solicitudes.size());
         return solicitudes;
     }
 }

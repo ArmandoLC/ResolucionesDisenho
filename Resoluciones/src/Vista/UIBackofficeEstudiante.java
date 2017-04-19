@@ -6,7 +6,7 @@
 package Vista;
 
 import Vista.BackofficeEstudiante;
-import Vista.FacadeEstudiante;
+import Controlador.FacadeEstudiante;
 
 /**
  *

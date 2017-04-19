@@ -24,6 +24,6 @@ public abstract class DAOSolicitud {
     }
     
     
-    public abstract ArrayList<DTOSolicitud> ConsultarSolicitudes();
+    public abstract ArrayList<DTOSolicitud> ConsultarSolicitudes();    
 
 }

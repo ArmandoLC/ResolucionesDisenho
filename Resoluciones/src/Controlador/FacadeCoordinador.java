@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista;
+package Controlador;
 
 import Controlador.ControladorPrincipal;
 import DTOs.DTOCurso;
@@ -48,7 +48,23 @@ public class FacadeCoordinador extends Facade implements ICoordinador{
     public ArrayList<String> ConsultarAnotaciones(int nSolicitud) {
         return control.ConsultarAnotaciones(nSolicitud);
     }
+
+    @Override
+    public DTOCurso ConsultarCurso(int idSolicitud) {
+        return control.ConsultarCurso(idSolicitud);
+    }
+
+    @Override
+    public ArrayList<DTOCurso> ConsultarCursos() {
+        return control.ConsultarCursos();
+    }
+
+    @Override
+    public ArrayList<String> ConsultarSituaciones() {
+        return control.ConsultarSituaciones();
+    }
     
+
     @Override
     public boolean TramitarSolicitud(int nSolicitud) {
         return control.TramitarSolicitud(nSolicitud);

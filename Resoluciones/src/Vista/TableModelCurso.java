@@ -1,7 +1,6 @@
 package Vista;
 
 import DTOs.DTOCurso;
-import DTOs.DTOSolicitud;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JTable;
@@ -19,16 +18,16 @@ public class TableModelCurso extends AbstractTableModel{
         this.cursos = new ArrayList<>();
     }
     
-    public TableModelCurso(ArrayList<DTOCurso> solicitudes){
-        this.cursos = solicitudes;
+    public TableModelCurso(ArrayList<DTOCurso> cursos){
+        this.cursos = cursos;
     }
     
     public ArrayList<DTOCurso> getSolicitudes() {
         return cursos;
     }
 
-    public void setSolicitudes(ArrayList<DTOCurso> solicitudes) {
-        this.cursos = solicitudes;
+    public void setCursos(ArrayList<DTOCurso> cursos) {
+        this.cursos = cursos;
     }
     
     @Override
@@ -51,7 +50,6 @@ public class TableModelCurso extends AbstractTableModel{
     }
 
     
-    
     @Override
     public Object getValueAt(int row, int col) {
         Object temp = null; 
@@ -62,8 +60,8 @@ public class TableModelCurso extends AbstractTableModel{
         return temp;
     }
     
-    public void addRow(DTOCurso solicitud){
-        cursos.add(solicitud);
+    public void addRow(DTOCurso curso){
+        cursos.add(curso);
     }
     
     public DTOCurso getCurso(int row){ 

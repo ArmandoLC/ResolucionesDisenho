@@ -1,14 +1,41 @@
 
 package Vista;
 
+import org.jdesktop.swingx.JXTable;
+
 
 public class DialogEstadisticas extends javax.swing.JDialog {
 
+    UIBackofficeCoordinador uibackoffice;
 
     public DialogEstadisticas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
         initComponents();
+        initEstadisticas();
     }
+    
+    private void initEstadisticas(){
+        uibackoffice.ConsultarTopCursos(this);
+        uibackoffice.ConsultarTopProfesores(this);
+    }
+
+    public JXTable getTabCursos() {
+        return tabCursos;
+    }
+
+    public void setTabCursos(JXTable tabCursos) {
+        this.tabCursos = tabCursos;
+    }
+
+    public JXTable getTabProfesores() {
+        return tabProfesores;
+    }
+
+    public void setTabProfesores(JXTable tabProfesores) {
+        this.tabProfesores = tabProfesores;
+    }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -17,9 +44,9 @@ public class DialogEstadisticas extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jXTable1 = new org.jdesktop.swingx.JXTable();
+        tabCursos = new org.jdesktop.swingx.JXTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jXTable2 = new org.jdesktop.swingx.JXTable();
+        tabProfesores = new org.jdesktop.swingx.JXTable();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -28,7 +55,7 @@ public class DialogEstadisticas extends javax.swing.JDialog {
 
         jLabel1.setText("Top de profesores con más modificaciones de actas");
 
-        jXTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabCursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -39,9 +66,9 @@ public class DialogEstadisticas extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jXTable1);
+        jScrollPane1.setViewportView(tabCursos);
 
-        jXTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabProfesores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -52,7 +79,7 @@ public class DialogEstadisticas extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jXTable2);
+        jScrollPane2.setViewportView(tabProfesores);
 
         jLabel2.setText("Top de cursos con más resoluciones");
 
@@ -104,7 +131,7 @@ public class DialogEstadisticas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private org.jdesktop.swingx.JXTable jXTable1;
-    private org.jdesktop.swingx.JXTable jXTable2;
+    private org.jdesktop.swingx.JXTable tabCursos;
+    private org.jdesktop.swingx.JXTable tabProfesores;
     // End of variables declaration//GEN-END:variables
 }
