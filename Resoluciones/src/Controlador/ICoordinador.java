@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import DTOs.DTOCurso;
 import DTOs.DTOResolucion;
 import DTOs.DTOSolicitud;
 import Enums.Estado;
@@ -22,6 +23,12 @@ public interface ICoordinador extends IEstadisticas {
     public DTOResolucion ConsultarResolucion(int nSolicitud);
 
     public ArrayList<String> ConsultarAnotaciones(int nSolicitud);
+    
+    public DTOCurso ConsultarCurso(int nSolicitud);
+    
+    public ArrayList<DTOCurso> ConsultarCursos();
+    
+    public ArrayList<String> ConsultarSituaciones();
     
     public boolean TramitarSolicitud(int nSolicitud);
 

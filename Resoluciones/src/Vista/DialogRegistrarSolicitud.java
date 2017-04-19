@@ -13,12 +13,18 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
     
     public DialogRegistrarSolicitud(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
         initComponents();
-        setCbModalidad();
+        uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
+        initConsultas();
+        initModalidad();
     }
     
-    private void setCbModalidad(){
+    private void initConsultas(){
+        uibackoffice.ConsultarCursos(this);
+        uibackoffice.ConsultarSituaciones(this);
+    }
+    
+    private void initModalidad(){
         for(Modalidad m : Modalidad.values())
             cbModalidad.addItem(m.toString());
     }

@@ -6,21 +6,20 @@
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/BackofficeEstudiante.java</file>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/TableModelProfesor.java</file>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogEstadisticas.java</file>
-            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/DTOs/DTOSolicitud.java</file>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/BackofficeCoordinador.java</file>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/UIBackofficeCoordinador.java</file>
-            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogInconsistencia.java</file>
-            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/DTOs/DTOCurso.java</file>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogRegistrarSolicitud.java</file>
-            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/FacadeCoordinador.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogInconsistencia.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Prueba.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/FacadeCoordinador.java</file>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/TableModelSolicitud.java</file>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogAclaracion.java</file>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogSolicitudesAtendidas.java</file>
-            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/ControladorPrincipal.java</file>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/TableModelCurso.java</file>
-            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/DTOs/DTOPersona.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/ICoordinador.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/ControladorPrincipal.java</file>
             <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/Backoffice.java</file>
-            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/FacadeEstudiante.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/BackofficeLogin.java</file>
         </group>
     </open-files>
 </project-private>

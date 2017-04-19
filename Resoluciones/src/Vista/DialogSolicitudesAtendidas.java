@@ -1,20 +1,21 @@
 package Vista;
 
-import org.jdesktop.swingx.JXTextArea;
+import org.jdesktop.swingx.JXEditorPane;
 
 public class DialogSolicitudesAtendidas extends javax.swing.JDialog {
 
+    
     public DialogSolicitudesAtendidas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
-    public JXTextArea getTxtSolicitudesAtendidas() {
-        return txtSolicitudesAtendidas;
+    public JXEditorPane getEditor() {
+        return editor;
     }
 
-    public void setTxtSolicitudesAtendidas(JXTextArea txtSolicitudesAtendidas) {
-        this.txtSolicitudesAtendidas = txtSolicitudesAtendidas;
+    public void setEditor(JXEditorPane editor) {
+        this.editor = editor;
     }
 
     @SuppressWarnings("unchecked")
@@ -22,32 +23,30 @@ public class DialogSolicitudesAtendidas extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtSolicitudesAtendidas = new org.jdesktop.swingx.JXTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        editor = new org.jdesktop.swingx.JXEditorPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtSolicitudesAtendidas.setColumns(20);
-        txtSolicitudesAtendidas.setRows(5);
-        jScrollPane2.setViewportView(txtSolicitudesAtendidas);
+        jScrollPane1.setViewportView(editor);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -66,8 +65,8 @@ public class DialogSolicitudesAtendidas extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.jdesktop.swingx.JXEditorPane editor;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private org.jdesktop.swingx.JXTextArea txtSolicitudesAtendidas;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

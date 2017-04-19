@@ -21,8 +21,8 @@ public class FactoryDAOSolicitud {
         DAOSolicitud daoSolicitud;
         
         try{
-            String name = DAOSolicitud.class.getPackage().getName();     
-            daoSolicitud = (DAOSolicitud) Class.forName(name + ".DAO" + recurso.name()).newInstance();            
+            String name = DAOSolicitud.class.getPackage().getName();            
+            daoSolicitud = (DAOSolicitud) Class.forName(name + "." + "DAO" + recurso.name()).newInstance();
             
             return daoSolicitud;       
             

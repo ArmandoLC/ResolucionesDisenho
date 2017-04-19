@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -40,8 +41,9 @@ public class BackofficeCoordinador extends Backoffice{
         cbEstado.addItemListener(itemListener);
         loadTestData();
         
+        setLocationRelativeTo(null);
+        
     }
-   
     
     private void setEstados(){
         cbEstado.addItem("Todas");
@@ -388,7 +390,7 @@ public class BackofficeCoordinador extends Backoffice{
     }// </editor-fold>//GEN-END:initComponents
 
     private void linkEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkEstadisticasActionPerformed
-        DialogEstadisticas dialog = new DialogEstadisticas(this, true);
+        JDialog dialog = new DialogEstadisticas(this, true);
         dialog.setVisible(true);
     }//GEN-LAST:event_linkEstadisticasActionPerformed
 
@@ -397,14 +399,14 @@ public class BackofficeCoordinador extends Backoffice{
     }//GEN-LAST:event_mitemSalirActionPerformed
 
     private void mitemInconsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemInconsistenciaActionPerformed
-        Dialog dialog = new DialogInconsistencia(this, true);
+        JDialog dialog = new DialogInconsistencia(this, true);
         dialog.setVisible(true);
     }//GEN-LAST:event_mitemInconsistenciaActionPerformed
 
     private void linkReporteSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkReporteSolicitudesActionPerformed
-        Dialog dialog = new DialogSolicitudesAtendidas(this, true);
+        JDialog dialog = new DialogSolicitudesAtendidas(this, true);
+        uibackoffice.ConsultarSolicitudes(dialog);
         dialog.setVisible(true);
-        uibackoffice.ConsultarSolicitudes();
     }//GEN-LAST:event_linkReporteSolicitudesActionPerformed
 
     private void btnExtraerExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtraerExcelActionPerformed
@@ -414,7 +416,7 @@ public class BackofficeCoordinador extends Backoffice{
     }//GEN-LAST:event_btnExtraerExcelActionPerformed
 
     private void btnRegistrarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarSolicitudActionPerformed
-        Dialog dialog = new DialogRegistrarSolicitud(this, true);
+        JDialog dialog = new DialogRegistrarSolicitud(this, true);
         dialog.setVisible(true);
     }//GEN-LAST:event_btnRegistrarSolicitudActionPerformed
 

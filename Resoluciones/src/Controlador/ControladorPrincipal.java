@@ -45,6 +45,14 @@ public class ControladorPrincipal implements ISolicitud,ICoordinador{
     private ArrayList<Curso> planEstudios;
     private ArrayList<Profesor> carteraDocente;
     
+    //Por mientras para que no den nullpointer
+    public ControladorPrincipal () {
+        situaciones = new ArrayList<>();
+        solicitudes = new ArrayList<>();
+        ofertaAcademica = new ArrayList<>();
+        planEstudios = new ArrayList<>();
+        carteraDocente = new ArrayList<>();
+    }
     
     private void CargarPremisas(){}
     
@@ -63,6 +71,25 @@ public class ControladorPrincipal implements ISolicitud,ICoordinador{
     public ArrayList<DTOSolicitud> ConsultarSolicitudes(Estado estado) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public DTOCurso ConsultarCurso(int idSolicitud) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public ArrayList<DTOCurso> ConsultarCursos(){
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<String> ConsultarSituaciones() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        situaciones.add("TOME");
+        situaciones.add("ESTA");
+        return situaciones;
+    }
+    
     
     @Override
     public boolean TramitarSolicitud(int nSolicitud) {
