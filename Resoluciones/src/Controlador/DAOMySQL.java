@@ -15,11 +15,11 @@ import java.util.ArrayList;
  */
 public class DAOMySQL extends DAOSolicitud{
 
-    private String stringConexion;
-
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return null;
+    
     }
 
     

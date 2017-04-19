@@ -22,7 +22,7 @@ public class FactoryDAOSolicitud {
         
         try{
             String name = DAOSolicitud.class.getPackage().getName();            
-            daoSolicitud = (DAOSolicitud) Class.forName(name + "." + recurso.name()).newInstance();
+            daoSolicitud = (DAOSolicitud) Class.forName(name + "." + "DAO" + recurso.name()).newInstance();
             
             return daoSolicitud;       
             
