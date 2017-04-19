@@ -1,5 +1,7 @@
 package Vista;
 
+import org.jdesktop.swingx.JXTextArea;
+
 public class DialogSolicitudesAtendidas extends javax.swing.JDialog {
 
     public DialogSolicitudesAtendidas(java.awt.Frame parent, boolean modal) {
@@ -7,39 +9,45 @@ public class DialogSolicitudesAtendidas extends javax.swing.JDialog {
         initComponents();
     }
 
+    public JXTextArea getTxtSolicitudesAtendidas() {
+        return txtSolicitudesAtendidas;
+    }
+
+    public void setTxtSolicitudesAtendidas(JXTextArea txtSolicitudesAtendidas) {
+        this.txtSolicitudesAtendidas = txtSolicitudesAtendidas;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jXTextArea1 = new org.jdesktop.swingx.JXTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtSolicitudesAtendidas = new org.jdesktop.swingx.JXTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jXTextArea1.setBackground(new java.awt.Color(255, 255, 255));
-        jXTextArea1.setColumns(20);
-        jXTextArea1.setRows(5);
-        jXTextArea1.setFocusable(false);
-        jScrollPane1.setViewportView(jXTextArea1);
+        txtSolicitudesAtendidas.setColumns(20);
+        txtSolicitudesAtendidas.setRows(5);
+        jScrollPane2.setViewportView(txtSolicitudesAtendidas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -59,7 +67,7 @@ public class DialogSolicitudesAtendidas extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private org.jdesktop.swingx.JXTextArea jXTextArea1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private org.jdesktop.swingx.JXTextArea txtSolicitudesAtendidas;
     // End of variables declaration//GEN-END:variables
 }

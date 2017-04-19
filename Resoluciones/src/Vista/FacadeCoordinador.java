@@ -26,30 +26,27 @@ public class FacadeCoordinador extends Facade implements ICoordinador{
     
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return control.ConsultarSolicitudes();
     }
 
     @Override
     public int RegistrarSolicitud(DTOSolicitud dtoSolicitud) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return control.RegistrarSolicitud(dtoSolicitud);
     }
-    
-    
 
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes(Estado estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return control.ConsultarSolicitudes(estado);
     }
 
     @Override
     public DTOResolucion ConsultarResolucion(int nSolicitud) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return control.ConsultarResolucion(nSolicitud);
     }
 
     @Override
     public ArrayList<String> ConsultarAnotaciones(int nSolicitud) {
-        //return control.consultarAnotaciones(nSolicitud);
-        return null;
+        return control.ConsultarAnotaciones(nSolicitud);
     }
     
     @Override
@@ -78,23 +75,28 @@ public class FacadeCoordinador extends Facade implements ICoordinador{
     }
 
     @Override
-    public boolean GenerarResolucion(int nSolicitud, int nResolucion, Formato formato) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean SolicitarTemplateResolucion(int nSolicitud) {
+        return control.SolicitarTemplateResolucion(nSolicitud);
+    }
+    
+    @Override
+    public boolean GenerarResolucion(int nSolicitud, int nResolucion, String ruta, Formato formato) {
+        return control.GenerarResolucion(nSolicitud, nResolucion, ruta, formato);
     }
 
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudesAtendidas(Date desde, Date hasta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return control.ConsultarSolicitudesAtendidas(desde, hasta);
     }
 
     @Override
     public ArrayList<DTOPersona> ConsultarTopProfesores(int top) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return control.ConsultarTopProfesores(top);
     }
 
     @Override
     public ArrayList<DTOCurso> ConsultarTopCursos(int top) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return control.ConsultarTopCursos(top);
     }
     
 }
