@@ -19,11 +19,11 @@ import jxl.Workbook;
  */
 public class DAOPremisaExcel implements IDAOPremisa {
 
-    private String ruta;
+    private String ruta = "C:\\Users\\Armando\\Documents\\I Semestre 2017\\Diseño de Software\\Proyectos\\Proyecto#1\\Datos\\DatosProyecto1.xls";
 
     @Override
     public ArrayList<DTOPersona> ConsultarCarteraDocente() throws Exception {
-        ArrayList<DTOPersona> carteraDocente = new ArrayList<DTOPersona>();
+        ArrayList<DTOPersona> carteraDocente = new ArrayList<>();
         
         try {
             File f = new File(ruta);
@@ -32,7 +32,7 @@ public class DAOPremisaExcel implements IDAOPremisa {
             Sheet sheet = book.getSheet("PROFESORES");
             int rows = sheet.getRows();
             
-            for (int i = 0; i < rows; i++) {
+            for (int i = 1; i < rows; i++) {
                 DTOPersona dtoPersona = new DTOPersona();
                 dtoPersona.setId(sheet.getCell(0, i).getContents());
                 dtoPersona.setNombre(sheet.getCell(1, i).getContents());
@@ -52,7 +52,7 @@ public class DAOPremisaExcel implements IDAOPremisa {
 
     @Override
     public ArrayList<DTOCurso> ConsultarPlanEstudios() {
-        ArrayList<DTOCurso> planEstudios = new ArrayList<DTOCurso>();
+        ArrayList<DTOCurso> planEstudios = new ArrayList<>();
         
         try {
             File f = new File(ruta);
@@ -61,7 +61,7 @@ public class DAOPremisaExcel implements IDAOPremisa {
             Sheet sheet = book.getSheet("PLAN");
             int rows = sheet.getRows();
             
-            for (int i = 0; i < rows; i++) {
+            for (int i = 1; i < rows; i++) {
                 DTOCurso dtoCurso = new DTOCurso();
                 dtoCurso.setId(sheet.getCell(0, i).getContents());
                 dtoCurso.setNombre(sheet.getCell(1, i).getContents());
@@ -80,7 +80,7 @@ public class DAOPremisaExcel implements IDAOPremisa {
 
     @Override
     public ArrayList<DTOferta> ConsultarOfertaAcademica() {
-        ArrayList<DTOferta> ofertaAcad = new ArrayList<DTOferta>();
+        ArrayList<DTOferta> ofertaAcad = new ArrayList<>();
         
         try {
             File f = new File(ruta);
@@ -89,7 +89,7 @@ public class DAOPremisaExcel implements IDAOPremisa {
             Sheet sheet = book.getSheet("OFERTA");
             int rows = sheet.getRows();
             
-            for (int i = 0; i < rows; i++) {
+            for (int i = 1; i < rows; i++) {
                 DTOferta dtoOferta = new DTOferta();
                 dtoOferta.setPeriodo(sheet.getCell(0, i).getContents());
                 dtoOferta.setIdCurso(sheet.getCell(1, i).getContents());
@@ -111,7 +111,7 @@ public class DAOPremisaExcel implements IDAOPremisa {
 
     @Override
     public ArrayList<String> ConsultarSituaciones() {
-        ArrayList<String> situaciones = new ArrayList<String>();
+        ArrayList<String> situaciones = new ArrayList<>();
         
         try {
             File f = new File(ruta);
@@ -119,7 +119,7 @@ public class DAOPremisaExcel implements IDAOPremisa {
             Workbook book = Workbook.getWorkbook(f);
             Sheet sheet = book.getSheet("SITUACIONES");
             int rows = sheet.getRows();
-            for (int i = 0; i < rows; i++) {
+            for (int i = 1; i < rows; i++) {
                 situaciones.add(sheet.getCell(0, i).getContents());
             }
         } catch (Exception e) {

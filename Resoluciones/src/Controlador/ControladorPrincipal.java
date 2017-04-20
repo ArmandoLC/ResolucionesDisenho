@@ -19,6 +19,7 @@ import Controlador.IDAOPremisa;
 import Controlador.DAOSolicitud;
 import Controlador.IGeneradorResolucion;
 import Controlador.ISolicitud;
+import DTOs.DTOferta;
 import Enums.Estado;
 import Enums.Formato;
 import java.util.ArrayList;
@@ -45,9 +46,57 @@ public class ControladorPrincipal implements ISolicitud,ICoordinador{
     private ArrayList<Curso> planEstudios;
     private ArrayList<Profesor> carteraDocente;
 
+    public ControladorPrincipal() {
+        solicitudes = new ArrayList<>();
+        ofertaAcademica = new ArrayList<>();
+        planEstudios = new ArrayList<>();
+        carteraDocente = new ArrayList<>();
+        daoPremisa = new DAOPremisaExcel();
+    }
+
+    private void setPlanEstudios(DTOCurso dtoCurso){
+        Curso curso = new Curso(dtoCurso.getId(),dtoCurso.getNombre(),dtoCurso.getCreditos());
+        planEstudios.add(curso);
+    }
     
-    private void CargarPremisas(){
+    private void setCarteraDocentes(DTOPersona dtoPersona){
+       Profesor profesor = new Profesor(dtoPersona.getId(),dtoPersona.getNombre(), dtoPersona.getCorreo(), dtoPersona.getTelefono());
+       carteraDocente.add(profesor);
+    }
+    
+    private Curso  getCurso(String idCurso){
+        for (int i = 0; i < planEstudios.size(); i++) {
+            if (planEstudios.get(i).getId().equals(idCurso)){
+                return planEstudios.get(i);
+            }
+        }
+        return null;
+    }
+    
+    private Profesor  getProfesor(String idProfesor){
+        for (int i = 0; i < carteraDocente.size(); i++) {
+            if (carteraDocente.get(i).getId().equals(idProfesor)){
+                return carteraDocente.get(i);
+            }
+        }
+        return null;
+    }
+    
+    private void setOfertaAcademica(DTOferta dtoOferta){
+       Oferta oferta = new Oferta(getCurso(dtoOferta.getIdCurso()), getProfesor(dtoOferta.getIdProfesor()),
+                            dtoOferta.getPeriodo(), dtoOferta.getnGrupo(), dtoOferta.getHorario(), dtoOferta.getAula());
+       ofertaAcademica.add(oferta);
+    }
+    
+    public void CargarPremisas() throws Exception{
+        ArrayList<DTOCurso> listCursos = daoPremisa.ConsultarPlanEstudios();
+        ArrayList<DTOPersona> listDocentes = daoPremisa.ConsultarCarteraDocente();
+        ArrayList<DTOferta> listOferta = daoPremisa.ConsultarOfertaAcademica();
+        situaciones = daoPremisa.ConsultarSituaciones();
         
+        listCursos.forEach((DTOCurso)-> setPlanEstudios(DTOCurso));
+        listDocentes.forEach((DTOPersona)-> setCarteraDocentes(DTOPersona));
+        listOferta.forEach((DTOferta)-> setOfertaAcademica(DTOferta));
     }
 
     @Override

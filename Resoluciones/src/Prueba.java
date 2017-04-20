@@ -1,4 +1,6 @@
 
+import Controlador.ControladorPrincipal;
+import Controlador.DAOPremisaExcel;
 import DTOs.DTOCurso;
 import DTOs.DTOPersona;
 import DTOs.DTOSolicitud;
@@ -6,9 +8,12 @@ import DTOs.DTOferta;
 import Modelo.Solicitud;
 import Modelo.SolicitudBuilder;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Properties;
 import jxl.Sheet;
 import jxl.Workbook;
 
@@ -26,7 +31,7 @@ public class Prueba {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         try {
             /*//Pueba de la creación de la solicitud
              SolicitudBuilder sol =   new SolicitudBuilder();
@@ -43,20 +48,35 @@ public class Prueba {
              
              System.out.println(s.toString());
              */
-            /*
-            ArrayList<String> situaciones = new ArrayList<String>();
-            File f = new File("C:\\Users\\Armando\\Documents\\I Semestre 2017\\Diseño de Software\\Proyectos\\Proyecto#1\\Datos\\DatosProyecto1.xls");
+            /*DAOPremisaExcel dao = new DAOPremisaExcel();
 
-            Workbook wb = Workbook.getWorkbook(f);
-            Sheet sheet = wb.getSheet("SITUACIONES");
-            int rows = sheet.getRows();
-            int cols = sheet.getColumns();
-            for (int i = 1; i < rows; i++) {
-               situaciones.add(sheet.getCell(0, i).getContents());
-            }
+            Properties prop = new Properties();
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            InputStream stream = loader.getResourceAsStream("PropertiesFile.properties");
+            prop.load(stream);
+            System.out.println(prop.getProperty("rutaExcelPremisas"));
+            //Properties prop = new Properties();
+
+            //InputStream input = new FileInputStream("/PropertiesFile.properties");
+            //prop.load(input);
+            //ArrayList<String> situaciones = dao.ConsultarSituaciones();
+            ArrayList<DTOPersona> situaciones = dao.ConsultarCarteraDocente();
+            //File f = new File("C:\\Users\\Armando\\Documents\\I Semestre 2017\\Diseño de Software\\Proyectos\\Proyecto#1\\Datos\\DatosProyecto1.xls");
+
+            //Workbook wb = Workbook.getWorkbook(f);
+            //Sheet sheet = wb.getSheet("SITUACIONES");
+            //int rows = sheet.getRows();
+            //int cols = sheet.getColumns();
+            //for (int i = 1; i < rows; i++) {
+            //   situaciones.add(sheet.getCell(0, i).getContents());
+            //}
             for (int i = 0; i < situaciones.size(); i++) {
                 System.out.println(situaciones.get(i).toString());
-            }
+            }*/
+            /*
+            ControladorPrincipal CPrin = new ControladorPrincipal();
+            CPrin.CargarPremisas();
+            System.out.println(CPrin.toString());
             */
 
         } catch (Exception e) {
