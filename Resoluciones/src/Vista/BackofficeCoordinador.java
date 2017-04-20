@@ -4,14 +4,11 @@ import DTOs.DTOSolicitud;
 import Enums.Estado;
 import java.awt.Dialog;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import static java.lang.System.exit;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -22,27 +19,21 @@ import org.jdesktop.swingx.JXDatePicker;
 
 public class BackofficeCoordinador extends Backoffice{
     
-    UIBackofficeCoordinador uibackoffice;
-    
-    JPopupMenu popup;
-    TableModelSolicitud tabModelSolicitudes;
+    private JPopupMenu popup;
+    private UIBackofficeCoordinador uibackoffice = new UIBackofficeCoordinador(this);;
             
     public BackofficeCoordinador() {
-        
-        initLookAndFeel();
         initComponents();
+        initVariables();     
+    }
+    
+    private void initVariables(){
+        initLookAndFeel();
+        initModel(tabSolicitudes);
         setEstados();
         setFechas();
-        
-        uibackoffice = new UIBackofficeCoordinador(this);
-        tabModelSolicitudes = new TableModelSolicitud(tabSolicitudes);  
-        tabSolicitudes.setModel(tabModelSolicitudes);
-        tabSolicitudes.addMouseListener(mouseAdapter);
-        cbEstado.addItemListener(itemListener);
-        loadTestData();
-        
+        setListeners();
         setLocationRelativeTo(null);
-        
     }
     
     private void setEstados(){
@@ -58,170 +49,80 @@ public class BackofficeCoordinador extends Backoffice{
         calendar.add(Calendar.DAY_OF_MONTH, 30);
         dpHasta.setDate(calendar.getTime());
     }
+    
+    private void setListeners(){
+        tabSolicitudes.addMouseListener(mouseAdapter);
+        cbEstado.addItemListener(itemListener);
+    }
 
     private final ItemListener itemListener = new ItemListener (){
         @Override
         public void itemStateChanged(ItemEvent e) {
             uibackoffice.ConsultarSolicitudes();
-            System.out.println("consultando solicitudes");
         }
     };
     
-    private void loadTestData(){
-        try{
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-            DTOSolicitud solicitud1 = new DTOSolicitud();
-            solicitud1.setId(123);
-            solicitud1.setFecha(sdf.parse("15/10/2013"));
-            solicitud1.setIdSolicitante("1546468");
-            solicitud1.setNombreSolicitante("Julian");
-            solicitud1.setPeriodo("IS2017");
-            solicitud1.setnGrupo(4);
-            solicitud1.setCodigoCurso("156485fr");
-            solicitud1.setEstado("Tramitada");
-            DTOSolicitud solicitud2 = new DTOSolicitud();
-            solicitud2.setId(456);
-            solicitud2.setFecha(sdf.parse("13/10/2013"));
-            solicitud2.setIdSolicitante("1546468");
-            solicitud2.setNombreSolicitante("Julian");
-            solicitud2.setPeriodo("IS2017");
-            solicitud2.setnGrupo(4);
-            solicitud2.setCodigoCurso("156485fr");
-            solicitud2.setEstado("Anulada");
-            DTOSolicitud solicitud3 = new DTOSolicitud();
-            solicitud3.setId(789);
-            solicitud3.setFecha(sdf.parse("12/10/2013"));
-            solicitud3.setIdSolicitante("1546468");
-            solicitud3.setNombreSolicitante("Julian");
-            solicitud3.setPeriodo("IS2017");
-            solicitud3.setnGrupo(4);
-            solicitud3.setCodigoCurso("156485fr");
-            solicitud3.setEstado("Pendiente");
-            tabModelSolicitudes.addRow(solicitud1);
-            tabModelSolicitudes.addRow(solicitud2);
-            tabModelSolicitudes.addRow(solicitud3);
-        }
-        catch(Exception e){
-            System.out.println("Error al colocar la hora");
-        }
-    }
-    
     private final MouseAdapter mouseAdapter = new MouseAdapter() {
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-            System.out.println("pressed");
-        }
-        
         @Override
         public void mouseReleased(MouseEvent e) {
             if (e.isPopupTrigger()) {
-                int row = tabSolicitudes.rowAtPoint( e.getPoint() );
-                int column = tabSolicitudes.columnAtPoint( e.getPoint() );
-                if (!tabSolicitudes.isRowSelected(row))
-                    tabSolicitudes.changeSelection(row, column, false, false);
-                popup = new JPopupMenu();
-                addPopupMenuOptions(popup);
+                int i = tabSolicitudes.rowAtPoint( e.getPoint() );
+                int j = tabSolicitudes.columnAtPoint( e.getPoint() );
+                if (! tabSolicitudes.isRowSelected(i)) tabSolicitudes.changeSelection(i, j, false, false);
+                popup = new JPopupMenu(); addPopupMenuOptions();
                 popup.show(e.getComponent(), e.getX(), e.getY());
             }
-        }
-            
+        }     
     };
     
-    public void addPopupMenuOptions(JPopupMenu popup){
-        
-        int fila = tabSolicitudes.getSelectedRow();
-        DTOSolicitud solicitud = tabModelSolicitudes.getSolicitud(fila);
-        popup.add(new JMenuItem("#Solicitud " + String.valueOf(solicitud.getId())));
-        
-        if("Anulada".equals(solicitud.getEstado())){
-            JMenuItem item = new JMenuItem("Ver aclaración");
-            item.addActionListener((ActionEvent e) -> {
-                DialogAclaracion dialog = new DialogAclaracion(BackofficeCoordinador.this, true, solicitud);
-                dialog.getBtnConfirmar().setVisible(false);
-                dialog.getBtnCancelar().setVisible(false);
-                dialog.getTxtAclaracion().setEditable(false);
-                dialog.setVisible(true);
-            }); popup.add(item);
+    public void addPopupMenuOptions(){
+        DTOSolicitud solicitud = tabModelSolicitudes.getSolicitud(tabSolicitudes.getSelectedRow());
+        switch(Estado.valueOf(solicitud.getEstado())){
+            case Anulada: setPopupOptionsSolicitudAnulada(solicitud); break;
+            case Tramitada: setPopupOptionsSolicitudTramitada(solicitud); break;
+            case Pendiente: setPopupOptionsSolicitudPendiente(solicitud); break;
         }
-        
-        else if("Tramitada".equals(solicitud.getEstado())){
-            
-            JMenuItem itemGenerar = new JMenuItem("Generar resolución");
-            itemGenerar.addActionListener((ActionEvent e) -> {
-                System.out.println("Generar resolución");
-            }); popup.add(itemGenerar);
-            
-            JMenuItem itemVer = new JMenuItem("Ver resolución");
-            itemVer.addActionListener((ActionEvent e) -> {
-                System.out.println("Ver resolución");
-            }); popup.add(itemVer);
-   
-        }
-        else if("Pendiente".equals(solicitud.getEstado())){
-        
-            JMenuItem itemGenerar = new JMenuItem("Tramitar");
-            itemGenerar.addActionListener((ActionEvent e) -> {
-                uibackoffice.TramitarSolicitud(solicitud);
-            }); popup.add(itemGenerar);
-            
-            JMenuItem itemVer = new JMenuItem("Anular");
-            itemVer.addActionListener((ActionEvent e) -> {
-                Dialog dialog = new DialogAclaracion(this, true, solicitud);
-                dialog.setVisible(true);
-            }); popup.add(itemVer);
-            
-        }
-        
-        JMenuItem itemVer = new JMenuItem("Ver detalles");
+        setPopupOptionsSolicitud(solicitud);
+    }
+    
+    public void setPopupOptionsSolicitudAnulada(DTOSolicitud solicitud){
+        JMenuItem item = new JMenuItem("Motivo de anulación");
+        item.addActionListener((ActionEvent e) -> {
+            Dialog dialog = new DialogAclaracion(this, true, solicitud);
+            dialog.setVisible(true);
+        }); popup.add(item);
+    }
+    
+    public void setPopupOptionsSolicitudTramitada(DTOSolicitud solicitud){
+        JMenuItem item = new JMenuItem();
+        if(solicitud.getnResolucion() == 0) item.setText("Registrar resolución");
+        else item.setText("Visualizar resolución");
+        item.addActionListener((ActionEvent e) -> {
+            Dialog dialog = new DialogEditorResolucion(this, true, solicitud);
+            dialog.setVisible(true);
+        }); popup.add(item);
+    }
+    
+    public void setPopupOptionsSolicitudPendiente(DTOSolicitud solicitud){
+        JMenuItem itemGenerar = new JMenuItem("Tramitar solicitud");
+        itemGenerar.addActionListener((ActionEvent e) -> {
+            uibackoffice.TramitarSolicitud(solicitud);
+        }); popup.add(itemGenerar);
+        JMenuItem itemVer = new JMenuItem("Anular solicitud");
+        itemVer.addActionListener((ActionEvent e) -> {
+            Dialog dialog = new DialogAclaracion(this, true, solicitud);
+            dialog.setVisible(true);
+        }); popup.add(itemVer);
+    }
+    
+    public void setPopupOptionsSolicitud(DTOSolicitud solicitud){
+        JMenuItem itemVer = new JMenuItem("Visualizar detalles");
         itemVer.addActionListener((ActionEvent e) -> {
             Dialog dialog = new DialogDetallesSolicitud(this, true, solicitud);
             dialog.setVisible(true);
         }); popup.add(itemVer);
     }
     
-    public static void main(String args[]) {
-        //</editor-fold>
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new BackofficeCoordinador().setVisible(true);
-            }
-        });
-    }
-
-    public JComboBox<String> getCbEstado() {
-        return cbEstado;
-    }
-
-    public void setCbEstado(JComboBox<String> cbEstado) {
-        this.cbEstado = cbEstado;
-    }
-
-    public JXDatePicker getDpDesde() {
-        return dpDesde;
-    }
-
-    public void setDpDesde(JXDatePicker dpDesde) {
-        this.dpDesde = dpDesde;
-    }
-
-    public JXDatePicker getDpHasta() {
-        return dpHasta;
-    }
-
-    public void setDpHasta(JXDatePicker dpHasta) {
-        this.dpHasta = dpHasta;
-    }
-
-    public TableModelSolicitud getTabModelSolicitudes() {
-        return tabModelSolicitudes;
-    }
-
-    public void setTabModelSolicitudes(TableModelSolicitud tabModelSolicitudes) {
-        this.tabModelSolicitudes = tabModelSolicitudes;
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -400,7 +301,7 @@ public class BackofficeCoordinador extends Backoffice{
     }//GEN-LAST:event_linkEstadisticasActionPerformed
 
     private void mitemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemSalirActionPerformed
-        exit(0);
+        java.lang.System.exit(0);
     }//GEN-LAST:event_mitemSalirActionPerformed
 
     private void mitemInconsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemInconsistenciaActionPerformed
@@ -410,14 +311,15 @@ public class BackofficeCoordinador extends Backoffice{
 
     private void linkReporteSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkReporteSolicitudesActionPerformed
         JDialog dialog = new DialogSolicitudesAtendidas(this, true);
-        uibackoffice.ConsultarSolicitudes(dialog);
+        //uibackoffice.ConsultarSolicitudes(dialog);
         dialog.setVisible(true);
     }//GEN-LAST:event_linkReporteSolicitudesActionPerformed
 
     private void btnExtraerExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtraerExcelActionPerformed
-        JFileChooser file=new JFileChooser();
+        JFileChooser file = new JFileChooser();
         file.showOpenDialog(this);
         File archivo = file.getSelectedFile();
+        //uibackoffice.RegistrarSolicitudesGoogleForm(dialog);
     }//GEN-LAST:event_btnExtraerExcelActionPerformed
 
     private void btnRegistrarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarSolicitudActionPerformed
@@ -450,5 +352,34 @@ public class BackofficeCoordinador extends Backoffice{
     private org.jdesktop.swingx.JXTable tabSolicitudes;
     // End of variables declaration//GEN-END:variables
 
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(() -> {
+            new BackofficeCoordinador().setVisible(true);
+        });
+    }
 
+    public JComboBox<String> getCbEstado() {
+        return cbEstado;
+    }
+
+    public void setCbEstado(JComboBox<String> cbEstado) {
+        this.cbEstado = cbEstado;
+    }
+
+    public JXDatePicker getDpDesde() {
+        return dpDesde;
+    }
+
+    public void setDpDesde(JXDatePicker dpDesde) {
+        this.dpDesde = dpDesde;
+    }
+
+    public JXDatePicker getDpHasta() {
+        return dpHasta;
+    }
+
+    public void setDpHasta(JXDatePicker dpHasta) {
+        this.dpHasta = dpHasta;
+    }
+    
 }

@@ -9,17 +9,14 @@ import javax.swing.table.AbstractTableModel;
 
 public class TableModelSolicitud extends AbstractTableModel{
 
-    private String columnas[] = {"Id","Fecha","Solicitante", "Nombre", "Periodo", "Curso", "Grupo", "Estado"};
+    private final String columnas[];
     private ArrayList<DTOSolicitud> solicitudes;
-    private JTable table;
+    private final JTable table;
     
     public TableModelSolicitud(JTable table){
+        this.columnas = new String[]{"Id", "Fecha", "Solicitante", "Nombre", "Periodo", "Curso", "Grupo", "Estado"};
         this.table = table;
         this.solicitudes = new ArrayList<>();
-    }
-    
-    public TableModelSolicitud(ArrayList<DTOSolicitud> solicitudes){
-        this.solicitudes = solicitudes;
     }
     
     public ArrayList<DTOSolicitud> getSolicitudes() {
@@ -36,7 +33,6 @@ public class TableModelSolicitud extends AbstractTableModel{
         if (solicitudes == null) size = 0; 
         else size = solicitudes.size();
         return size; 
-        
     }
 
     @Override
@@ -49,20 +45,21 @@ public class TableModelSolicitud extends AbstractTableModel{
         return columnas[column];
     }
 
-    
-    
     @Override
     public Object getValueAt(int row, int col) {
         Object temp = null; 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        if (col == 0) temp = solicitudes.get(row).getId(); 
-        else if (col == 1) temp = sdf.format(solicitudes.get(row).getFecha()); 
-        else if (col == 2) temp = solicitudes.get(row).getIdSolicitante(); 
-        else if (col == 3) temp = solicitudes.get(row).getNombreSolicitante(); 
-        else if (col == 4) temp = solicitudes.get(row).getPeriodo(); 
-        else if (col == 5) temp = solicitudes.get(row).getCodigoCurso(); 
-        else if (col == 6) temp = solicitudes.get(row).getnGrupo(); 
-        else if (col == 7) temp = solicitudes.get(row).getEstado(); 
+        switch (col) {
+            case 0: temp = solicitudes.get(row).getId(); break;
+            case 1: temp = sdf.format(solicitudes.get(row).getFecha()); break;
+            case 2: temp = solicitudes.get(row).getIdSolicitante(); break;
+            case 3: temp = solicitudes.get(row).getNombreSolicitante(); break;
+            case 4: temp = solicitudes.get(row).getPeriodo(); break;
+            case 5: temp = solicitudes.get(row).getCodigoCurso(); break;
+            case 6: temp = solicitudes.get(row).getnGrupo(); break;
+            case 7: temp = solicitudes.get(row).getEstado(); break;
+            default: break;
+        }
         return temp;
     }
     
@@ -75,5 +72,4 @@ public class TableModelSolicitud extends AbstractTableModel{
         int index = table.convertRowIndexToModel(row);
         return solicitudes.get(index);
     }
-    
 }

@@ -1,6 +1,4 @@
 package DTOs;
-
-import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -18,7 +16,7 @@ public class DTOSolicitud {
     private String nombreAfectado;
     private String correoAfectado;
     private String telefonoAfectado;
-    private String tipoSituacion;
+    private String inconsistencia;
     private String descripcionDetallada;
     private String rutaArchivoAdjunto;
     private String estado;
@@ -41,7 +39,7 @@ public class DTOSolicitud {
         this.nombreAfectado = nombreAfectado;
         this.correoAfectado = correoAfectado;
         this.telefonoAfectado = telefonoAfectado;
-        this.tipoSituacion = tipoSituacion;
+        this.inconsistencia = tipoSituacion;
         this.descripcionDetallada = descripcionDetallada;
         this.rutaArchivoAdjunto = rutaArchivoAdjunto;
         this.estado = estado;
@@ -137,12 +135,12 @@ public class DTOSolicitud {
         this.telefonoAfectado = telefonoAfectado;
     }
 
-    public String getTipoSituacion() {
-        return tipoSituacion;
+    public String getInconsistencia() {
+        return inconsistencia;
     }
 
-    public void setTipoSituacion(String tipoSituacion) {
-        this.tipoSituacion = tipoSituacion;
+    public void setInconsistencia(String inconsistencia) {
+        this.inconsistencia = inconsistencia;
     }
 
     public String getDescripcionDetallada() {
@@ -187,7 +185,7 @@ public class DTOSolicitud {
 
     @Override
     public String toString() {
-        return "DTOSolicitud{" + "id=" + id + ", fecha=" + fecha + ", idSolicitante=" + idSolicitante + ", nombreSolicitante=" + nombreSolicitante + ", periodo=" + periodo + ", codigoCurso=" + codigoCurso + ", nGrupo=" + nGrupo + ", idAfectado=" + idAfectado + ", nombreAfectado=" + nombreAfectado + ", correoAfectado=" + correoAfectado + ", telefonoAfectado=" + telefonoAfectado + ", tipoSituacion=" + tipoSituacion + ", descripcionDetallada=" + descripcionDetallada + ", rutaArchivoAdjunto=" + rutaArchivoAdjunto + ", estado=" + estado + ", aclaracion=" + aclaracion + ", nResolucion=" + nResolucion + '}';
+        return "DTOSolicitud{" + "id=" + id + ", fecha=" + fecha + ", idSolicitante=" + idSolicitante + ", nombreSolicitante=" + nombreSolicitante + ", periodo=" + periodo + ", codigoCurso=" + codigoCurso + ", nGrupo=" + nGrupo + ", idAfectado=" + idAfectado + ", nombreAfectado=" + nombreAfectado + ", correoAfectado=" + correoAfectado + ", telefonoAfectado=" + telefonoAfectado + ", tipoSituacion=" + inconsistencia + ", descripcionDetallada=" + descripcionDetallada + ", rutaArchivoAdjunto=" + rutaArchivoAdjunto + ", estado=" + estado + ", aclaracion=" + aclaracion + ", nResolucion=" + nResolucion + '}';
     } 
 
 }

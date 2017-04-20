@@ -4,137 +4,97 @@ import Controlador.FacadeCoordinador;
 import DTOs.DTOCurso;
 import DTOs.DTOSolicitud;
 import Enums.Estado;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Properties;
 import javax.swing.JDialog;
 
 public class UIBackofficeCoordinador {
-      
-    //Properties prop;
-    //InputStream input;
-    
-    private FacadeCoordinador facade;
-    private BackofficeCoordinador backoffice;
 
+    private final FacadeCoordinador facade;
+    private final BackofficeCoordinador backoffice;
+
+    
     public UIBackofficeCoordinador(Backoffice backoffice){
         this.facade = new FacadeCoordinador();
         this.backoffice = (BackofficeCoordinador) backoffice;
-        //initPropertiesFile();
     }
     
-    /*private void initPropertiesFile (){
-        try{
-            prop = new Properties();
-            input = this.getClass().getResourceAsStream("PropertiesFile.properties");
-            prop.load(input); 
-            input.close();
-        }
-        catch(IOException e){
-            backoffice.showMessage("Error al cargar el archivo de configuración");
-        }
-    }*/
     
     public void ConsultarSolicitudes() {
-        try{
-            ArrayList<DTOSolicitud> solicitudes;
+        try{  ArrayList<DTOSolicitud> solicitudes;
             String item = (String) backoffice.getCbEstado().getSelectedItem();
             if("Todas".equals(item)) solicitudes = facade.ConsultarSolicitudes();
-            else {
-                Estado estado = Estado.valueOf(item);
-                solicitudes = facade.ConsultarSolicitudes(estado);
-            }
+            else solicitudes = facade.ConsultarSolicitudes(Estado.valueOf(item));
             backoffice.getTabModelSolicitudes().setSolicitudes(solicitudes);
-        }
-        catch(Exception e){
-            backoffice.showMessage(e.getMessage());
-        }
+        } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
     
-    public void ConsultarSolicitudes(JDialog dialogSolicitudesAtendidas){
-        try{
-            DialogSolicitudesAtendidas dialog = (DialogSolicitudesAtendidas) dialogSolicitudesAtendidas;
+    
+    public void ConsultarSolicitudesAtendidas(JDialog pdialog){
+        try{  DialogSolicitudesAtendidas dialog = (DialogSolicitudesAtendidas) pdialog;
+            dialog.getEditor().setContentType("text/html");
             Date desde = backoffice.getDpDesde().getDate();
             Date hasta = backoffice.getDpHasta().getDate();
-            dialog.getEditor().setContentType("text/html"); 
-            ArrayList<DTOSolicitud> solicitudes = facade.ConsultarSolicitudesAtendidas(desde, hasta);
-            String reporte = "<b><font color=\"#CD5C5C\">ID</font></b><br><br>";
-            for(DTOSolicitud solicitud : solicitudes){
-                DTOCurso curso = facade.ConsultarCurso(solicitud.getId());
-                reporte += "<b><font color=\"#FA8072\">ID</font></b>" + solicitud.getId() + "\n";
-                reporte += "<b>Período: <b> " + solicitud.getId() + "\n";
-                reporte += "<b>Tipo de situación: <b> " + solicitud.getTipoSituacion() + "\n";
-                reporte += "<b>Número de resolución: <b> " + String.valueOf(solicitud.getnResolucion()) + "\n";
-                reporte += "<b>Curso: <b> " + curso.getId() + "  " + curso.getNombre() + "\n";
-                reporte += "<b>Grupo: <b> " + String.valueOf(solicitud.getnGrupo()) + "\n";
-            }
+            String reporte = GenerarReporteSolicitudesAtendidas(desde, hasta);
             dialog.getEditor().setText(reporte);
-            
-        }
-        catch(Exception e){
-            backoffice.showMessage(e.getMessage());
-        }
+        } catch(Exception e){ backoffice.showError(e.getMessage()); }
+    }
     
+    
+    private String GenerarReporteSolicitudesAtendidas(Date desde, Date hasta){
+        String reporte = "<b><font color=\"#CD5C5C\">Reporte de solicitudes atendidas</font></b><br><br>";
+        for(DTOSolicitud solicitud : facade.ConsultarSolicitudesAtendidas(desde, hasta)){
+            DTOCurso curso = facade.ConsultarCurso(solicitud.getId());
+            reporte += "<b><font color=\"#FA8072\">ID</font></b>" + solicitud.getId() + "<br>";
+            reporte += "<b>Período: <b> " + solicitud.getId() + "<br>";
+            reporte += "<b>Tipo de situación: <b> " + solicitud.getTipoSituacion() + "<br>";
+            reporte += "<b>Número de resolución: <b> " + String.valueOf(solicitud.getnResolucion()) + "<br>";
+            reporte += "<b>Curso: <b> " + curso.getId() + "  " + curso.getNombre() + "<br>";
+            reporte += "<b>Grupo: <b> " + String.valueOf(solicitud.getnGrupo()) + "<br>";
+        } return reporte;
     }
+    
 
-    public void ConsultarAnotaciones(DTOSolicitud solicitud) {
-        try{
-            
-        }
-        catch(Exception e){
-            backoffice.showMessage(e.getMessage());
-        }
-    }
-
-    public void ConsultarTopProfesores(JDialog dialogEstadisticas) {
-        try{
-            DialogEstadisticas dialog = (DialogEstadisticas) dialogEstadisticas;
+    public void ConsultarTopProfesores(JDialog pdialog) {
+        try{  DialogEstadisticas dialog = (DialogEstadisticas) pdialog;
             TableModelProfesor model = new TableModelProfesor(dialog.getTabProfesores()); 
             model.setPersonas( facade.ConsultarTopProfesores(3) );
             dialog.getTabProfesores().setModel(model);
-        }
-        catch(Exception e){
-            backoffice.showMessage(e.getMessage());
-        }
+        } catch(Exception e){ backoffice.showMessage(e.getMessage()); }
     }
 
-    public void ConsultarTopCursos(JDialog dialogEstadisticas) {
-        try{
-            DialogEstadisticas dialog = (DialogEstadisticas) dialogEstadisticas;
+    
+    public void ConsultarTopCursos(JDialog pdialog) {
+        try{  DialogEstadisticas dialog = (DialogEstadisticas) pdialog;
             TableModelCurso model = new TableModelCurso(dialog.getTabCursos()); 
             model.setCursos( facade.ConsultarTopCursos(5) );
             dialog.getTabProfesores().setModel(model);
-        }
-        catch(Exception e){
-            backoffice.showMessage(e.getMessage());
-        }
+        } catch(Exception e){ backoffice.showMessage(e.getMessage()); }
     }
         
-    public void RegistrarSolicitud(JDialog dialogRegistrarSolicitud) {
-        try{
-            
-            DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) dialogRegistrarSolicitud;
+    
+    public void RegistrarSolicitud(JDialog pdialog ) {
+        try{  DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) pdialog;
             DTOSolicitud dtoSolicitud = new DTOSolicitud();
             
             dtoSolicitud.setFecha(Calendar.getInstance().getTime()); 
             dtoSolicitud.setIdSolicitante(dialog.getTxtIdSolicitante().getText());
             dtoSolicitud.setNombreSolicitante(dialog.getTxtNombreSolicitante().getText());
-            dtoSolicitud.setEstado(Estado.Pendiente.name());
-            //dtoSolicitud.setNombreDirectorAdmYRegResolucion(prop.getProperty("nombreDirectorAdmYReg"));
-            //dtoSolicitud.setNombreDirectorEscuelaResolucion(prop.getProperty("nombreDirectorEscuela"));
-            //dtoSolicitud.setNombreCoordinadorResolucion("nombreCoordinador");
-           
+            
             String nPeriodo =  dialog.getTxtPeriodo().getText();
             String modalidad = (String) dialog.getCbModalidad().getSelectedItem();
             String anho = dialog.getTxtAnho().getText();
             dtoSolicitud.setPeriodo(nPeriodo + modalidad + anho);
             
+            dtoSolicitud.setEstado(Estado.Pendiente.name());
+            //dtoSolicitud.setNombreDirectorAdmYRegResolucion(prop.getProperty("nombreDirectorAdmYReg"));
+            //dtoSolicitud.setNombreDirectorEscuelaResolucion(prop.getProperty("nombreDirectorEscuela"));
+            //dtoSolicitud.setNombreCoordinadorResolucion("nombreCoordinador");
+            
             dtoSolicitud.setCodigoCurso((String) dialog.getCbCurso().getSelectedItem());
             dtoSolicitud.setnGrupo(Integer.parseInt(dialog.getTxtGrupo().getText()));
-            dtoSolicitud.setTipoSituacion((String) dialog.getCbSituacion().getSelectedItem());
+            dtoSolicitud.setInconsistencia((String) dialog.getCbSituacion().getSelectedItem());
             dtoSolicitud.setIdAfectado(dialog.getTxtIdAfectado().getText());
             dtoSolicitud.setNombreAfectado(dialog.getTxtNombreAfectado().getText());
             dtoSolicitud.setCorreoAfectado(dialog.getTxtCorreoAfectado().getText());

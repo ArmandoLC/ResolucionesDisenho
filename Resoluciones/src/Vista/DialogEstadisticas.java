@@ -10,8 +10,8 @@ public class DialogEstadisticas extends javax.swing.JDialog {
 
     public DialogEstadisticas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
         initComponents();
+        uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
         initEstadisticas();
     }
     
@@ -19,23 +19,6 @@ public class DialogEstadisticas extends javax.swing.JDialog {
         uibackoffice.ConsultarTopCursos(this);
         uibackoffice.ConsultarTopProfesores(this);
     }
-
-    public JXTable getTabCursos() {
-        return tabCursos;
-    }
-
-    public void setTabCursos(JXTable tabCursos) {
-        this.tabCursos = tabCursos;
-    }
-
-    public JXTable getTabProfesores() {
-        return tabProfesores;
-    }
-
-    public void setTabProfesores(JXTable tabProfesores) {
-        this.tabProfesores = tabProfesores;
-    }
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -134,4 +117,21 @@ public class DialogEstadisticas extends javax.swing.JDialog {
     private org.jdesktop.swingx.JXTable tabCursos;
     private org.jdesktop.swingx.JXTable tabProfesores;
     // End of variables declaration//GEN-END:variables
+
+    public JXTable getTabCursos() {
+        return tabCursos;
+    }
+
+    public void setTabCursos(JXTable tabCursos) {
+        this.tabCursos = tabCursos;
+    }
+
+    public JXTable getTabProfesores() {
+        return tabProfesores;
+    }
+
+    public void setTabProfesores(JXTable tabProfesores) {
+        this.tabProfesores = tabProfesores;
+    }
+
 }

@@ -7,8 +7,8 @@ import org.jdesktop.swingx.JXTextArea;
 
 public class DialogDetallesSolicitud extends javax.swing.JDialog {
 
-    DTOSolicitud solicitud; 
-    UIBackofficeCoordinador uibackoffice;
+    private final DTOSolicitud solicitud; 
+    private final UIBackofficeCoordinador uibackoffice;
     
     public DialogDetallesSolicitud(java.awt.Frame parent, boolean modal, DTOSolicitud solicitud) {
         super(parent, modal);
