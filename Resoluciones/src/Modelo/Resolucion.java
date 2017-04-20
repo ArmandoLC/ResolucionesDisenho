@@ -18,7 +18,16 @@ public class Resolucion {
     public Resolucion() {
     }
 
-    public Resolucion(int nResolucion, Date fecha, String nombreCoordinador, String nombreDirectorEscuela, String nombreDirectorAdmYReg, String introduccion, String resultado, String considerandos, String resuelvo) {
+    public Resolucion(int nResolucion, 
+                      Date fecha, 
+                      String nombreCoordinador, 
+                      String nombreDirectorEscuela, 
+                      String nombreDirectorAdmYReg, 
+                      String introduccion, 
+                      String resultado, 
+                      String considerandos, 
+                      String resuelvo) {
+        
         this.nResolucion = nResolucion;
         this.fecha = fecha;
         this.nombreCoordinador = nombreCoordinador;

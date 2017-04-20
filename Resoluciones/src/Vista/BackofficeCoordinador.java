@@ -8,11 +8,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.util.Calendar;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import org.jdesktop.swingx.JXDatePicker;
@@ -23,12 +21,17 @@ public class BackofficeCoordinador extends Backoffice{
     private UIBackofficeCoordinador uibackoffice = new UIBackofficeCoordinador(this);;
             
     public BackofficeCoordinador() {
+        initLookAndFeel();
         initComponents();
-        initVariables();     
+        initVariables();
+        initConsultaSolicitudes();
+    }
+    
+    private void initConsultaSolicitudes(){
+        uibackoffice.ConsultarSolicitudes();
     }
     
     private void initVariables(){
-        initLookAndFeel();
         initModel(tabSolicitudes);
         setEstados();
         setFechas();
@@ -98,7 +101,7 @@ public class BackofficeCoordinador extends Backoffice{
         if(solicitud.getnResolucion() == 0) item.setText("Registrar resolución");
         else item.setText("Visualizar resolución");
         item.addActionListener((ActionEvent e) -> {
-            Dialog dialog = new DialogEditorResolucion(this, true, solicitud);
+            Dialog dialog = new DialogResolucion(this, true, solicitud);
             dialog.setVisible(true);
         }); popup.add(item);
     }
@@ -311,14 +314,13 @@ public class BackofficeCoordinador extends Backoffice{
 
     private void linkReporteSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkReporteSolicitudesActionPerformed
         JDialog dialog = new DialogSolicitudesAtendidas(this, true);
-        //uibackoffice.ConsultarSolicitudes(dialog);
         dialog.setVisible(true);
     }//GEN-LAST:event_linkReporteSolicitudesActionPerformed
 
     private void btnExtraerExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtraerExcelActionPerformed
-        JFileChooser file = new JFileChooser();
-        file.showOpenDialog(this);
-        File archivo = file.getSelectedFile();
+        /*JFileChooser file = new JFileChooser();
+                    file.showOpenDialog(this);
+                    File archivo = file.getSelectedFile();*/
         //uibackoffice.RegistrarSolicitudesGoogleForm(dialog);
     }//GEN-LAST:event_btnExtraerExcelActionPerformed
 

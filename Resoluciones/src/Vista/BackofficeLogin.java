@@ -2,11 +2,13 @@ package Vista;
 
 import Controlador.FactoryDAOSolicitud;
 import Controlador.DAOSolicitud;
+import Controlador.GeneradorResolucionPDF;
 import DTOs.DTOSolicitud;
 import DTOs.DTOUsuario;
 import Enums.Recurso;
 import Login.ILogin;
 import Login.LoginMySQL;
+import Modelo.Resolucion;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -142,7 +144,7 @@ public class BackofficeLogin extends Backoffice {
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-     
+
         try{ 
             String id = txtUsuario.getText();
             String pass = txtContrasenha.getText();
