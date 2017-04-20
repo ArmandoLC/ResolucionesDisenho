@@ -1,10 +1,9 @@
 package Vista;
 
+import DTOs.DTOCurso;
 import Enums.Modalidad;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
-import java.text.NumberFormat;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
@@ -19,14 +18,17 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
-        initConsultas();
         initModalidad();
+        initConsultas();
     }
     
     private void initConsultas(){
-        uibackoffice.ConsultarCursos(this);
+        
         uibackoffice.ConsultarSituaciones(this);
         uibackoffice.ConsultarSolicitudes();
+        uibackoffice.ConsultarCursos(this);
+        uibackoffice.ConsultarGrupos(this);
+        cbCurso.addItemListener((ItemEvent e) -> { uibackoffice.ConsultarGrupos(this); });
     }
     
     private void initModalidad(){
@@ -60,13 +62,11 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
         cbCurso = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtGrupo = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         cbSituacion = new javax.swing.JComboBox<>();
         cbPeriodo = new javax.swing.JComboBox<>();
-        NumberFormat f = NumberFormat.getNumberInstance();
-        f.setMaximumIntegerDigits(4);
-        txtAnho = new javax.swing.JFormattedTextField(f);
+        txtAnho = new javax.swing.JFormattedTextField();
+        cbGrupo = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -114,7 +114,13 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
 
         jLabel11.setText("Tipo de inconsistencia");
 
-        txtAnho.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        try {
+            txtAnho.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        cbGrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -137,10 +143,10 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
                     .addComponent(txtNombreSolicitante)
                     .addComponent(cbModalidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbCurso, 0, 252, Short.MAX_VALUE)
-                    .addComponent(txtGrupo)
                     .addComponent(cbSituacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbPeriodo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtAnho, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(txtAnho, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cbGrupo, 0, 252, Short.MAX_VALUE))
                 .addGap(24, 24, 24))
         );
         jPanel2Layout.setVerticalGroup(
@@ -172,8 +178,8 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -368,6 +374,7 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
     private javax.swing.JButton btnAbrirArchivoAdjunto;
     private javax.swing.JButton btnRegistrarSolicitud;
     private javax.swing.JComboBox<String> cbCurso;
+    private javax.swing.JComboBox<String> cbGrupo;
     private javax.swing.JComboBox<String> cbModalidad;
     private javax.swing.JComboBox<String> cbPeriodo;
     private javax.swing.JComboBox<String> cbSituacion;
@@ -395,7 +402,6 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
     private javax.swing.JTextField txtArchivoAdjunto;
     private javax.swing.JTextField txtCorreoAfectado;
     private org.jdesktop.swingx.JXTextArea txtDescripcion;
-    private javax.swing.JTextField txtGrupo;
     private javax.swing.JTextField txtIdAfectado;
     private javax.swing.JTextField txtIdSolicitante;
     private javax.swing.JTextField txtNombreAfectado;
@@ -459,14 +465,14 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
         this.txtDescripcion = txtDescripcion;
     }
 
-    public JTextField getTxtGrupo() {
-        return txtGrupo;
+    public JComboBox<String> getCbGrupo() {
+        return cbGrupo;
     }
 
-    public void setTxtGrupo(JTextField txtGrupo) {
-        this.txtGrupo = txtGrupo;
+    public void setCbGrupo(JComboBox<String> cbGrupo) {
+        this.cbGrupo = cbGrupo;
     }
-
+    
     public JTextField getTxtIdAfectado() {
         return txtIdAfectado;
     }

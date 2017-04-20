@@ -28,6 +28,7 @@ public class TableModelCurso extends AbstractTableModel{
 
     public void setCursos(ArrayList<DTOCurso> cursos) {
         this.cursos = cursos;
+        table.setModel(this);
     }
     
     @Override

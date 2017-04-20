@@ -8,8 +8,6 @@ import Enums.Estado;
 import Enums.Formato;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class FacadeCoordinador extends Facade implements ICoordinador{
     

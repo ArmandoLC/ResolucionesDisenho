@@ -21,8 +21,7 @@ public class UIBackofficeCoordinador {
         this.facade = new FacadeCoordinador();
         this.backoffice = (BackofficeCoordinador) backoffice;
     }
-    
-    
+
     public void ConsultarSolicitudes() {
         try{  ArrayList<DTOSolicitud> solicitudes;
             String item = (String) backoffice.getCbEstado().getSelectedItem();
@@ -31,8 +30,7 @@ public class UIBackofficeCoordinador {
             backoffice.getTabModelSolicitudes().setSolicitudes(solicitudes);
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
-    
-    
+        
     public void ConsultarSolicitudesAtendidas(JDialog pdialog){
         try{  DialogSolicitudesAtendidas dialog = (DialogSolicitudesAtendidas) pdialog;
             dialog.getEditor().setContentType("text/html");
@@ -42,8 +40,7 @@ public class UIBackofficeCoordinador {
             dialog.getEditor().setText(reporte);
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
-    
-    
+      
     private String GenerarReporteSolicitudesAtendidas(Date desde, Date hasta){
         String reporte = "<b><font color=\"#CD5C5C\">Reporte de solicitudes atendidas</font></b><br><br>";
         for(DTOSolicitud solicitud : facade.ConsultarSolicitudesAtendidas(desde, hasta)){
@@ -57,7 +54,6 @@ public class UIBackofficeCoordinador {
         } return reporte;
     }
     
-
     public void ConsultarTopProfesores(JDialog pdialog) {
         try{  DialogEstadisticas dialog = (DialogEstadisticas) pdialog;
             TableModelProfesor model = new TableModelProfesor(dialog.getTabProfesores()); 
@@ -66,7 +62,6 @@ public class UIBackofficeCoordinador {
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
 
-    
     public void ConsultarTopCursos(JDialog pdialog) {
         try{  DialogEstadisticas dialog = (DialogEstadisticas) pdialog;
             TableModelCurso model = new TableModelCurso(dialog.getTabCursos()); 
@@ -83,7 +78,6 @@ public class UIBackofficeCoordinador {
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
     
-    
     public void RegistrarSolicitud(JDialog pdialog ) {
         try{  DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) pdialog;
             DTOSolicitud dtoSolicitud = new DTOSolicitud();
@@ -93,9 +87,10 @@ public class UIBackofficeCoordinador {
             String nPeriodo =  (String) dialog.getCbPeriodo().getSelectedItem();
             String modalidad = (String) dialog.getCbModalidad().getSelectedItem();
             String anho = dialog.getTxtAnho().getText();
-            dtoSolicitud.setPeriodo(nPeriodo + modalidad + anho);
+            String periodo = nPeriodo + String.valueOf(modalidad.charAt(0)) + anho;
+            dtoSolicitud.setPeriodo(periodo);
             dtoSolicitud.setCodigoCurso((String) dialog.getCbCurso().getSelectedItem());
-            dtoSolicitud.setnGrupo(Integer.parseInt(dialog.getTxtGrupo().getText()));
+            dtoSolicitud.setnGrupo(Integer.parseInt((String) dialog.getCbGrupo().getSelectedItem()));
             dtoSolicitud.setIdAfectado(dialog.getTxtIdAfectado().getText());
             dtoSolicitud.setNombreAfectado(dialog.getTxtNombreAfectado().getText());
             dtoSolicitud.setCorreoAfectado(dialog.getTxtCorreoAfectado().getText());
@@ -104,13 +99,16 @@ public class UIBackofficeCoordinador {
             dtoSolicitud.setDescripcionDetallada(dialog.getTxtDescripcion().getText());
             dtoSolicitud.setRutaArchivoAdjunto(dialog.getTxtArchivoAdjunto().getText());
             dtoSolicitud.setEstado(Estado.Pendiente.name());
+            dtoSolicitud.setAclaracion(" sin definir");
             Integer idSolicitud = facade.RegistrarSolicitud(dtoSolicitud);
-            if(idSolicitud != 0) backoffice.showMessage("La identificación de la solicitud es " + idSolicitud.toString());
+            if(idSolicitud != -1) { 
+                backoffice.showMessage("La identificación de la solicitud es " + idSolicitud.toString());
+                ConsultarSolicitudes();
+            }
             else backoffice.showMessage("No se ha podido registrar la solicitud");
-        } catch(Exception e){ backoffice.showError("Espacio inválido"); }   
+        } catch(Exception e){ backoffice.showError(e.getMessage()); }   
     }
-
-    
+  
     public void RegistrarInconsistencia(JDialog pdialog) {
         try{  DialogInconsistencia dialog = (DialogInconsistencia) pdialog;
             String nuevaInconsistencia = dialog.getTxtRegistrarInconsistencia().getText();
@@ -119,7 +117,6 @@ public class UIBackofficeCoordinador {
             else backoffice.showMessage("No se ha podido registrar la inconsistencia");
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
-
     
     public void RegistrarSolicitudes() {
         try{  JFileChooser file = new JFileChooser();
@@ -129,8 +126,7 @@ public class UIBackofficeCoordinador {
             backoffice.showMessage("Cargando solicitudes desde:\n"+archivo.getAbsolutePath());
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
-
-    
+   
     public void AnularSolicitud(JDialog pdialog) {
         try{  DialogAclaracion dialog = (DialogAclaracion) pdialog;
             String aclaracion = dialog.getTxtAclaracion().getText();
@@ -138,7 +134,7 @@ public class UIBackofficeCoordinador {
             boolean respuesta = facade.AnularSolicitud(nSolicitud, aclaracion);
             if(respuesta){ backoffice.showMessage("Solicitud tramitada"); ConsultarSolicitudes(); }
             else backoffice.showMessage("No se ha podido realizar la acción");
-        } catch(Exception e){ backoffice.showMessage(e.getMessage()); }   
+        } catch(Exception e){ backoffice.showError(e.getMessage()); }   
     }
     
     public void GenerarResolucion(JDialog dialog) {
@@ -153,21 +149,30 @@ public class UIBackofficeCoordinador {
     public void ConsultarResolucion(JDialog dialog) {
         try{
             
-        } catch(Exception e){ backoffice.showMessage(e.getMessage()); }
+        } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
 
     public void ConsultarCursos(JDialog pdialog) {
         try{  DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) pdialog;
             ArrayList<DTOCurso> cursos = facade.ConsultarCursos();
             cursos.forEach((curso) -> { dialog.getCbCurso().addItem(curso.getId()); });
-        } catch(Exception e){ backoffice.showMessage(e.getMessage()); }
+        } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
     
     public void ConsultarSituaciones(JDialog pdialog) {
         try{  DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) pdialog;
             ArrayList<String> situaciones = facade.ConsultarInconsistencias();
             situaciones.forEach((situacion) -> { dialog.getCbSituacion().addItem(situacion); });
-        } catch(Exception e){ backoffice.showMessage(e.getMessage()); }
+        } catch(Exception e){ backoffice.showError(e.getMessage()); }
+    }
+    
+    public void ConsultarGrupos(JDialog pdialog){
+        try{  DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) pdialog;
+            dialog.getCbGrupo().removeAllItems();
+            String codCurso = (String) dialog.getCbCurso().getSelectedItem();
+            ArrayList<Integer> grupos = facade.ConsultarGrupos(codCurso);
+            grupos.forEach((grupo) -> { dialog.getCbGrupo().addItem(grupo.toString()); });
+        } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
     
 }

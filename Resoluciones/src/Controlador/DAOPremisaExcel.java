@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
 import DTOs.DTOCurso;
@@ -11,7 +6,6 @@ import DTOs.DTOferta;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
 import jxl.Sheet;
