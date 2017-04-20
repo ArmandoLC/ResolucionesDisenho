@@ -179,13 +179,9 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
 
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes() {
-
-        //ArrayList<DTOSolicitud> listSolicitudes = new ArrayList<>();
+        
         DAOMySQL DB = (DAOMySQL)factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
         return DB.ConsultarSolicitudes();
-        /*for (int i = 0; i < solicitudes.size(); i++) {
-            listSolicitudes.add(crearDTOSolicitud(solicitudes.get(i)));
-        }*/
     }
     
     @Override
@@ -193,31 +189,44 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         //Se procede a guardar en la base de datos..
         DAOMySQL BD = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
         int identificador = BD.RegistrarSolicitud(dtoSolicitud);
-        /*
+        System.out.println("ID: "+identificador);
+        //Se retorna el ID con el que se registró la solicitud
+        
         //Se procede a guardar la solicitud en memoria (en el atributo solicitudes)..
         dtoSolicitud.setId(identificador);
-        //Solicitud solicitud = getSolicitud(dtoSolicitud.getId());
-
-        Curso curso = getCurso(dtoSolicitud.getCodigoCurso());
-        Profesor profesor = getProfesor();
         
-        //DTOPersona dtoAfectado = crearDTOPersona(solicitud.getAfectado());
+        Oferta infoCurso = null;
+        for (Oferta oferta : ofertaAcademica) {
+            if (oferta.getCurso().getId().equals(dtoSolicitud.getCodigoCurso()) && oferta.getnGrupo() == dtoSolicitud.getnGrupo()) {
+                infoCurso = oferta;
+            }
+        }
+        System.out.println("Infor Curso: "+infoCurso.toString());
+        
         DTOPersona dtoAfectado = crearDTOPersona(new Estudiante(dtoSolicitud.getIdAfectado(), dtoSolicitud.getNombreAfectado(), dtoSolicitud.getCorreoAfectado(), dtoSolicitud.getTelefonoAfectado()));
-        DTOPersona dtoSolicitante = crearDTOPersona(new Persona(dtoSolicitud.getIdSolicitante(), dtoSolicitud.getNombreSolicitante(), null, null));
+        DTOPersona dtoSolicitante = crearDTOPersona(new Persona(dtoSolicitud.getIdSolicitante(), dtoSolicitud.getNombreSolicitante(), "", ""));
+        DTOferta dtoOferta = crearDTOferta(infoCurso);
         
-        DTOferta dtoOferta = crearDTOferta(solicitud.getInfoCurso());
+        System.out.println("dtoAfecta: "+dtoAfectado.toString());
+        System.out.println("dtoSolicitante: "+dtoSolicitante.toString());
+        System.out.println("dtoOferta: "+dtoOferta.toString());
         
         //Se crea la solcitud por medio del builder
         Solicitud nuevaSolic = solicitudBuilder
                 .setDatosSolicitud(dtoSolicitud)
                 .setAfectado(dtoAfectado)
                 .setSolicitante(dtoSolicitante)
-                .setOferta(dtoOferta, curso, profesor)
+                .setOferta(dtoOferta, infoCurso.getCurso(), infoCurso.getProfesor())
                 .create();
         //Se guarda en la lista de solicitudes que se encuentra en el controlador
+              
         solicitudes.add(nuevaSolic);
-        */
-        //Se retorna el ID con el que se registró la solicitud
+        
+        for (Solicitud sol : solicitudes) {
+            System.out.println("Solicitud: "+sol.toString());
+        }
+                
+        
         return identificador;
     }
 
@@ -276,20 +285,30 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
 
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes(Estado estado) {
-        //Se filtran las solicitudes por medio del estado
-        ArrayList<Solicitud> listSolicitud = getSolicitudes(estado);
-        //Se genera por cada solicitud un DTOSolicitud que se almacena en listDTOSolicitud
-        ArrayList<DTOSolicitud> listDTOSolicitud = new ArrayList<>();
-        for (int i = 0; i < listSolicitud.size(); i++) {
-            listDTOSolicitud.add(crearDTOSolicitud(listSolicitud.get(i)));
+        DAOMySQL DB = (DAOMySQL)factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
+        ArrayList<DTOSolicitud> listDTOSolicitud = DB.ConsultarSolicitudes();
+        
+        for (DTOSolicitud solicitud : listDTOSolicitud) {
+            //Se filtran las solicitudes por medio del estado
+            if (Estado.valueOf(solicitud.getEstado())!= estado) {
+                listDTOSolicitud.remove(solicitud);
+            }
         }
+        
         //Se retorna la lista de solicitudes que cumplen con el estado ingresado
         return listDTOSolicitud;
     }
 
     @Override
     public boolean RegistrarSolicitudes(String ruta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DAOGoogleForm form = (DAOGoogleForm) factorySolicitudes.CrearDAOSolicitud(Recurso.GoogleForm);
+        ArrayList<DTOSolicitud> dtoSolicitudes = form.ConsultarSolicitudes();
+        
+        DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
+        ArrayList<DTOSolicitud> newSolicitudes = DB.RegistrarSolicitudes(dtoSolicitudes);
+        
+        return true;
+        
     }
 
     @Override
