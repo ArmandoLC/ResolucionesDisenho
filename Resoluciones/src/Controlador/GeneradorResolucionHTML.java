@@ -29,7 +29,7 @@ import java.util.Properties;
 public class GeneradorResolucionHTML implements IGeneradorResolucion {
 
     @Override
-    public boolean Generar(Resolucion resolucion) {
+    public boolean Generar(Resolucion resolucion, String ruta) {
         try{        
             
             Properties prop = new Properties();

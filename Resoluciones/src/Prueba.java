@@ -5,6 +5,7 @@ import DTOs.DTOCurso;
 import DTOs.DTOPersona;
 import DTOs.DTOSolicitud;
 import DTOs.DTOferta;
+import Enums.Estado;
 import Modelo.Solicitud;
 import Modelo.SolicitudBuilder;
 import java.io.File;
@@ -88,9 +89,15 @@ public class Prueba {
             }
             s1.setIdSolicitante("1546468");
             s1.setNombreSolicitante("Julian");
-            s1.setPeriodo("2017");
+            
+            s1.setPeriodo("2014");
             s1.setnGrupo(2);
             s1.setCodigoCurso("IC4301");
+            
+            //s1.setPeriodo("2017");
+            //s1.setnGrupo(40);
+            //s1.setCodigoCurso("s11");
+            
             s1.setEstado("Tramitada");
             s1.setIdAfectado("idAfec");
             s1.setNombreAfectado("nameAf");
@@ -108,6 +115,8 @@ public class Prueba {
                 System.out.println(solicitud);
             }*/
             System.out.println(CPrin.RegistrarSolicitud(s1));
+            
+            System.out.println("Solicitudes: "+ CPrin.ConsultarSolicitudes(Estado.Anulada));
             
             //for (Integer nGrupo1 : nGrupo) {
             //    System.out.println(nGrupo1);

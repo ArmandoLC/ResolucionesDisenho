@@ -22,7 +22,7 @@ public class GeneradorResolucionPDF implements IGeneradorResolucion{
     }
     
     @Override
-    public boolean Generar(Resolucion resolucion) {
+    public boolean Generar(Resolucion resolucion, String ruta) {
         try{        
             
             Font negrita = new Font(FontFamily.HELVETICA, 12, Font.BOLD);

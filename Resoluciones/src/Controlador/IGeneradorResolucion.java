@@ -4,5 +4,5 @@ import Modelo.Resolucion;
 
 public interface IGeneradorResolucion {
     
-    public boolean Generar(Resolucion resolucion);
+    public boolean Generar(Resolucion resolucion, String ruta);
 }   
