@@ -1,4 +1,3 @@
-
 package Modelo;
 
 import DTOs.DTOCurso;
@@ -11,42 +10,39 @@ public class SolicitudBuilder {
 
     private Solicitud solicitud;
 
-    public SolicitudBuilder setSolicitante(DTOPersona dtoPersona){
-        
-        solicitud.setSolicitante(new Persona(dtoPersona.getId(),dtoPersona.getNombre(),
-                                dtoPersona.getCorreo(),dtoPersona.getTelefono()));
+    public SolicitudBuilder setSolicitante(DTOPersona dtoPersona) {
+
+        solicitud.setSolicitante(new Persona(dtoPersona.getId(), dtoPersona.getNombre(),
+                dtoPersona.getCorreo(), dtoPersona.getTelefono()));
         return this;
     }
-    
+
     public SolicitudBuilder setAfectado(DTOPersona dtoPersona) {
         solicitud.setAfectado(new Estudiante(dtoPersona.getId(), dtoPersona.getNombre(),
-                                dtoPersona.getCorreo(), dtoPersona.getTelefono()));
-        return this; 
+                dtoPersona.getCorreo(), dtoPersona.getTelefono()));
+        return this;
     }
 
     public SolicitudBuilder setOferta(DTOferta dtoOferta, Curso curso, Profesor profesor) {
-        solicitud.setInfoCurso( new Oferta(curso, profesor, dtoOferta.getPeriodo(),
-                                dtoOferta.getnGrupo(), dtoOferta.getHorario(), dtoOferta.getAula()));
+        solicitud.setInfoCurso(new Oferta(curso, profesor, dtoOferta.getPeriodo(),
+                dtoOferta.getnGrupo(), dtoOferta.getHorario(), dtoOferta.getAula()));
         return this;
     }
 
-    public SolicitudBuilder setDatosSolicitud(DTOSolicitud dtoSolicitud, DTOCurso dtoCurso, DTOferta dtoOferta, DTOPersona dtoProfesor, DTOPersona dtoSolicitante) throws Exception{
-        try{
-            solicitud = new Solicitud();
+    public SolicitudBuilder setDatosSolicitud(DTOSolicitud dtoSolicitud) {
 
-            solicitud.setId(dtoSolicitud.getId());
-            solicitud.setFecha(dtoSolicitud.getFecha());
-            solicitud.setInconsistencia(dtoSolicitud.getInconsistencia());
-            solicitud.setDescripcion(dtoSolicitud.getDescripcionDetallada());
-            solicitud.setRutaArchivoAdjunto(dtoSolicitud.getRutaArchivoAdjunto());
-            solicitud.setEstado(Estado.valueOf(dtoSolicitud.getEstado())); // Se obtiene el Estado apartir de un String
-            solicitud.setAclaracion(dtoSolicitud.getAclaracion());
+        solicitud = new Solicitud();
 
-            return this;
-        }
-         catch (Exception e) {
-            throw new Exception("La solicitud no se pudo crear! "+e.getMessage());
-        }
+        solicitud.setId(dtoSolicitud.getId());
+        solicitud.setFecha(dtoSolicitud.getFecha());
+        solicitud.setInconsistencia(dtoSolicitud.getInconsistencia());
+        solicitud.setDescripcion(dtoSolicitud.getDescripcionDetallada());
+        solicitud.setRutaArchivoAdjunto(dtoSolicitud.getRutaArchivoAdjunto());
+        solicitud.setEstado(Estado.valueOf(dtoSolicitud.getEstado())); // Se obtiene el Estado apartir de un String
+        solicitud.setAclaracion(dtoSolicitud.getAclaracion());
+
+        return this;
+
     }
 
     public Solicitud create() {

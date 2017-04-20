@@ -15,6 +15,8 @@ import Enums.Estado;
 import Enums.Formato;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FacadeCoordinador extends Facade implements ICoordinador{
     
@@ -24,42 +26,42 @@ public class FacadeCoordinador extends Facade implements ICoordinador{
 
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return controlador.ConsultarSolicitudes();
     }
 
     @Override
     public int RegistrarSolicitud(DTOSolicitud dtoSolicitud) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return controlador.RegistrarSolicitud(dtoSolicitud);
     }
 
     @Override
     public DTOCurso ConsultarCurso(int nSolicitud) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return controlador.ConsultarCurso(nSolicitud);
     }
 
     @Override
     public ArrayList<DTOCurso> ConsultarCursos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return controlador.ConsultarCursos();
     }
 
     @Override
     public DTOPersona ConsultarProfesor(int nSolicitud) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return controlador.ConsultarProfesor(nSolicitud);
     }
 
     @Override
     public ArrayList<String> ConsultarInconsistencias() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return controlador.ConsultarInconsistencias();
     }
 
     @Override
     public boolean RegistrarInconsistencia(String incosistencia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return controlador.RegistrarInconsistencia(incosistencia);
     }
 
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes(Estado estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return controlador.ConsultarSolicitudes(estado);
     }
 
     @Override
@@ -69,12 +71,12 @@ public class FacadeCoordinador extends Facade implements ICoordinador{
 
     @Override
     public boolean TramitarSolicitud(int nSolicitud) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return controlador.TramitarSolicitud(nSolicitud);
     }
 
     @Override
     public boolean AnularSolicitud(int nSolicitud, String aclaracion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return controlador.AnularSolicitud(nSolicitud, aclaracion);
     }
 
     @Override
