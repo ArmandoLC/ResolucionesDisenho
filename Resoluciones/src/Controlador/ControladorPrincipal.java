@@ -20,7 +20,10 @@ import Enums.Formato;
 import Enums.Recurso;
 import Modelo.Persona;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -343,12 +346,59 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
 
     @Override
     public ArrayList<DTOPersona> ConsultarTopProfesores(int top) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        ArrayList<DTOPersona> resultado = new ArrayList<>();
+        Map<String, Integer> topList = new HashMap<>();
+        
+        solicitudes.forEach((solic)-> fillMap(solic.getInfoCurso().getProfesor().getId(), topList ) );
+        if (top < 1) top = 1; int count = 1;
+        
+        while(count <= top){
+            String key = getHigherIdFromMap(topList);
+            DTOPersona nuevo = new DTOPersona();
+            nuevo.setId(key);
+            resultado.add(nuevo);
+            topList.remove(key);
+            count++;
+        }
+               
+        return resultado;
     }
-
+    
     @Override
     public ArrayList<DTOCurso> ConsultarTopCursos(int top) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		
+        ArrayList<DTOCurso> resultado = new ArrayList<>();
+        Map<String, Integer> topList = new HashMap<>();
+        
+        solicitudes.forEach((curso)-> fillMap(curso.getInfoCurso().getProfesor().getId(), topList ) );
+        if (top < 1) top = 1; int count = 1;
+        
+        while(count <= top){
+            String key = getHigherIdFromMap(topList);
+            DTOCurso nuevo = new DTOCurso();
+            nuevo.setId(key);
+            resultado.add(nuevo);
+            topList.remove(key);
+            count++;
+        }
+               
+        return resultado;
+		
+	}
+    
+    private void fillMap(String id, Map mapa){        
+        if(mapa.containsKey(id)){
+            int valor = (int) mapa.get(id);
+            mapa.put(id, valor+1);
+        } else {
+            mapa.put(id, 1);
+        }        
+    }
+    
+    private String getHigherIdFromMap(Map mapa){
+        
+        return (String) Collections.max(mapa.entrySet(), Map.Entry.comparingByValue()).getKey();
     }
 
 
