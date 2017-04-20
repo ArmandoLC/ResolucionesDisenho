@@ -158,6 +158,10 @@ CREATE TABLE `resoluciones` (
   `coordinador` varchar(100) DEFAULT NULL,
   `directorEscuela` varchar(100) DEFAULT NULL,
   `directorAdmyReg` varchar(100) DEFAULT NULL,
+  `introduccion` text,
+  `resultado` text,
+  `considerandos` text,
+  `resuelvo` text,
   PRIMARY KEY (`idSolicitud`),
   UNIQUE KEY `idSolicitud_UNIQUE` (`idSolicitud`),
   UNIQUE KEY `numeroResolucion_UNIQUE` (`numeroResolucion`),
@@ -171,31 +175,8 @@ CREATE TABLE `resoluciones` (
 
 LOCK TABLES `resoluciones` WRITE;
 /*!40000 ALTER TABLE `resoluciones` DISABLE KEYS */;
+INSERT INTO `resoluciones` VALUES (1,123,'2014-05-05','Ericka S.','Mauricio H.','Juan P.','intro','results','considerandos!','resueltos!');
 /*!40000 ALTER TABLE `resoluciones` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `resueltos`
---
-
-DROP TABLE IF EXISTS `resueltos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `resueltos` (
-  `numeroResolucion` int(11) NOT NULL,
-  `detalle` text NOT NULL,
-  PRIMARY KEY (`numeroResolucion`),
-  CONSTRAINT `numRes` FOREIGN KEY (`numeroResolucion`) REFERENCES `resoluciones` (`numeroResolucion`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `resueltos`
---
-
-LOCK TABLES `resueltos` WRITE;
-/*!40000 ALTER TABLE `resueltos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `resueltos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -209,7 +190,7 @@ CREATE TABLE `solicitudes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idOferta` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
-  `tipoSituacion` varchar(100) DEFAULT NULL,
+  `inconsistencia` varchar(100) DEFAULT NULL,
   `descripcion` text,
   `idSolicitante` varchar(100) DEFAULT NULL,
   `solicitante` varchar(100) DEFAULT NULL,
@@ -224,7 +205,7 @@ CREATE TABLE `solicitudes` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `solicitudOferta_idx` (`idOferta`),
   CONSTRAINT `solicitudOferta` FOREIGN KEY (`idOferta`) REFERENCES `ofertas` (`idoferta`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,7 +214,7 @@ CREATE TABLE `solicitudes` (
 
 LOCK TABLES `solicitudes` WRITE;
 /*!40000 ALTER TABLE `solicitudes` DISABLE KEYS */;
-INSERT INTO `solicitudes` VALUES (1,1,'2017-04-19','INCLUSION','Dato de descripcion','1','solicitante ejemplo','1-1651','afectado 01','correo@afectado.com','73L3F0N0','ruta archivo','PENDIENTE','Sin aclaraciones');
+INSERT INTO `solicitudes` VALUES (1,1,'2017-04-19','INCLUSION','Dato de descripcion','1','solicitante ejemplo','1-1651','afectado 01','correo@afectado.com','73L3F0N0','ruta archivo','PENDIENTE','Sin aclaraciones'),(2,1,'2018-04-21','EXCLUSION','Descripcion xd','1','Solicitante anonónimo','1-1444','Juan Afectado','juan@afectado.com','11111112','File Url','PENDIENTE','Aclaracion#1');
 /*!40000 ALTER TABLE `solicitudes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -265,25 +246,6 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'resolucionesbd'
 --
-/*!50003 DROP PROCEDURE IF EXISTS `consultarAnotaciones` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarAnotaciones`(IN id INT)
-BEGIN
-	SELECT detalle AS 'anotaciones' FROM anotaciones WHERE idSolicitud = id;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `consultarSolicitudes` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -297,18 +259,38 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarSolicitudes`()
 BEGIN
 	SELECT s.id, s.fecha, s.idSolicitante, s.solicitante, s.idAfectado, s.nombreAfectado,
-		   s.correoAfectado, s.telefonoAfectado, s.tipoSituacion, s.descripcion, 
+		   s.correoAfectado, s.telefonoAfectado, s.inconsistencia, s.descripcion, 
            s.rutaAdjunto, s.estado, s.aclaracion, -1 as 'numResolucion',
 		   o.periodo, o.codigoCurso, o.numeroGrupo, s.estado
 	FROM solicitudes s, ofertas o
     WHERE s.idOferta = o.idoferta and s.id not in (select idSolicitud from resoluciones)
     UNION
     SELECT s.id, s.fecha, s.idSolicitante, s.solicitante, s.idAfectado, s.nombreAfectado,
-		   s.correoAfectado, s.telefonoAfectado, s.tipoSituacion, s.descripcion, 
+		   s.correoAfectado, s.telefonoAfectado, s.inconsistencia, s.descripcion, 
            s.rutaAdjunto, s.estado, s.aclaracion, r.numeroResolucion as 'numResolucion',
 		   o.periodo, o.codigoCurso, o.numeroGrupo, s.estado
 	FROM solicitudes s, ofertas o, resoluciones r
     WHERE s.idOferta = o.idoferta and r.idSolicitud = s.id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `obtenerNumResolucionParaSolic` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerNumResolucionParaSolic`(IN idBuscado INT)
+BEGIN
+	SELECT numeroResolucion FROM resoluciones
+    WHERE idSolicitud = idBuscado;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -325,4 +307,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-19 16:55:51
+-- Dump completed on 2017-04-19 18:59:42
