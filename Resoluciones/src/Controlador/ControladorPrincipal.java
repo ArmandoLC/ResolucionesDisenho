@@ -22,6 +22,8 @@ import Controlador.ISolicitud;
 import DTOs.DTOferta;
 import Enums.Estado;
 import Enums.Formato;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -101,7 +103,101 @@ public class ControladorPrincipal implements ISolicitud,ICoordinador{
 
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        DTOSolicitud s1 = new DTOSolicitud();
+            
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                s1.setFecha(dateFormat.parse("2014-02-02"));
+            } catch (ParseException ex) {
+                System.out.println(ex.getMessage());
+            }
+            s1.setIdSolicitante("1546468");
+            s1.setNombreSolicitante("Julian");
+            s1.setPeriodo("2017");
+            s1.setnGrupo(40);
+            s1.setCodigoCurso("s11");
+            s1.setEstado("Anulada");
+            s1.setIdAfectado("idAfec");
+            s1.setNombreAfectado("nameAf");
+            s1.setCorreoAfectado("corAF");
+            s1.setTelefonoAfectado("telAf");
+            s1.setInconsistencia("exclusioooon");
+            s1.setDescripcionDetallada("descripAF");
+            s1.setRutaArchivoAdjunto("rutaf");
+            s1.setAclaracion("lul aclaracion");
+        
+        DTOSolicitud s2 = new DTOSolicitud();
+            
+            try {
+                s2.setFecha(dateFormat.parse("2014-02-02"));
+            } catch (ParseException ex) {
+                System.out.println(ex.getMessage());
+            }
+            s2.setIdSolicitante("1546468");
+            s2.setNombreSolicitante("Julian");
+            s2.setPeriodo("2017");
+            s2.setnGrupo(40);
+            s2.setCodigoCurso("s11");
+            s2.setEstado("Tramitada");
+            s2.setIdAfectado("idAfec");
+            s2.setNombreAfectado("nameAf");
+            s2.setCorreoAfectado("corAF");
+            s2.setTelefonoAfectado("telAf");
+            s2.setInconsistencia("exclusioooon");
+            s2.setDescripcionDetallada("descripAF");
+            s2.setRutaArchivoAdjunto("rutaf");
+            s2.setAclaracion("lul aclaracion");
+            
+            DTOSolicitud s3 = new DTOSolicitud();
+            
+            try {
+                s3.setFecha(dateFormat.parse("2014-02-02"));
+            } catch (ParseException ex) {
+                System.out.println(ex.getMessage());
+            }
+            s3.setIdSolicitante("1546468");
+            s3.setNombreSolicitante("Julian");
+            s3.setPeriodo("2017");
+            s3.setnGrupo(40);
+            s3.setCodigoCurso("s11");
+            s3.setEstado("Tramitada");
+            s3.setIdAfectado("idAfec");
+            s3.setNombreAfectado("nameAf");
+            s3.setCorreoAfectado("corAF");
+            s3.setTelefonoAfectado("telAf");
+            s3.setInconsistencia("exclusioooon");
+            s3.setDescripcionDetallada("descripAF");
+            s3.setRutaArchivoAdjunto("rutaf");
+            s3.setAclaracion("lul aclaracion");
+            
+            DTOSolicitud s4 = new DTOSolicitud();
+            
+            try {
+                s4.setFecha(dateFormat.parse("2014-02-02"));
+            } catch (ParseException ex) {
+                System.out.println(ex.getMessage());
+            }
+            s4.setIdSolicitante("1546468");
+            s4.setNombreSolicitante("Julian");
+            s4.setPeriodo("2017");
+            s4.setnGrupo(40);
+            s4.setCodigoCurso("s11");
+            s4.setEstado("Pendiente");
+            s4.setIdAfectado("idAfec");
+            s4.setNombreAfectado("nameAf");
+            s4.setCorreoAfectado("corAF");
+            s4.setTelefonoAfectado("telAf");
+            s4.setInconsistencia("exclusioooon");
+            s4.setDescripcionDetallada("descripAF");
+            s4.setRutaArchivoAdjunto("rutaf");
+            s4.setAclaracion("lul aclaracion");
+           
+        ArrayList<DTOSolicitud> aray = new ArrayList<>();
+        aray.add(s1); aray.add(s2); aray.add(s3); aray.add(s4);
+        System.out.println("Controlador");
+        return aray;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

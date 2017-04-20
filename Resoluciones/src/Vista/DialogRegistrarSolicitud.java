@@ -1,9 +1,13 @@
 package Vista;
 
 import Enums.Modalidad;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
+import java.text.NumberFormat;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 import org.jdesktop.swingx.JXTextArea;
 
@@ -27,118 +31,14 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
     private void initModalidad(){
         for(Modalidad m : Modalidad.values())
             cbModalidad.addItem(m.toString());
+        initPeriodo();
+        cbModalidad.addItemListener((ItemEvent e) -> { initPeriodo(); });
     }
-
-    public JComboBox<String> getCbCurso() {
-        return cbCurso;
-    }
-
-    public void setCbCurso(JComboBox<String> cbCurso) {
-        this.cbCurso = cbCurso;
-    }
-
-    public JComboBox<String> getCbModalidad() {
-        return cbModalidad;
-    }
-
-    public void setCbModalidad(JComboBox<String> cbModalidad) {
-        this.cbModalidad = cbModalidad;
-    }
-
-    public JComboBox<String> getCbSituacion() {
-        return cbSituacion;
-    }
-
-    public void setCbSituacion(JComboBox<String> cbSituacion) {
-        this.cbSituacion = cbSituacion;
-    }
-
-    public JTextField getTxtAnho() {
-        return txtAnho;
-    }
-
-    public void setTxtAnho(JTextField txtAnho) {
-        this.txtAnho = txtAnho;
-    }
-
-    public JTextField getTxtArchivoAdjunto() {
-        return txtArchivoAdjunto;
-    }
-
-    public void setTxtArchivoAdjunto(JTextField txtArchivoAdjunto) {
-        this.txtArchivoAdjunto = txtArchivoAdjunto;
-    }
-
-    public JTextField getTxtCorreoAfectado() {
-        return txtCorreoAfectado;
-    }
-
-    public void setTxtCorreoAfectado(JTextField txtCorreoAfectado) {
-        this.txtCorreoAfectado = txtCorreoAfectado;
-    }
-
-    public JXTextArea getTxtDescripcion() {
-        return txtDescripcion;
-    }
-
-    public void setTxtDescripcion(JXTextArea txtDescripcion) {
-        this.txtDescripcion = txtDescripcion;
-    }
-
-    public JTextField getTxtGrupo() {
-        return txtGrupo;
-    }
-
-    public void setTxtGrupo(JTextField txtGrupo) {
-        this.txtGrupo = txtGrupo;
-    }
-
-    public JTextField getTxtIdAfectado() {
-        return txtIdAfectado;
-    }
-
-    public void setTxtIdAfectado(JTextField txtIdAfectado) {
-        this.txtIdAfectado = txtIdAfectado;
-    }
-
-    public JTextField getTxtIdSolicitante() {
-        return txtIdSolicitante;
-    }
-
-    public void setTxtIdSolicitante(JTextField txtIdSolicitante) {
-        this.txtIdSolicitante = txtIdSolicitante;
-    }
-
-    public JTextField getTxtNombreAfectado() {
-        return txtNombreAfectado;
-    }
-
-    public void setTxtNombreAfectado(JTextField txtNombreAfectado) {
-        this.txtNombreAfectado = txtNombreAfectado;
-    }
-
-    public JTextField getTxtNombreSolicitante() {
-        return txtNombreSolicitante;
-    }
-
-    public void setTxtNombreSolicitante(JTextField txtNombreSolicitante) {
-        this.txtNombreSolicitante = txtNombreSolicitante;
-    }
-
-    public JTextField getTxtPeriodo() {
-        return txtPeriodo;
-    }
-
-    public void setTxtPeriodo(JTextField txtPeriodo) {
-        this.txtPeriodo = txtPeriodo;
-    }
-
-    public JTextField getTxtTelefono() {
-        return txtTelefono;
-    }
-
-    public void setTxtTelefono(JTextField txtTelefono) {
-        this.txtTelefono = txtTelefono;
+    
+    public void initPeriodo(){
+        cbPeriodo.removeAllItems();
+        Modalidad m = Modalidad.valueOf( (String) cbModalidad.getSelectedItem());
+        Modalidad.getPeriodos(m).forEach((periodo) -> { cbPeriodo.addItem(periodo); });
     }
 
     @SuppressWarnings("unchecked")
@@ -153,17 +53,19 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
         txtNombreSolicitante = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtPeriodo = new javax.swing.JTextField();
         cbModalidad = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtAnho = new javax.swing.JTextField();
         cbCurso = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtGrupo = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         cbSituacion = new javax.swing.JComboBox<>();
+        cbPeriodo = new javax.swing.JComboBox<>();
+        NumberFormat f = NumberFormat.getNumberInstance();
+        f.setMaximumIntegerDigits(4);
+        txtAnho = new javax.swing.JFormattedTextField(f);
         jPanel4 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -203,13 +105,15 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
 
         jLabel7.setText("Año");
 
-        cbCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
 
         jLabel3.setText("Código del curso");
 
         jLabel5.setText("Grupo");
 
         jLabel11.setText("Tipo de inconsistencia");
+
+        txtAnho.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -230,12 +134,12 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtIdSolicitante)
                     .addComponent(txtNombreSolicitante)
-                    .addComponent(txtPeriodo)
                     .addComponent(cbModalidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtAnho)
                     .addComponent(cbCurso, 0, 252, Short.MAX_VALUE)
                     .addComponent(txtGrupo)
-                    .addComponent(cbSituacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbSituacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbPeriodo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtAnho, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(24, 24, 24))
         );
         jPanel2Layout.setVerticalGroup(
@@ -251,16 +155,16 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbModalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAnho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAnho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -273,7 +177,7 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -341,6 +245,8 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
                     .addComponent(jLabel14))
                 .addGap(14, 14, 14))
         );
+
+        txtArchivoAdjunto.setEditable(false);
 
         jLabel9.setText("Adjuntar archivo: ");
 
@@ -462,6 +368,7 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
     private javax.swing.JButton btnRegistrarSolicitud;
     private javax.swing.JComboBox<String> cbCurso;
     private javax.swing.JComboBox<String> cbModalidad;
+    private javax.swing.JComboBox<String> cbPeriodo;
     private javax.swing.JComboBox<String> cbSituacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -483,7 +390,7 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField txtAnho;
+    private javax.swing.JFormattedTextField txtAnho;
     private javax.swing.JTextField txtArchivoAdjunto;
     private javax.swing.JTextField txtCorreoAfectado;
     private org.jdesktop.swingx.JXTextArea txtDescripcion;
@@ -492,7 +399,119 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
     private javax.swing.JTextField txtIdSolicitante;
     private javax.swing.JTextField txtNombreAfectado;
     private javax.swing.JTextField txtNombreSolicitante;
-    private javax.swing.JTextField txtPeriodo;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+
+    public JComboBox<String> getCbCurso() {
+        return cbCurso;
+    }
+
+    public void setCbCurso(JComboBox<String> cbCurso) {
+        this.cbCurso = cbCurso;
+    }
+
+    public JComboBox<String> getCbModalidad() {
+        return cbModalidad;
+    }
+
+    public void setCbModalidad(JComboBox<String> cbModalidad) {
+        this.cbModalidad = cbModalidad;
+    }
+
+    public JComboBox<String> getCbSituacion() {
+        return cbSituacion;
+    }
+
+    public void setCbSituacion(JComboBox<String> cbSituacion) {
+        this.cbSituacion = cbSituacion;
+    }
+
+    public JFormattedTextField getTxtAnho() {
+        return txtAnho;
+    }
+
+    public void setTxtAnho(JFormattedTextField txtAnho) {
+        this.txtAnho = txtAnho;
+    }
+
+    public JTextField getTxtArchivoAdjunto() {
+        return txtArchivoAdjunto;
+    }
+
+    public void setTxtArchivoAdjunto(JTextField txtArchivoAdjunto) {
+        this.txtArchivoAdjunto = txtArchivoAdjunto;
+    }
+
+    public JTextField getTxtCorreoAfectado() {
+        return txtCorreoAfectado;
+    }
+
+    public void setTxtCorreoAfectado(JTextField txtCorreoAfectado) {
+        this.txtCorreoAfectado = txtCorreoAfectado;
+    }
+
+    public JXTextArea getTxtDescripcion() {
+        return txtDescripcion;
+    }
+
+    public void setTxtDescripcion(JXTextArea txtDescripcion) {
+        this.txtDescripcion = txtDescripcion;
+    }
+
+    public JTextField getTxtGrupo() {
+        return txtGrupo;
+    }
+
+    public void setTxtGrupo(JTextField txtGrupo) {
+        this.txtGrupo = txtGrupo;
+    }
+
+    public JTextField getTxtIdAfectado() {
+        return txtIdAfectado;
+    }
+
+    public void setTxtIdAfectado(JTextField txtIdAfectado) {
+        this.txtIdAfectado = txtIdAfectado;
+    }
+
+    public JTextField getTxtIdSolicitante() {
+        return txtIdSolicitante;
+    }
+
+    public void setTxtIdSolicitante(JTextField txtIdSolicitante) {
+        this.txtIdSolicitante = txtIdSolicitante;
+    }
+
+    public JTextField getTxtNombreAfectado() {
+        return txtNombreAfectado;
+    }
+
+    public void setTxtNombreAfectado(JTextField txtNombreAfectado) {
+        this.txtNombreAfectado = txtNombreAfectado;
+    }
+
+    public JTextField getTxtNombreSolicitante() {
+        return txtNombreSolicitante;
+    }
+
+    public void setTxtNombreSolicitante(JTextField txtNombreSolicitante) {
+        this.txtNombreSolicitante = txtNombreSolicitante;
+    }
+
+    public JComboBox<String> getCbPeriodo() {
+        return cbPeriodo;
+    }
+
+    public void setCbPeriodo(JComboBox<String> cbPeriodo) {
+        this.cbPeriodo = cbPeriodo;
+    }
+
+    public JTextField getTxtTelefono() {
+        return txtTelefono;
+    }
+
+    public void setTxtTelefono(JTextField txtTelefono) {
+        this.txtTelefono = txtTelefono;
+    }
+
 }

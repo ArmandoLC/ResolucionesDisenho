@@ -1,6 +1,7 @@
 package Vista;
 
 import DTOs.DTOSolicitud;
+import Enums.Estado;
 import javax.swing.JButton;
 import org.jdesktop.swingx.JXTextArea;
 
@@ -8,53 +9,23 @@ public class DialogAclaracion extends javax.swing.JDialog {
 
     DTOSolicitud solicitud; 
     UIBackofficeCoordinador uibackoffice;
-    
-    
+
     public DialogAclaracion(java.awt.Frame parent, boolean modal, DTOSolicitud solicitud) {
         super(parent, modal);
         this.uibackoffice = new UIBackofficeCoordinador((Backoffice)parent);
         this.solicitud = solicitud;
         initComponents();
-        llenarCampos();
+        initVariables();
     }
     
-    public void llenarCampos(){
+    public void initVariables(){
         this.txtAclaracion.setText(solicitud.getAclaracion());
+        if(Estado.Anulada == Estado.valueOf(solicitud.getEstado())){
+            btnConfirmar.setVisible(false);
+            btnCancelar.setVisible(false);
+            txtAclaracion.setEditable(false);
+        }
     }
-
-    public DTOSolicitud getSolicitud() {
-        return solicitud;
-    }
-
-    public void setSolicitud(DTOSolicitud solicitud) {
-        this.solicitud = solicitud;
-    }
-
-    public JXTextArea getTxtAclaracion() {
-        return txtAclaracion;
-    }
-
-    public void setTxtAclaracion(JXTextArea txtAclaracion) {
-        this.txtAclaracion = txtAclaracion;
-    }
-
-    public JButton getBtnCancelar() {
-        return btnCancelar;
-    }
-
-    public void setBtnCancelar(JButton btnCancelar) {
-        this.btnCancelar = btnCancelar;
-    }
-
-    public JButton getBtnConfirmar() {
-        return btnConfirmar;
-    }
-
-    public void setBtnConfirmar(JButton btnConfirmar) {
-        this.btnConfirmar = btnConfirmar;
-    }
-    
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -154,4 +125,36 @@ public class DialogAclaracion extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXTextArea txtAclaracion;
     // End of variables declaration//GEN-END:variables
+
+    public DTOSolicitud getSolicitud() {
+        return solicitud;
+    }
+
+    public void setSolicitud(DTOSolicitud solicitud) {
+        this.solicitud = solicitud;
+    }
+
+    public JXTextArea getTxtAclaracion() {
+        return txtAclaracion;
+    }
+
+    public void setTxtAclaracion(JXTextArea txtAclaracion) {
+        this.txtAclaracion = txtAclaracion;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public void setBtnCancelar(JButton btnCancelar) {
+        this.btnCancelar = btnCancelar;
+    }
+
+    public JButton getBtnConfirmar() {
+        return btnConfirmar;
+    }
+
+    public void setBtnConfirmar(JButton btnConfirmar) {
+        this.btnConfirmar = btnConfirmar;
+    }
 }

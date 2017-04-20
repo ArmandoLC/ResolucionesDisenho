@@ -90,7 +90,7 @@ public class UIBackofficeCoordinador {
             dtoSolicitud.setFecha(Calendar.getInstance().getTime()); 
             dtoSolicitud.setIdSolicitante(dialog.getTxtIdSolicitante().getText());
             dtoSolicitud.setNombreSolicitante(dialog.getTxtNombreSolicitante().getText());
-            String nPeriodo =  dialog.getTxtPeriodo().getText();
+            String nPeriodo =  (String) dialog.getCbPeriodo().getSelectedItem();
             String modalidad = (String) dialog.getCbModalidad().getSelectedItem();
             String anho = dialog.getTxtAnho().getText();
             dtoSolicitud.setPeriodo(nPeriodo + modalidad + anho);

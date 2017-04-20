@@ -318,10 +318,7 @@ public class BackofficeCoordinador extends Backoffice{
     }//GEN-LAST:event_linkReporteSolicitudesActionPerformed
 
     private void btnExtraerExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtraerExcelActionPerformed
-        /*JFileChooser file = new JFileChooser();
-                    file.showOpenDialog(this);
-                    File archivo = file.getSelectedFile();*/
-        //uibackoffice.RegistrarSolicitudesGoogleForm(dialog);
+        uibackoffice.RegistrarSolicitudes();
     }//GEN-LAST:event_btnExtraerExcelActionPerformed
 
     private void btnRegistrarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarSolicitudActionPerformed

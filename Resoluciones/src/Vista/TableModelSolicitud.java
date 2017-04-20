@@ -25,6 +25,7 @@ public class TableModelSolicitud extends AbstractTableModel{
 
     public void setSolicitudes(ArrayList<DTOSolicitud> solicitudes) {
         this.solicitudes = solicitudes;
+        table.setModel(this);
     }
     
     @Override

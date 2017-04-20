@@ -116,7 +116,7 @@ public class DialogResolucion extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIntroduccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntroduccionActionPerformed
-        if( ! btnIntroduccion.isSelected() ){ 
+        if( btnIntroduccion.isSelected() ){ 
             btnResultado.setSelected(false);
             btnConsiderandos.setSelected(false);
             btnResuelvo.setSelected(false);
@@ -124,7 +124,7 @@ public class DialogResolucion extends javax.swing.JDialog {
     }//GEN-LAST:event_btnIntroduccionActionPerformed
 
     private void btnResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultadoActionPerformed
-        if( ! btnResultado.isSelected() ){ 
+        if( btnResultado.isSelected() ){ 
             btnIntroduccion.setSelected(false);
             btnConsiderandos.setSelected(false);
             btnResuelvo.setSelected(false);
@@ -132,7 +132,7 @@ public class DialogResolucion extends javax.swing.JDialog {
     }//GEN-LAST:event_btnResultadoActionPerformed
 
     private void btnConsiderandosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsiderandosActionPerformed
-        if( ! btnConsiderandos.isSelected() ){ 
+        if(  btnConsiderandos.isSelected() ){ 
             btnIntroduccion.setSelected(false);
             btnResultado.setSelected(false);
             btnResuelvo.setSelected(false);
@@ -140,7 +140,7 @@ public class DialogResolucion extends javax.swing.JDialog {
     }//GEN-LAST:event_btnConsiderandosActionPerformed
 
     private void btnResuelvoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResuelvoActionPerformed
-        if( ! btnResuelvo.isSelected() ){ 
+        if( btnResuelvo.isSelected() ){ 
             btnIntroduccion.setSelected(false);
             btnResultado.setSelected(false);
             btnConsiderandos.setSelected(false);
