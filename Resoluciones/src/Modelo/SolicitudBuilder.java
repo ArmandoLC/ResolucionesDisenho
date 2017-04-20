@@ -36,7 +36,7 @@ public class SolicitudBuilder {
 
             solicitud.setId(dtoSolicitud.getId());
             solicitud.setFecha(dtoSolicitud.getFecha());
-            solicitud.setInconsistencia(dtoSolicitud.getTipoSituacion());
+            solicitud.setInconsistencia(dtoSolicitud.getInconsistencia());
             solicitud.setDescripcion(dtoSolicitud.getDescripcionDetallada());
             solicitud.setRutaArchivoAdjunto(dtoSolicitud.getRutaArchivoAdjunto());
             solicitud.setEstado(Estado.valueOf(dtoSolicitud.getEstado())); // Se obtiene el Estado apartir de un String
