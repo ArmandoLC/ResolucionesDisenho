@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
-import Controlador.IGeneradorResolucion;
 import Modelo.Resolucion;
-import com.itextpdf.text.Chapter;
 import com.itextpdf.text.Chunk;
 
        
@@ -15,12 +8,9 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
-import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Section;
-import com.itextpdf.text.pdf.CMYKColor;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.util.Properties;

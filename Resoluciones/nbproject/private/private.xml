@@ -2,6 +2,42 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/BackofficeEstudiante.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/FactoryDAOSolicitud.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/PropertiesFile.properties</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogDetallesSolicitud.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/GenerardorResolucionHTML.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogEstadisticas.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/DAOGoogleForm.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/DTOs/DTOSolicitud.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/BackofficeCoordinador.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/UIBackofficeCoordinador.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/FacadeEstudiante.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogRegistrarSolicitud.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogInconsistencia.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogResolucion.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/UIBackofficeEstudiante.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/Facade.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Prueba.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/FacadeCoordinador.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/IDAOPremisa.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/TableModelSolicitud.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogAclaracion.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogGenerarResolucion.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/DialogSolicitudesAtendidas.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/ICoordinador.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/BackofficeLogin.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/DAOPremisaExcel.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/TableModelProfesor.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/DAOMySQL.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/PruebasBrondon.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/DAOSolicitud.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Enums/Modalidad.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/IGeneradorResolucion.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/TableModelCurso.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Controlador/ControladorPrincipal.java</file>
+            <file>file:/C:/Users/july1/Desktop/GitHub/ResolucionesDisenho/Resoluciones/src/Vista/Backoffice.java</file>
+        </group>
     </open-files>
 </project-private>

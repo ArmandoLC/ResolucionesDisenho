@@ -28,6 +28,7 @@ public class TableModelProfesor extends AbstractTableModel{
 
     public void setPersonas(ArrayList<DTOPersona> personas) {
         this.personas = personas;
+        table.setModel(this);
     }
     
     @Override

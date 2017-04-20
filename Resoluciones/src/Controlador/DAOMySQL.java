@@ -91,7 +91,7 @@ public class DAOMySQL extends DAOSolicitud{
         ResultSet rs; int lastID = -1;
         
         try {
-            
+                       
             CallableStatement conexionSP = obtenerConexionSP("{call registrarSolicitud(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
                         
             conexionSP.setString("fecha", dateFormat.format(dto.getFecha()));

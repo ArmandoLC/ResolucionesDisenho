@@ -54,6 +54,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         planEstudios = new ArrayList<>();
         carteraDocente = new ArrayList<>();
         daoPremisa = new DAOPremisaExcel();
+        factorySolicitudes = new FactoryDAOSolicitud();
         this.CargarPremisas();
     }
 
@@ -189,7 +190,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     @Override
     public int RegistrarSolicitud(DTOSolicitud dtoSolicitud) {
         //Se procede a guardar en la base de datos..
-        DAOMySQL BD =(DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
+        DAOMySQL BD = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
         int identificador = BD.RegistrarSolicitud(dtoSolicitud);
         
         //Se procede a guardar la solicitud en memoria (en el atributo solicitudes)..
@@ -336,6 +337,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
                 lisResult.add(ofertaAcademica.get(i).getnGrupo());
             }
         }
+
         return lisResult;
     }
 

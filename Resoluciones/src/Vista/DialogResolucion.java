@@ -5,10 +5,10 @@ import DTOs.DTOSolicitud;
 public class DialogResolucion extends javax.swing.JDialog {
 
     private DTOSolicitud solicitud;
-    private String introduccion;
-    private String resultado;
-    private String considerandos;
-    private String resuelvo;
+    private String introduccion = " ";
+    private String resultado = " ";
+    private String considerandos = " ";
+    private String resuelvo = " ";
     
     public DialogResolucion(java.awt.Frame parent, boolean modal, DTOSolicitud solicitud) {
         super(parent, modal);
@@ -117,33 +117,49 @@ public class DialogResolucion extends javax.swing.JDialog {
 
     private void btnIntroduccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntroduccionActionPerformed
         if( btnIntroduccion.isSelected() ){ 
+            if(btnResultado.isSelected()) resultado = txtEditor.getText();
+            if(btnConsiderandos.isSelected()) resultado = txtEditor.getText();
+            if(btnResuelvo.isSelected()) resultado = txtEditor.getText();
             btnResultado.setSelected(false);
             btnConsiderandos.setSelected(false);
             btnResuelvo.setSelected(false);
+            txtEditor.setText(introduccion);
         }
     }//GEN-LAST:event_btnIntroduccionActionPerformed
 
     private void btnResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultadoActionPerformed
         if( btnResultado.isSelected() ){ 
+            if(btnIntroduccion.isSelected()) resultado = txtEditor.getText();
+            if(btnConsiderandos.isSelected()) resultado = txtEditor.getText();
+            if(btnResuelvo.isSelected()) resultado = txtEditor.getText();
             btnIntroduccion.setSelected(false);
             btnConsiderandos.setSelected(false);
             btnResuelvo.setSelected(false);
+            txtEditor.setText(resultado);
         }
     }//GEN-LAST:event_btnResultadoActionPerformed
 
     private void btnConsiderandosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsiderandosActionPerformed
         if(  btnConsiderandos.isSelected() ){ 
+            if(btnIntroduccion.isSelected()) resultado = txtEditor.getText();
+            if(btnResultado.isSelected()) resultado = txtEditor.getText();
+            if(btnResuelvo.isSelected()) resultado = txtEditor.getText();
             btnIntroduccion.setSelected(false);
             btnResultado.setSelected(false);
             btnResuelvo.setSelected(false);
+            txtEditor.setText(considerandos);
         }
     }//GEN-LAST:event_btnConsiderandosActionPerformed
 
     private void btnResuelvoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResuelvoActionPerformed
         if( btnResuelvo.isSelected() ){ 
+            if(btnIntroduccion.isSelected()) resultado = txtEditor.getText();
+            if(btnResultado.isSelected()) resultado = txtEditor.getText();
+            if(btnResuelvo.isSelected()) resultado = txtEditor.getText();
             btnIntroduccion.setSelected(false);
             btnResultado.setSelected(false);
             btnConsiderandos.setSelected(false);
+            txtEditor.setText(resuelvo);
         }
     }//GEN-LAST:event_btnResuelvoActionPerformed
 
