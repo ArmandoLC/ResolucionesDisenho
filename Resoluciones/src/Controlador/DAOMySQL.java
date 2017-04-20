@@ -22,8 +22,28 @@ public class DAOMySQL extends DAOSolicitud{
     
     private void agregarResolucionParaDTO(DTOSolicitud dto) {
         
-        int idBuscado = dto.getId();
+        int idBuscado = dto.getId();        
+        String procAlmacenado = "{call obtenerNumResolucionParaSolic(?)}";
+        ResultSet rs;
+        Connection conexion = null;
         
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conexion = DriverManager.getConnection(ruta, user, pass);            
+            CallableStatement conexionSP = conexion.prepareCall(procAlmacenado);
+            
+            conexionSP.setInt("idBuscado", idBuscado);
+            rs = conexionSP.executeQuery(); 
+
+            while (rs.next() )
+            {
+                dto.setnResolucion( rs.getInt("numeroResolucion") );
+            }
+        } 
+        catch (ClassNotFoundException | SQLException e) 
+        {
+            dto.setnResolucion( -1 );
+        }
     }
         
     private ArrayList<DTOSolicitud> getSolicitudesSinResolucion(){
@@ -38,29 +58,29 @@ public class DAOMySQL extends DAOSolicitud{
             conexion = DriverManager.getConnection(ruta, user, pass);            
             CallableStatement conexionSP = conexion.prepareCall(procAlmacenado);
             
-                rs = conexionSP.executeQuery(); 
-                
-                while (rs.next() )
-                {
-                    retorno.add(new DTOSolicitud(   rs.getInt("id"), 
-                                                    rs.getDate("fecha"), 
-                                                    rs.getString("idSolicitante"),
-                                                    rs.getString("solicitante"),
-                                                    rs.getString("periodo"),
-                                                    rs.getString("codigoCurso"),
-                                                    rs.getInt("numeroGrupo"),
-                                                    rs.getString("idAfectado"),
-                                                    rs.getString("nombreAfectado"),
-                                                    rs.getString("correoAfectado"),
-                                                    rs.getString("telefonoAfectado"),
-                                                    rs.getString("inconsistencia"),
-                                                    rs.getString("descripcion"),
-                                                    rs.getString("rutaAdjunto"),
-                                                    rs.getString("estado"),
-                                                    rs.getString("aclaracion"),
-                                                    -1
-                                                ) );
-                }
+            rs = conexionSP.executeQuery(); 
+
+            while (rs.next() )
+            {
+                retorno.add(new DTOSolicitud(   rs.getInt("id"), 
+                                                rs.getDate("fecha"), 
+                                                rs.getString("idSolicitante"),
+                                                rs.getString("solicitante"),
+                                                rs.getString("periodo"),
+                                                rs.getString("codigoCurso"),
+                                                rs.getInt("numeroGrupo"),
+                                                rs.getString("idAfectado"),
+                                                rs.getString("nombreAfectado"),
+                                                rs.getString("correoAfectado"),
+                                                rs.getString("telefonoAfectado"),
+                                                rs.getString("inconsistencia"),
+                                                rs.getString("descripcion"),
+                                                rs.getString("rutaAdjunto"),
+                                                rs.getString("estado"),
+                                                rs.getString("aclaracion"),
+                                                -1
+                                            ) );
+            }
         } 
         catch (ClassNotFoundException | SQLException e) 
         {

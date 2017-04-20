@@ -12,6 +12,6 @@ public class PruebasBrondon {
         DAOMySQL dao = new DAOMySQL();
         
         ArrayList<DTOSolicitud> aray = dao.ConsultarSolicitudes();        
-        aray.forEach((a)-> System.out.println(a.getNombreAfectado()) );
+        aray.forEach((a)-> System.out.println(a.getNombreAfectado() + "_" + a.getnResolucion()) );
     }
 }
