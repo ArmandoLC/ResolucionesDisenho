@@ -21,6 +21,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Section;
 import com.itextpdf.text.pdf.CMYKColor;
+import com.itextpdf.tool.xml.XMLWorkerHelper;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.util.Properties;
@@ -31,7 +33,7 @@ public class GeneradorResolucionPDF implements IGeneradorResolucion{
     public GeneradorResolucionPDF() {
     }
     
-    @Override
+   
     public boolean Generar(Resolucion resolucion) {
         try{        
             

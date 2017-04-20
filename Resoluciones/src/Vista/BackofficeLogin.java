@@ -2,7 +2,9 @@ package Vista;
 
 import Controlador.FactoryDAOSolicitud;
 import Controlador.DAOSolicitud;
+import Controlador.GeneradorResolucionHTML;
 import Controlador.GeneradorResolucionPDF;
+import Controlador.IGeneradorResolucion;
 import DTOs.DTOSolicitud;
 import DTOs.DTOUsuario;
 import Enums.Recurso;

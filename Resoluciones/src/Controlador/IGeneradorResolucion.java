@@ -12,6 +12,6 @@ import Modelo.Resolucion;
  * @author Armando
  */
 public interface IGeneradorResolucion {
-
+    
     public boolean Generar(Resolucion resolucion);
 }   
