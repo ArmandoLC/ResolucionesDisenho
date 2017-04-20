@@ -37,7 +37,33 @@ public class PruebasBrondon {
             s1.setDescripcionDetallada("descripAF");
             s1.setRutaArchivoAdjunto("rutaf");
             s1.setAclaracion("lul aclaracion");
+        
+        DTOSolicitud s2 = new DTOSolicitud();
             
-        System.out.println(dao.RegistrarSolicitud(s1));
+            try {
+                s2.setFecha(dateFormat.parse("2014-02-02"));
+            } catch (ParseException ex) {
+                System.out.println(ex.getMessage());
+            }
+            s2.setIdSolicitante("1546468");
+            s2.setNombreSolicitante("Julian");
+            s2.setPeriodo("2017");
+            s2.setnGrupo(40);
+            s2.setCodigoCurso("s11");
+            s2.setEstado("Tramitada");
+            s2.setIdAfectado("idAfec");
+            s2.setNombreAfectado("nameAf");
+            s2.setCorreoAfectado("corAF");
+            s2.setTelefonoAfectado("telAf");
+            s2.setInconsistencia("exclusioooon");
+            s2.setDescripcionDetallada("descripAF");
+            s2.setRutaArchivoAdjunto("rutaf");
+            s2.setAclaracion("lul aclaracion");
+        ArrayList<DTOSolicitud> aray = new ArrayList<>();
+        aray.add(s1); aray.add(s2);
+        
+        aray = dao.RegistrarSolicitudes(aray);
+        
+        System.out.println(aray.get(0).getId() + "_" + aray.get(1).getId());
     }
 }

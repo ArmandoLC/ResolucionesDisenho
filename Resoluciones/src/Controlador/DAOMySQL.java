@@ -123,10 +123,19 @@ public class DAOMySQL extends DAOSolicitud{
         }
         return lastID;
     }
-
-    
+ 
     public ArrayList<DTOSolicitud> RegistrarSolicitudes(ArrayList<DTOSolicitud> dtoSolicitudes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        
+        dtoSolicitudes.forEach((dtoSolicitud)-> registrarSolicitudObteniendoID(dtoSolicitud));
+        
+        return dtoSolicitudes;
+        
+    }
+    
+    private void registrarSolicitudObteniendoID(DTOSolicitud dto){
+        
+        int id = RegistrarSolicitud(dto);
+        dto.setId(id);   
     }
     
     private CallableStatement obtenerConexionSP(String procAlmacenado) throws Exception {
