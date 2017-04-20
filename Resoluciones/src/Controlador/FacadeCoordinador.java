@@ -87,6 +87,11 @@ public class FacadeCoordinador extends Facade implements ICoordinador{
     public boolean GenerarResolucion(DTOResolucion resolucion, Formato formato, String ruta) {
         return ctrl.GenerarResolucion(resolucion, formato, ruta);
     }
+    
+    @Override
+    public ArrayList<Integer> ConsultarGrupos(String codCurso) {
+        return ctrl.ConsultarGrupos(codCurso);
+    }
 
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudesAtendidas(Date desde, Date hasta) {
@@ -102,6 +107,6 @@ public class FacadeCoordinador extends Facade implements ICoordinador{
     public ArrayList<DTOCurso> ConsultarTopCursos(int top) {
         return ctrl.ConsultarTopCursos(top);
     }
-    
+
         
 }

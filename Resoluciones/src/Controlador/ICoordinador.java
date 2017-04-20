@@ -43,4 +43,6 @@ public interface ICoordinador extends IEstadisticas {
     
     public boolean GenerarResolucion(DTOResolucion resolucion, Formato formato, String ruta);  
     
+    public ArrayList<Integer> ConsultarGrupos(String codCurso);
+    
 }
