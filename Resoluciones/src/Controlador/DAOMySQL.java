@@ -4,6 +4,7 @@ package Controlador;
 
 import DTOs.DTOSolicitud;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
@@ -23,14 +24,10 @@ public class DAOMySQL extends DAOSolicitud{
     private void agregarResolucionParaDTO(DTOSolicitud dto) {
         
         int idBuscado = dto.getId();        
-        String procAlmacenado = "{call obtenerNumResolucionParaSolic(?)}";
         ResultSet rs;
-        Connection conexion = null;
         
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection(ruta, user, pass);            
-            CallableStatement conexionSP = conexion.prepareCall(procAlmacenado);
+            CallableStatement conexionSP = obtenerConexionSP("{call obtenerNumResolucionParaSolic(?)}");
             
             conexionSP.setInt("idBuscado", idBuscado);
             rs = conexionSP.executeQuery(); 
@@ -40,7 +37,7 @@ public class DAOMySQL extends DAOSolicitud{
                 dto.setnResolucion( rs.getInt("numeroResolucion") );
             }
         } 
-        catch (ClassNotFoundException | SQLException e) 
+        catch (Exception e) 
         {
             dto.setnResolucion( -1 );
         }
@@ -49,14 +46,11 @@ public class DAOMySQL extends DAOSolicitud{
     private ArrayList<DTOSolicitud> getSolicitudesSinResolucion(){
         
         ArrayList<DTOSolicitud> retorno = new ArrayList<>();
-        String procAlmacenado = "{call consultarSolicitudes()}";
         ResultSet rs;
-        Connection conexion = null;
         
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection(ruta, user, pass);            
-            CallableStatement conexionSP = conexion.prepareCall(procAlmacenado);
+           
+            CallableStatement conexionSP = obtenerConexionSP("{call consultarSolicitudes()}");
             
             rs = conexionSP.executeQuery(); 
 
@@ -82,7 +76,7 @@ public class DAOMySQL extends DAOSolicitud{
                                             ) );
             }
         } 
-        catch (ClassNotFoundException | SQLException e) 
+        catch (Exception e) 
         {
             return null;
         }
@@ -90,19 +84,64 @@ public class DAOMySQL extends DAOSolicitud{
         return retorno;
     }
     
-    public int RegistrarSolicitud(DTOSolicitud dtoSolicitud) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int RegistrarSolicitud(DTOSolicitud dtoSolicitud) {      
+        
+        DTOSolicitud dto = dtoSolicitud;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        ResultSet rs; int lastID = -1;
+        
+        try {
+            
+            CallableStatement conexionSP = obtenerConexionSP("{call registrarSolicitud(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                        
+            conexionSP.setString("fecha", dateFormat.format(dto.getFecha()));
+            conexionSP.setString("idSolic", dto.getIdSolicitante());
+            conexionSP.setString("nombreSolic", dto.getNombreSolicitante());
+            conexionSP.setString("period", dto.getPeriodo());
+            conexionSP.setString("codCurso", dto.getCodigoCurso());
+            conexionSP.setInt("nGrupo", dto.getnGrupo());
+            conexionSP.setString("idAfect", dto.getIdAfectado());
+            conexionSP.setString("nombreAfect", dto.getNombreAfectado());
+            conexionSP.setString("correoAfect", dto.getCorreoAfectado());
+            conexionSP.setString("telefonoAfect", dto.getTelefonoAfectado());
+            conexionSP.setString("inconsist", dto.getTipoSituacion());
+            conexionSP.setString("descrip", dto.getDescripcionDetallada());
+            conexionSP.setString("ruta", dto.getRutaArchivoAdjunto());
+            conexionSP.setString("estado", dto.getEstado());
+            conexionSP.setString("aclarac", dto.getAclaracion());
+            
+            rs = conexionSP.executeQuery(); 
+
+            while (rs.next() )
+            {
+                lastID = rs.getInt("ultimoID");
+            }
+        } 
+        catch (Exception e) 
+        {
+            return -1;
+        }
+        return lastID;
     }
 
     
     public ArrayList<DTOSolicitud> RegistrarSolicitudes(ArrayList<DTOSolicitud> dtoSolicitudes) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    private CallableStatement obtenerConexionSP(String procAlmacenado) throws Exception {
+        
+        Class.forName("com.mysql.jdbc.Driver");
+        conexion = DriverManager.getConnection(ruta, user, pass);            
+        return conexion.prepareCall(procAlmacenado);
+        
+    }
+    
     public DAOMySQL(){
         setRutaConexion("jdbc:mysql://localhost:3306/resolucionesbd");
     }
     
-    String user = "root"; String pass = "1234";
-    
+    private String user = "root"; 
+    private String pass = "1234";
+    private Connection conexion;
 }
