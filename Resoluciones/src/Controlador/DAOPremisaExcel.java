@@ -9,7 +9,11 @@ import DTOs.DTOCurso;
 import DTOs.DTOPersona;
 import DTOs.DTOferta;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Properties;
 import jxl.Sheet;
 import jxl.Workbook;
 
@@ -19,19 +23,27 @@ import jxl.Workbook;
  */
 public class DAOPremisaExcel implements IDAOPremisa {
 
-    private String ruta = "C:\\Users\\Armando\\Documents\\I Semestre 2017\\Diseño de Software\\Proyectos\\Proyecto#1\\Datos\\DatosProyecto1.xls";
+    private String ruta;
+
+    private String setRuta() throws IOException {
+        Properties prop = new Properties();
+        FileReader reader = new FileReader("src\\PropertiesFile.properties");
+        prop.load(reader);
+        return prop.getProperty("rutaExcelPremisas");
+    }
 
     @Override
     public ArrayList<DTOPersona> ConsultarCarteraDocente() throws Exception {
         ArrayList<DTOPersona> carteraDocente = new ArrayList<>();
-        
+
         try {
+            ruta = setRuta();
             File f = new File(ruta);
 
             Workbook book = Workbook.getWorkbook(f);
             Sheet sheet = book.getSheet("PROFESORES");
             int rows = sheet.getRows();
-            
+
             for (int i = 1; i < rows; i++) {
                 DTOPersona dtoPersona = new DTOPersona();
                 dtoPersona.setId(sheet.getCell(0, i).getContents());
@@ -53,14 +65,15 @@ public class DAOPremisaExcel implements IDAOPremisa {
     @Override
     public ArrayList<DTOCurso> ConsultarPlanEstudios() {
         ArrayList<DTOCurso> planEstudios = new ArrayList<>();
-        
+
         try {
+            ruta = setRuta();
             File f = new File(ruta);
 
             Workbook book = Workbook.getWorkbook(f);
             Sheet sheet = book.getSheet("PLAN");
             int rows = sheet.getRows();
-            
+
             for (int i = 1; i < rows; i++) {
                 DTOCurso dtoCurso = new DTOCurso();
                 dtoCurso.setId(sheet.getCell(0, i).getContents());
@@ -81,14 +94,15 @@ public class DAOPremisaExcel implements IDAOPremisa {
     @Override
     public ArrayList<DTOferta> ConsultarOfertaAcademica() {
         ArrayList<DTOferta> ofertaAcad = new ArrayList<>();
-        
+
         try {
+            ruta = setRuta();
             File f = new File(ruta);
 
             Workbook book = Workbook.getWorkbook(f);
             Sheet sheet = book.getSheet("OFERTA");
             int rows = sheet.getRows();
-            
+
             for (int i = 1; i < rows; i++) {
                 DTOferta dtoOferta = new DTOferta();
                 dtoOferta.setPeriodo(sheet.getCell(0, i).getContents());
@@ -112,8 +126,9 @@ public class DAOPremisaExcel implements IDAOPremisa {
     @Override
     public ArrayList<String> ConsultarSituaciones() {
         ArrayList<String> situaciones = new ArrayList<>();
-        
+
         try {
+            ruta = setRuta();
             File f = new File(ruta);
 
             Workbook book = Workbook.getWorkbook(f);

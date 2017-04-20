@@ -54,7 +54,7 @@ public class Prueba {
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
             InputStream stream = loader.getResourceAsStream("PropertiesFile.properties");
             prop.load(stream);
-            System.out.println(prop.getProperty("rutaExcelPremisas"));
+            //System.out.println(prop.getProperty("rutaExcelPremisas"));
             //Properties prop = new Properties();
 
             //InputStream input = new FileInputStream("/PropertiesFile.properties");
