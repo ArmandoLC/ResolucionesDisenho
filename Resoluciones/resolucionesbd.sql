@@ -175,7 +175,6 @@ CREATE TABLE `resoluciones` (
 
 LOCK TABLES `resoluciones` WRITE;
 /*!40000 ALTER TABLE `resoluciones` DISABLE KEYS */;
-INSERT INTO `resoluciones` VALUES (1,123,'2014-05-05','Ericka S.','Mauricio H.','Juan P.','intro','results','considerandos!','resueltos!');
 /*!40000 ALTER TABLE `resoluciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,7 +204,7 @@ CREATE TABLE `solicitudes` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `solicitudOferta_idx` (`idOferta`),
   CONSTRAINT `solicitudOferta` FOREIGN KEY (`idOferta`) REFERENCES `ofertas` (`idoferta`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -297,6 +296,47 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `registrarSolicitud` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarSolicitud`(
+IN fecha DATE, IN idSolic VARCHAR(100), IN nombreSolic VARCHAR(100),
+IN period VARCHAR(100), IN codCurso VARCHAR(100), IN nGrupo INT,
+IN idAfect VARCHAR(100), IN nombreAfect VARCHAR(100), IN correoAfect VARCHAR(100),
+IN telefonoAfect VARCHAR(100), IN inconsist VARCHAR(100), IN descrip TEXT, 
+IN ruta TEXT, IN estado VARCHAR(100), IN aclarac TEXT
+)
+BEGIN
+	IF EXISTS (SELECT idoferta FROM ofertas WHERE period = periodo AND codigoCurso = codCurso
+											AND numeroGrupo = nGrupo)
+	THEN
+		SET @idOferta = (SELECT idoferta FROM ofertas WHERE period = periodo AND codigoCurso = codCurso
+											AND numeroGrupo = nGrupo);
+		INSERT INTO solicitudes (`idOferta`,`fecha`,`inconsistencia`,`descripcion`,
+								`idSolicitante`,`solicitante`,`idAfectado`,`nombreAfectado`,
+                                `correoAfectado`,`telefonoAfectado`,`rutaAdjunto`,`estado`,
+                                `aclaracion`)
+					VALUES		(@idOferta, fecha, inconsist, descrip, idSolic,
+								nombreSolic, idAfect, nombreAfect, correoAfect, 
+                                telefonoAfect, ruta, estado, aclarac);
+                                
+		SELECT LAST_INSERT_ID() AS 'ultimoID';
+	ELSE
+		SIGNAL SQLSTATE '01000';
+	END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -307,4 +347,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-19 18:59:42
+-- Dump completed on 2017-04-19 22:54:41
