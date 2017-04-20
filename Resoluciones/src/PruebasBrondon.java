@@ -33,7 +33,7 @@ public class PruebasBrondon {
             s1.setNombreAfectado("nameAf");
             s1.setCorreoAfectado("corAF");
             s1.setTelefonoAfectado("telAf");
-            s1.setTipoSituacion("exclusioooon");
+            s1.setInconsistencia("exclusioooon");
             s1.setDescripcionDetallada("descripAF");
             s1.setRutaArchivoAdjunto("rutaf");
             s1.setAclaracion("lul aclaracion");

@@ -104,7 +104,7 @@ public class DAOMySQL extends DAOSolicitud{
             conexionSP.setString("nombreAfect", dto.getNombreAfectado());
             conexionSP.setString("correoAfect", dto.getCorreoAfectado());
             conexionSP.setString("telefonoAfect", dto.getTelefonoAfectado());
-            conexionSP.setString("inconsist", dto.getTipoSituacion());
+            conexionSP.setString("inconsist", dto.getInconsistencia());
             conexionSP.setString("descrip", dto.getDescripcionDetallada());
             conexionSP.setString("ruta", dto.getRutaArchivoAdjunto());
             conexionSP.setString("estado", dto.getEstado());
