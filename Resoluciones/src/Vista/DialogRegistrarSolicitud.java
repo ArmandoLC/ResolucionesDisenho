@@ -26,6 +26,7 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
     private void initConsultas(){
         uibackoffice.ConsultarCursos(this);
         uibackoffice.ConsultarSituaciones(this);
+        uibackoffice.ConsultarSolicitudes();
     }
     
     private void initModalidad(){
