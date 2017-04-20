@@ -76,8 +76,11 @@ public class Prueba {
             /*
             ControladorPrincipal CPrin = new ControladorPrincipal();
             CPrin.CargarPremisas();
-            System.out.println(CPrin.toString());
+            ArrayList<DTOCurso> cursos = CPrin.ConsultarCursos();
+            System.out.println(cursos);
             */
+            
+            
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
