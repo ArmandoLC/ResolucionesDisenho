@@ -7,29 +7,35 @@ package Controlador;
 
 import Controlador.IGeneradorResolucion;
 import Modelo.Resolucion;
+import com.itextpdf.text.Chapter;
 import com.itextpdf.text.Chunk;
+
+       
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Section;
+import com.itextpdf.text.pdf.CMYKColor;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.util.Properties;
 
 
-/**
- *
- * @author Armando
- */
-public class GenerardorResolucionHTML implements IGeneradorResolucion {
+public class GeneradorResolucionPDF implements IGeneradorResolucion{
 
+    public GeneradorResolucionPDF() {
+    }
+    
     @Override
     public boolean Generar(Resolucion resolucion) {
         try{        
             
-            Font negrita = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+            Font negrita = new Font(FontFamily.HELVETICA, 12, Font.BOLD);
             Properties prop = new Properties();
             prop.load(new FileReader("src\\PropertiesFile.properties")); 
             
@@ -100,8 +106,6 @@ public class GenerardorResolucionHTML implements IGeneradorResolucion {
             return false;
         } 
         
-    }    public int Generar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

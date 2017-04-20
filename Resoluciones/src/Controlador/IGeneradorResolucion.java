@@ -5,11 +5,13 @@
  */
 package Controlador;
 
+import Modelo.Resolucion;
+
 /**
  *
  * @author Armando
  */
 public interface IGeneradorResolucion {
 
-    public int Generar();
+    public boolean Generar(Resolucion resolucion);
 }   

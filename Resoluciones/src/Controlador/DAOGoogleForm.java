@@ -31,7 +31,7 @@ public class DAOGoogleForm extends DAOSolicitud{
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes() {
         
-       /* ArrayList<DTOSolicitud> solicitudes = new ArrayList<>();
+        ArrayList<DTOSolicitud> solicitudes = new ArrayList<>();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         BufferedReader reader = null;
         String linea = "";
@@ -40,7 +40,7 @@ public class DAOGoogleForm extends DAOSolicitud{
         
         try {
             
-            reader = new BufferedReader(new FileReader(rutaConexion));
+            reader = new BufferedReader(new FileReader(ruta));
             while ((linea = reader.readLine()) != null){
                 
                 if (cont >= 1)
@@ -77,9 +77,9 @@ public class DAOGoogleForm extends DAOSolicitud{
                     }
 
                     DTOSolicitud dtoSolicitud = 
-                            new DTOSolicitud(fecha, idSolicitante, nombreSolicitante, oferta, codCurso,
+                            new DTOSolicitud(0, fecha, idSolicitante, nombreSolicitante, oferta, codCurso,
                                              nGrupo, idAfectado, nombreAfectado, correoAfectado, telefAfectado, 
-                                             tipoSituacion, descripDetallada, "", "", new ArrayList<String>());
+                                             tipoSituacion, descripDetallada, "", "", "",0);
                     
                     solicitudes.add(dtoSolicitud);
                     
@@ -102,9 +102,6 @@ public class DAOGoogleForm extends DAOSolicitud{
                 }
             }
         }
-        
-        System.out.println(solicitudes.size());
-        return solicitudes;*/
-       return null;
+       return solicitudes;
     }
 }
