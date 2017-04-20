@@ -8,9 +8,25 @@ import java.util.ArrayList;
 
 
 public class DAOMySQL extends DAOSolicitud{
-       
+      
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes() {
+        
+        ArrayList<DTOSolicitud> resultado = getSolicitudesSinResolucion();
+        
+        resultado.forEach((DTO)-> agregarResolucionParaDTO(DTO) );
+        
+        return resultado;
+        
+    }
+    
+    private void agregarResolucionParaDTO(DTOSolicitud dto) {
+        
+        int idBuscado = dto.getId();
+        
+    }
+        
+    private ArrayList<DTOSolicitud> getSolicitudesSinResolucion(){
         
         ArrayList<DTOSolicitud> retorno = new ArrayList<>();
         String procAlmacenado = "{call consultarSolicitudes()}";
@@ -19,7 +35,7 @@ public class DAOMySQL extends DAOSolicitud{
         
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection(rutaConexion, user, pass);            
+            conexion = DriverManager.getConnection(ruta, user, pass);            
             CallableStatement conexionSP = conexion.prepareCall(procAlmacenado);
             
                 rs = conexionSP.executeQuery(); 
@@ -37,11 +53,12 @@ public class DAOMySQL extends DAOSolicitud{
                                                     rs.getString("nombreAfectado"),
                                                     rs.getString("correoAfectado"),
                                                     rs.getString("telefonoAfectado"),
-                                                    rs.getString("tipoSituacion"),
+                                                    rs.getString("inconsistencia"),
                                                     rs.getString("descripcion"),
-                                                    rs.getString("rutaAdjunto"), 
-                                                    rs.getString("aclaracion"), 
-                                                    new ArrayList<>()
+                                                    rs.getString("rutaAdjunto"),
+                                                    rs.getString("estado"),
+                                                    rs.getString("aclaracion"),
+                                                    -1
                                                 ) );
                 }
         } 
@@ -51,9 +68,7 @@ public class DAOMySQL extends DAOSolicitud{
         }
         
         return retorno;
-        
     }
-
     
     public int RegistrarSolicitud(DTOSolicitud dtoSolicitud) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
