@@ -89,8 +89,8 @@ public class Prueba {
             s1.setIdSolicitante("1546468");
             s1.setNombreSolicitante("Julian");
             s1.setPeriodo("2017");
-            s1.setnGrupo(40);
-            s1.setCodigoCurso("s11");
+            s1.setnGrupo(2);
+            s1.setCodigoCurso("IC4301");
             s1.setEstado("Tramitada");
             s1.setIdAfectado("idAfec");
             s1.setNombreAfectado("nameAf");
@@ -103,10 +103,10 @@ public class Prueba {
         
             //ArrayList<DTOCurso> cursos = CPrin.ConsultarCursos();
             //ArrayList<Integer> nGrupo = CPrin.ConsultarGrupos("IC4301");
-            ArrayList<DTOSolicitud> listSolicitudes = CPrin.ConsultarSolicitudes();
+            /*ArrayList<DTOSolicitud> listSolicitudes = CPrin.ConsultarSolicitudes();
             for (DTOSolicitud solicitud : listSolicitudes) {
                 System.out.println(solicitud);
-            }
+            }*/
             System.out.println(CPrin.RegistrarSolicitud(s1));
             
             //for (Integer nGrupo1 : nGrupo) {
