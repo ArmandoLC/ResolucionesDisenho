@@ -26,7 +26,7 @@ public class DialogDetallesSolicitud extends javax.swing.JDialog {
         txtCodigoCurso.setText(solicitud.getCodigoCurso());
         txtGrupo.setText(String.valueOf(solicitud.getnGrupo()));
         txtPeriodo.setText(solicitud.getPeriodo());
-        txtTipoInconsistencia.setText(solicitud.getTipoSituacion());
+        txtTipoInconsistencia.setText(solicitud.getInconsistencia());
         txtIdAfectado.setText(solicitud.getIdAfectado());
         txtNombreAfectado.setText(solicitud.getNombreAfectado());
         txtCorreoAfectado.setText(solicitud.getCorreoAfectado());

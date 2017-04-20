@@ -48,7 +48,7 @@ public class UIBackofficeCoordinador {
             DTOCurso curso = facade.ConsultarCurso(solicitud.getId());
             reporte += "<b><font color=\"#FA8072\">ID</font></b>" + solicitud.getId() + "<br>";
             reporte += "<b>Período: <b> " + solicitud.getId() + "<br>";
-            reporte += "<b>Tipo de situación: <b> " + solicitud.getTipoSituacion() + "<br>";
+            reporte += "<b>Tipo de inconsistencia: <b> " + solicitud.getInconsistencia()+ "<br>";
             reporte += "<b>Número de resolución: <b> " + String.valueOf(solicitud.getnResolucion()) + "<br>";
             reporte += "<b>Curso: <b> " + curso.getId() + "  " + curso.getNombre() + "<br>";
             reporte += "<b>Grupo: <b> " + String.valueOf(solicitud.getnGrupo()) + "<br>";
