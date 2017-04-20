@@ -324,6 +324,17 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     public boolean GenerarResolucion(DTOResolucion resolucion, Formato formato, String ruta) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    @Override
+    public ArrayList<Integer> ConsultarGrupos(String codCurso) {
+        ArrayList<Integer> lisResult = new ArrayList<>();
+        for (int i = 0; i < ofertaAcademica.size(); i++) {
+            if (ofertaAcademica.get(i).getCurso().getId().equals(codCurso)) {
+                lisResult.add(ofertaAcademica.get(i).getnGrupo());
+            }
+        }
+        return lisResult;
+    }
 
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudesAtendidas(Date desde, Date hasta) {
@@ -339,5 +350,6 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     public ArrayList<DTOCurso> ConsultarTopCursos(int top) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 
 }
