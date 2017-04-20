@@ -16,7 +16,7 @@ public class PruebasBrondon {
             
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             try {
-                s1.setFecha(dateFormat.parse("2014-02-02"));
+                s1.setFecha(dateFormat.parse("2015-04-15"));
             } catch (ParseException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -59,8 +59,9 @@ public class PruebasBrondon {
         ArrayList<DTOSolicitud> aray = new ArrayList<>();
         aray.add(s1); aray.add(s2);
         
-        aray = dao.RegistrarSolicitudes(aray);
-        
-        System.out.println(aray.get(0).getId() + "_" + aray.get(1).getId());
+        //aray = dao.RegistrarSolicitudes(aray);
+        int result = dao.RegistrarSolicitud(s1);
+        System.out.println("Salida: "+result);
+        //System.out.println(aray.get(0).getId() + "_" + aray.get(1).getId());
     }
 }

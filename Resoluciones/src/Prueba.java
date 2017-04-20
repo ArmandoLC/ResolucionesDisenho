@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -73,12 +75,48 @@ public class Prueba {
             for (int i = 0; i < situaciones.size(); i++) {
                 System.out.println(situaciones.get(i).toString());
             }*/
-            /*
+            
             ControladorPrincipal CPrin = new ControladorPrincipal();
-            CPrin.CargarPremisas();
-            ArrayList<DTOCurso> cursos = CPrin.ConsultarCursos();
-            System.out.println(cursos);
-            */
+            
+            DTOSolicitud s1 = new DTOSolicitud();
+            
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                s1.setFecha(dateFormat.parse("02-12-2015"));
+            } catch (ParseException ex) {
+                System.out.println(ex.getMessage());
+            }
+            s1.setIdSolicitante("1546468");
+            s1.setNombreSolicitante("Julian");
+            s1.setPeriodo("2017");
+            s1.setnGrupo(40);
+            s1.setCodigoCurso("s11");
+            s1.setEstado("Tramitada");
+            s1.setIdAfectado("idAfec");
+            s1.setNombreAfectado("nameAf");
+            s1.setCorreoAfectado("corAF");
+            s1.setTelefonoAfectado("telAf");
+            s1.setInconsistencia("exclusioooon");
+            s1.setDescripcionDetallada("descripAF");
+            s1.setRutaArchivoAdjunto("rutaf");
+            s1.setAclaracion("lul aclaracion");
+        
+            //ArrayList<DTOCurso> cursos = CPrin.ConsultarCursos();
+            //ArrayList<Integer> nGrupo = CPrin.ConsultarGrupos("IC4301");
+            ArrayList<DTOSolicitud> listSolicitudes = CPrin.ConsultarSolicitudes();
+            for (DTOSolicitud solicitud : listSolicitudes) {
+                System.out.println(solicitud);
+            }
+            System.out.println(CPrin.RegistrarSolicitud(s1));
+            
+            //for (Integer nGrupo1 : nGrupo) {
+            //    System.out.println(nGrupo1);
+            //}
+            //for (DTOCurso dto : cursos) {
+            //    System.out.println(dto);
+            //}
+            
+            
             
             
 

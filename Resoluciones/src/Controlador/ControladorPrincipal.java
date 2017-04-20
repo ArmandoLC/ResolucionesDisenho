@@ -18,6 +18,7 @@ import DTOs.DTOferta;
 import Enums.Estado;
 import Enums.Formato;
 import Enums.Recurso;
+import Modelo.Estudiante;
 import Modelo.Persona;
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,6 +52,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         planEstudios = new ArrayList<>();
         carteraDocente = new ArrayList<>();
         daoPremisa = new DAOPremisaExcel();
+        factorySolicitudes = new FactoryDAOSolicitud();
         this.CargarPremisas();
     }
 
@@ -175,29 +177,31 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes() {
 
-        ArrayList<DTOSolicitud> listSolicitudes = new ArrayList<>();
-        
-        for (int i = 0; i < solicitudes.size(); i++) {
+        //ArrayList<DTOSolicitud> listSolicitudes = new ArrayList<>();
+        DAOMySQL DB = (DAOMySQL)factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
+        return DB.ConsultarSolicitudes();
+        /*for (int i = 0; i < solicitudes.size(); i++) {
             listSolicitudes.add(crearDTOSolicitud(solicitudes.get(i)));
-        }
-        return listSolicitudes;
+        }*/
     }
-
+    
     @Override
     public int RegistrarSolicitud(DTOSolicitud dtoSolicitud) {
         //Se procede a guardar en la base de datos..
         DAOMySQL BD =(DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
         int identificador = BD.RegistrarSolicitud(dtoSolicitud);
-        
+        /*
         //Se procede a guardar la solicitud en memoria (en el atributo solicitudes)..
         dtoSolicitud.setId(identificador);
-        Solicitud solicitud = getSolicitud(dtoSolicitud.getId());
+        //Solicitud solicitud = getSolicitud(dtoSolicitud.getId());
 
-        Curso curso = solicitud.getInfoCurso().getCurso();
-        Profesor profesor = solicitud.getInfoCurso().getProfesor();
+        Curso curso = getCurso(dtoSolicitud.getCodigoCurso());
+        Profesor profesor = getProfesor();
         
-        DTOPersona dtoAfectado = crearDTOPersona(solicitud.getAfectado());
-        DTOPersona dtoSolicitante = crearDTOPersona(solicitud.getSolicitante());
+        //DTOPersona dtoAfectado = crearDTOPersona(solicitud.getAfectado());
+        DTOPersona dtoAfectado = crearDTOPersona(new Estudiante(dtoSolicitud.getIdAfectado(), dtoSolicitud.getNombreAfectado(), dtoSolicitud.getCorreoAfectado(), dtoSolicitud.getTelefonoAfectado()));
+        DTOPersona dtoSolicitante = crearDTOPersona(new Persona(dtoSolicitud.getIdSolicitante(), dtoSolicitud.getNombreSolicitante(), null, null));
+        
         DTOferta dtoOferta = crearDTOferta(solicitud.getInfoCurso());
         
         //Se crea la solcitud por medio del builder
@@ -209,7 +213,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
                 .create();
         //Se guarda en la lista de solicitudes que se encuentra en el controlador
         solicitudes.add(nuevaSolic);
-        
+        */
         //Se retorna el ID con el que se registró la solicitud
         return identificador;
     }
@@ -328,6 +332,8 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     @Override
     public ArrayList<Integer> ConsultarGrupos(String codCurso) {
         ArrayList<Integer> lisResult = new ArrayList<>();
+        System.out.println("Largo: "+ofertaAcademica.size());
+        
         for (int i = 0; i < ofertaAcademica.size(); i++) {
             if (ofertaAcademica.get(i).getCurso().getId().equals(codCurso)) {
                 lisResult.add(ofertaAcademica.get(i).getnGrupo());
