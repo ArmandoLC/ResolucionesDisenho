@@ -16,12 +16,12 @@ public class FacadeEstudiante extends Facade{
 
     @Override
     public ArrayList<DTOSolicitud> ConsultarSolicitudes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ctrl.ConsultarSolicitudes();
     }
 
     @Override
     public int RegistrarSolicitud(DTOSolicitud dtoSolicitud) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ctrl.RegistrarSolicitud(dtoSolicitud);
     }
     
 }
