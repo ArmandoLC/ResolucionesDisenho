@@ -78,7 +78,7 @@ public class DAOMySQL extends DAOSolicitud{
         } 
         catch (Exception e) 
         {
-            return null;
+            return new ArrayList<>();
         }
         
         return retorno;
