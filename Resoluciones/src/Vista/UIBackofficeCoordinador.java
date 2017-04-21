@@ -104,15 +104,17 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
     }
       
     private String GenerarReporteSolicitudesAtendidas(Date desde, Date hasta){
-        String reporte = "<b><font color=\"#CD5C5C\">Reporte de solicitudes atendidas</font></b><br><br>";
+        String reporte = "<head><meta charset=utf-8></head>"
+                + "<b><font color=\"#CD5C5C\">Reporte de solicitudes atendidas</font></b><br><br>";
         for(DTOSolicitud solicitud : facade.ConsultarSolicitudesAtendidas(desde, hasta)){
             DTOCurso curso = facade.ConsultarCurso(solicitud.getId());
-            reporte += "<b><font color=\"#FA8072\">ID</font></b>" + solicitud.getId() + "<br>";
+            //DTOReso
+            reporte += "<b><font color=\"#FA8072\">ID&nbsp;</font></b>" + solicitud.getId() + "<br>";
             reporte += "<b>Período: <b> " + solicitud.getId() + "<br>";
             reporte += "<b>Tipo de inconsistencia: <b> " + solicitud.getInconsistencia()+ "<br>";
-            reporte += "<b>Número de resolución: <b> " + String.valueOf(solicitud.getnResolucion()) + "<br>";
+            //reporte += "<b>Número de resolución: <b> " + String.valueOf() + "<br>";
             reporte += "<b>Curso: <b> " + curso.getId() + "  " + curso.getNombre() + "<br>";
-            reporte += "<b>Grupo: <b> " + String.valueOf(solicitud.getnGrupo()) + "<br>";
+            reporte += "<b>Grupo: <b> " + String.valueOf(solicitud.getnGrupo()) + "<br><br>";
         } return reporte;
     }
     

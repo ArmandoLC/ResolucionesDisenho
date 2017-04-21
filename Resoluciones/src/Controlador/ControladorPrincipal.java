@@ -464,8 +464,11 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         solicitud.setResolucion(resolucion);
         
         
-        if(solicitud.getResolucion() != null)
+        if(solicitud.getResolucion() != null){
+            DTOResolucion res = crearDTOResolucion(solicitud.getResolucion(), nSolicitud);
+            res.setIdResolucion(resolucion.getnResolucion());
             return crearDTOResolucion(solicitud.getResolucion(), nSolicitud);
+        }
         else
             return null;
         

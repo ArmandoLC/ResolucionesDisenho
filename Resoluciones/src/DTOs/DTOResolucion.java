@@ -7,6 +7,7 @@ import java.util.Date;
 public class DTOResolucion {
 
     private int idSolicitud;
+    private int idResolucion;
     private String introduccion;
     private String resultado;
     private String considerandos;
@@ -64,6 +65,15 @@ public class DTOResolucion {
         this.resuelvo = resuelvo;
     }
 
+    public int getIdResolucion() {
+        return idResolucion;
+    }
+
+    public void setIdResolucion(int idResolucion) {
+        this.idResolucion = idResolucion;
+    }
+
+    
     @Override
     public String toString() {
         return "DTOResolucion{" + "idSolicitud=" + idSolicitud + ", introduccion=" + introduccion + ", resultado=" + resultado + ", considerandos=" + considerandos + ", resuelvo=" + resuelvo + '}';

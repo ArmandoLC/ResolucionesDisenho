@@ -27,6 +27,7 @@ public class GeneradorResolucionHTML implements IGeneradorResolucion {
             
             String htmlPage = 
 "<html>\n" +
+"<head><meta charset=utf-8></head>" + 
 "    <body>" +
 "        <b>" +
 "            <h3><center" +
