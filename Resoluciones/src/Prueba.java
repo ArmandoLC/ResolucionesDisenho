@@ -3,6 +3,7 @@ import Controlador.ControladorPrincipal;
 import Controlador.DAOPremisaExcel;
 import DTOs.DTOCurso;
 import DTOs.DTOPersona;
+import DTOs.DTOResolucion;
 import DTOs.DTOSolicitud;
 import DTOs.DTOferta;
 import Enums.Estado;
@@ -117,8 +118,19 @@ public class Prueba {
             //System.out.println(CPrin.RegistrarSolicitud(s1));
             
             //System.out.println("Solicitudes: "+ CPrin.ConsultarSolicitudes(Estado.Anulada));
-            System.out.println(CPrin.ConsultarInconsistencias());
+            //System.out.println(CPrin.ConsultarInconsistencias());
             System.out.println(CPrin.ConsultarSolicitudes());
+            ArrayList<DTOSolicitud> dtoSolicitud  = CPrin.ConsultarSolicitudes(Estado.Tramitada);
+            if(!dtoSolicitud.isEmpty()){
+                DTOResolucion dtoResol = new DTOResolucion();
+                dtoResol.setIdSolicitud(dtoSolicitud.get(0).getId());
+                dtoResol.setConsiderandos("este es el considerando");
+                dtoResol.setIntroduccion("Intro");
+                dtoResol.setResuelvo("Resuelvo");
+                dtoResol.setResultado("Resultado");
+                System.out.println(CPrin.RegistrarResolucion(dtoResol));
+                
+            }
             
             //for (Integer nGrupo1 : nGrupo) {
             //    System.out.println(nGrupo1);

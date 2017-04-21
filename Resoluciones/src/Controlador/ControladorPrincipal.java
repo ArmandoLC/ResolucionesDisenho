@@ -419,7 +419,6 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
             
             
             int nResolucion;
-
             nResolucion = Integer.parseInt(getPropiedad("nResolucionActual"));
             setPropiedad("nResolucionActual", String.valueOf(nResolucion + 1));
             Date fecha = Calendar.getInstance().getTime();
@@ -435,6 +434,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
             Resolucion resolucionResult = new Resolucion(nResolucion, fecha, nombreCoordinador, nombreDirectorEscuela, nombreDirectorAdmYReg, introduccion, resultado, considerandos, resuelvo);
             
             getSolicitud(resolucion.getIdSolicitud()).setResolucion(resolucionResult);
+            
             return true;
         } catch (IOException ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);

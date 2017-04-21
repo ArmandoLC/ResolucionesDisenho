@@ -184,6 +184,7 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
     public void RegistrarResolucion(JDialog pdialog){
         try{  DialogRegistrarResolucion dialog = (DialogRegistrarResolucion) pdialog;
             DTOResolucion resolucion = new DTOResolucion();
+            System.out.println("ID: "+dialog.getSolicitud().getId());
             resolucion.setIdSolicitud(dialog.getSolicitud().getId());
             resolucion.setIntroduccion(dialog.getIntroduccion());
             resolucion.setResultado(dialog.getResultado());
@@ -192,8 +193,8 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
             boolean respuesta = facade.RegistrarResolucion(resolucion);
             if(respuesta) { 
                 backoffice.showMessage("Resolucion registrada"); 
-                dialog.getBtnGuardar().setSelected(false);
-                dialog.getBtnRegistrar().setSelected(true);
+                dialog.getBtnGuardar().setVisible(true);
+                dialog.getBtnRegistrar().setVisible(false);
                 ConsultarSolicitudes();
             }
             else backoffice.showMessage("No se ha podido realizar la acción");  

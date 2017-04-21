@@ -33,6 +33,7 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
         }
         uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
         txtEditor.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        this.solicitud = solicitud;
         setLocationRelativeTo(null);
     }
 
