@@ -186,7 +186,7 @@ CREATE TABLE `solicitudes` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `solicitudOferta_idx` (`idOferta`),
   CONSTRAINT `solicitudOferta` FOREIGN KEY (`idOferta`) REFERENCES `ofertas` (`idoferta`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +195,7 @@ CREATE TABLE `solicitudes` (
 
 LOCK TABLES `solicitudes` WRITE;
 /*!40000 ALTER TABLE `solicitudes` DISABLE KEYS */;
-INSERT INTO `solicitudes` VALUES (12,8,'2014-02-02','asdf','asdf','asdf','sdf','asdf','asdf','asf','asdf','asdf','Anulada','Satanas en vida la anulo');
+INSERT INTO `solicitudes` VALUES (12,8,'2014-02-02','asdf','asdf','asdf','sdf','asdf','asdf','asf','asdf','asdf','Anulada','Satanas en vida la anulo'),(13,8,'2017-04-21','EXCLUSION_ACTA','tengala adentro','2015114132','Julian Salinas','201514132','Julians Salinas','beto@dltgkbmfg','546546','C:\\Users\\july1\\Documents\\mysql-installer-web-community-5.7.18.0.msi','Tramitada','Sin definir'),(14,8,'2017-04-19','ERROR_NOTA','Nota mal asignada, es un 90, no un 70\"','2015082908','Andrey Mendoza','2015082908','Andrey Mendoza','amf@gmail.com','86382040','Solicutud por medio del formulario','Anulada','EL HUEBON ES VIEN HUEBON'),(15,8,'2017-04-19','INCLUSION_NOTA','Mi nota no fue asignada\"','2015555555','Brandon Dinarte','2015555555','Brnadon Dinarte','brandon@gmail.com','88888888','Solicutud por medio del formulario','Tramitada',''),(16,8,'2017-04-21','EXCLUSION_ACTA','dwaefawefaewfaef','21323423','Benito Camelas','56485468','Nombre','julitre@sekjnvse.com','165416356','C:\\Users\\july1\\Documents\\mysql-installer-web-community-5.7.18.0.msi','Tramitada','Sin definir');
 /*!40000 ALTER TABLE `solicitudes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,6 +244,27 @@ BEGIN
 	UPDATE solicitudes
     SET estado = 'Anulada', aclaracion = aclaration
     WHERE id = idS;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `consultarResolucion` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarResolucion`(in pidSolicitud int(11) )
+BEGIN
+
+	select * from resoluciones where pidSolicitud = resoluciones.idSolicitud;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -421,6 +442,36 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `registrarResolucion` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarResolucion`(
+IN idSolicitud INT(11), IN nResolucion INT(11),  IN fecha DATE, IN coordinador VARCHAR(100), 
+in directorEscuela VARCHAR(100), in directorAdmyReg text, in introduccion text, 
+in resultado text, in considerandos text, in resuelvo text
+)
+BEGIN
+	IF NOT EXISTS (select idS from resoluciones where idS = resoluciones.idSolicitud)
+	THEN
+		insert into resoluciones (`idSolicitud`, `numeroResolucion`, `fecha`, `coordinador`, `directorEscuela`,
+					`directorAdmYReg`, `introduccion`, `resultado`,`considerandos`,`resuelvo`)  
+                    VALUES 
+                    (idSolicitud, nResolucion, fecha, coordinador, directorEscuela,
+					directorAdmyReg, introduccion, resultado, considerandos, resuelvo);
+	END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `registrarSolicitud` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -495,4 +546,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-20 23:52:11
+-- Dump completed on 2017-04-21  4:16:11
