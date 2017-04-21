@@ -46,14 +46,13 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
             dtoSolicitud.setDescripcionDetallada(dialog.getTxtDescripcion().getText());
             dtoSolicitud.setRutaArchivoAdjunto(dialog.getTxtArchivoAdjunto().getText());
             dtoSolicitud.setEstado(Estado.Pendiente.name());
-            dtoSolicitud.setAclaracion(" sin definir");
+            dtoSolicitud.setAclaracion("Sin definir");
             Integer idSolicitud = facade.RegistrarSolicitud(dtoSolicitud);
             if(idSolicitud != -1) { 
                 backoffice.showMessage("La identificación de la solicitud es " + idSolicitud.toString());
                 ConsultarSolicitudes();
-            }
-            else backoffice.showMessage("No se ha podido registrar la solicitud");
-        } catch(Exception e){ backoffice.showError(e.getMessage()); }   
+            } else backoffice.showError("No se ha podido registrar la solicitud");
+        } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
     
     @Override
@@ -135,9 +134,19 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
     
     public void TramitarSolicitud(DTOSolicitud solicitud) {
         try{  boolean respuesta = facade.TramitarSolicitud(solicitud.getId());
-            if(respuesta){ backoffice.showMessage("Solicitud anulada"); ConsultarSolicitudes(); } 
+            if(respuesta){ backoffice.showMessage("Solicitud tramitada"); ConsultarSolicitudes(); } 
             else backoffice.showMessage("No se ha podido realizar la acción");
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
+    }
+    
+    public void AnularSolicitud(JDialog pdialog) {
+        try{  DialogAclaracion dialog = (DialogAclaracion) pdialog;
+            String aclaracion = dialog.getTxtAclaracion().getText();
+            int nSolicitud = dialog.getSolicitud().getId();
+            boolean respuesta = facade.AnularSolicitud(nSolicitud, aclaracion);
+            if(respuesta){ backoffice.showMessage("Solicitud anulada"); ConsultarSolicitudes(); }
+            else backoffice.showMessage("No se ha podido realizar la acción");
+        } catch(Exception e){ backoffice.showError(e.getMessage()); }   
     }
    
   
@@ -154,20 +163,16 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
         try{  JFileChooser file = new JFileChooser();
             file.showOpenDialog(backoffice);
             File archivo = file.getSelectedFile();
-            facade.RegistrarSolicitudes(archivo.getAbsolutePath());
             backoffice.showMessage("Cargando solicitudes desde:\n"+archivo.getAbsolutePath());
+            boolean respuesta = facade.RegistrarSolicitudes(archivo.getAbsolutePath());
+            if(respuesta) {
+                backoffice.showMessage("Nueva inconsistencia registrada");
+                ConsultarSolicitudes();
+            }
+            else backoffice.showMessage("No se ha podido registrar la inconsistencia");  
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
    
-    public void AnularSolicitud(JDialog pdialog) {
-        try{  DialogAclaracion dialog = (DialogAclaracion) pdialog;
-            String aclaracion = dialog.getTxtAclaracion().getText();
-            int nSolicitud = dialog.getSolicitud().getId();
-            boolean respuesta = facade.AnularSolicitud(nSolicitud, aclaracion);
-            if(respuesta){ backoffice.showMessage("Solicitud tramitada"); ConsultarSolicitudes(); }
-            else backoffice.showMessage("No se ha podido realizar la acción");
-        } catch(Exception e){ backoffice.showError(e.getMessage()); }   
-    }
     
     public void RegistrarResolucion(JDialog pdialog){
         try{  DialogRegistrarResolucion dialog = (DialogRegistrarResolucion) pdialog;
@@ -182,6 +187,7 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
                 backoffice.showMessage("Resolucion registrada"); 
                 dialog.getBtnGuardar().setSelected(false);
                 dialog.getBtnRegistrar().setSelected(true);
+                ConsultarSolicitudes();
             }
             else backoffice.showMessage("No se ha podido realizar la acción");  
         } catch(Exception e){ backoffice.showMessage(e.getMessage()); }
@@ -189,6 +195,10 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
     
     public void GuardarResolucion(JDialog pdialog) {
         try{  DialogGuardarResolucion dialog = (DialogGuardarResolucion) pdialog;
+            JFileChooser file = new JFileChooser();
+            file.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            file.showOpenDialog(backoffice);
+            dialog.setVisible(true);
             Formato formato = Formato.valueOf((String) dialog.getCbFormatos().getSelectedItem());
             String ruta = dialog.getTxtRuta().getText();
             boolean respuesta = facade.GuardarResolucion(dialog.getResolucion(), formato, ruta);

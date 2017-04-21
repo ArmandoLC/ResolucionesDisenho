@@ -257,10 +257,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         dtoCurso.setId(curso.getId());
         dtoCurso.setNombre(curso.getNombre());
         dtoCurso.setCreditos(curso.getCreditos());
-
-        curso = null;
         System.gc();
-
         return dtoCurso;
     }
 
@@ -320,6 +317,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     @Override
     public boolean RegistrarSolicitudes(String ruta) {
         DAOGoogleForm form = (DAOGoogleForm) factorySolicitudes.CrearDAOSolicitud(Recurso.GoogleForm);
+        form.setRutaConexion(ruta);
         ArrayList<DTOSolicitud> dtoSolicitudes = form.ConsultarSolicitudes();
 
         DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);

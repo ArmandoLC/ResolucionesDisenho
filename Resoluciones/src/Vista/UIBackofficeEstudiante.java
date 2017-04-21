@@ -5,8 +5,6 @@
  */
 package Vista;
 
-import Controlador.FacadeCoordinador;
-import Vista.BackofficeEstudiante;
 import Controlador.FacadeEstudiante;
 import DTOs.DTOCurso;
 import DTOs.DTOSolicitud;

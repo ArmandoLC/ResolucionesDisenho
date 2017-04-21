@@ -2,7 +2,9 @@ package Vista;
 
 import DTOs.DTOResolucion;
 import Enums.Formato;
+import java.io.File;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 
 public class DialogGuardarResolucion extends javax.swing.JDialog {
@@ -17,6 +19,7 @@ public class DialogGuardarResolucion extends javax.swing.JDialog {
         setFormatos();
         this.resolucion = resolucion;
         uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
+        this.resolucion = resolucion;
     }
     
     private void setFormatos(){
@@ -52,6 +55,11 @@ public class DialogGuardarResolucion extends javax.swing.JDialog {
         jLabel2.setText("Ruta: ");
 
         btnRuta.setText("...");
+        btnRuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRutaActionPerformed(evt);
+            }
+        });
 
         txtRuta.setEditable(false);
 
@@ -111,6 +119,15 @@ public class DialogGuardarResolucion extends javax.swing.JDialog {
     private void btnGuardarResolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarResolucionActionPerformed
         uibackoffice.GuardarResolucion(this);
     }//GEN-LAST:event_btnGuardarResolucionActionPerformed
+
+    private void btnRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new java.io.File("."));
+        chooser.setDialogTitle("Guardar resolución");
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        File ruta = chooser.getCurrentDirectory();
+        txtRuta.setText(ruta.getAbsolutePath());
+    }//GEN-LAST:event_btnRutaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,19 +1,8 @@
 package Vista;
-
-import Controlador.FactoryDAOSolicitud;
-import Controlador.DAOSolicitud;
-import Controlador.GeneradorResolucionHTML;
-import Controlador.GeneradorResolucionPDF;
-import Controlador.IGeneradorResolucion;
-import DTOs.DTOSolicitud;
 import DTOs.DTOUsuario;
-import Enums.Recurso;
 import Login.ILogin;
 import Login.LoginMySQL;
-import Modelo.Resolucion;
-import java.util.ArrayList;
 import javax.swing.JFrame;
-import javax.swing.UIManager;
 
 public class BackofficeLogin extends Backoffice {
     
@@ -23,16 +12,12 @@ public class BackofficeLogin extends Backoffice {
         
         initLookAndFeel();
         initComponents();
-        
+        setLocationRelativeTo(null);
     }
 
     public static void main(String args[]) {
-        //</editor-fold>
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new BackofficeLogin().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new BackofficeLogin().setVisible(true);
         });
     }
  
