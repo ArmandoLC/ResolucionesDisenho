@@ -23,18 +23,13 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
     public DialogRegistrarResolucion(java.awt.Frame parent, boolean modal, DTOSolicitud solicitud) {
         super(parent, modal);
         initComponents();
-        btnIntroduccion.setSelected(true);
-        if(solicitud.getnResolucion() == -1 ){
-            btnGuardar.setVisible(false);
-        }
-        else {
-            btnRegistrar.setVisible(false);
-            txtEditor.setEditable(false);
-        }
+        
         uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
         txtEditor.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         this.solicitud = solicitud;
+        
         uibackoffice.ConsultarResolucion(this);
+        
         setLocationRelativeTo(null);
     }
 

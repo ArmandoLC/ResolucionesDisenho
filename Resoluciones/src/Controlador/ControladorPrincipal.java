@@ -451,11 +451,16 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     public DTOResolucion ConsultarResolucion(int nSolicitud) {
         
         Solicitud solicitud = getSolicitud(nSolicitud);
-
+        
+        DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
+        Resolucion resolucion = DB.ConsultarResolucion(nSolicitud);
+        solicitud.setResolucion(resolucion);
+        
+        
         if(solicitud.getResolucion() != null)
             return crearDTOResolucion(solicitud.getResolucion(), nSolicitud);
         else
-            return new DTOResolucion();
+            return null;
         
     }
 

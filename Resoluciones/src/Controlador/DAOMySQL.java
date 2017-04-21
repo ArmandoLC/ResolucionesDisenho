@@ -268,7 +268,7 @@ public class DAOMySQL extends DAOSolicitud{
     
         ResultSet rs;
         try{
-            Resolucion resolucion = new Resolucion();
+            Resolucion resolucion = null;
             
             CallableStatement conexionSP = obtenerConexionSP("{call consultarResolucion(?)}");
             
@@ -278,7 +278,8 @@ public class DAOMySQL extends DAOSolicitud{
             
             while ( rs.next() )
             {
-                resolucion.setnResolucion(rs.getInt("nResolucion"));
+                resolucion = new Resolucion();
+                resolucion.setnResolucion(rs.getInt("numeroResolucion"));
                 resolucion.setFecha(rs.getDate("fecha"));
                 resolucion.setNombreCoordinador(rs.getString("coordinador"));
                 resolucion.setNombreDirectorEscuela(rs.getString("directorEscuela"));
@@ -292,7 +293,7 @@ public class DAOMySQL extends DAOSolicitud{
             return resolucion;
         }
         catch(Exception e){
-            return new Resolucion();
+            return null;
         }
         
     }

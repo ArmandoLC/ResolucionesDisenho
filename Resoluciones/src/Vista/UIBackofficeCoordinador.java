@@ -212,7 +212,7 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
         } catch(Exception e){ backoffice.showMessage(e.getMessage()); }
     }
 
-    public void ConsultarResolucion(JDialog pdialog) {
+    public DTOResolucion ConsultarResolucion(JDialog pdialog) {
         try{  DialogRegistrarResolucion dialog = (DialogRegistrarResolucion) pdialog;
             DTOResolucion resolucion = facade.ConsultarResolucion(dialog.getSolicitud().getId());
             if(resolucion != null){
@@ -223,8 +223,14 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
                 dialog.getBtnGuardar().setVisible(true);
                 dialog.getBtnRegistrar().setVisible(false);
                 dialog.getTxtEditor().setText(resolucion.getIntroduccion());
-            }         
-        } catch(Exception e){ backoffice.showError(e.getMessage()); }
+                dialog.getTxtEditor().setEditable(false);
+            }      
+            else {
+                dialog.getBtnGuardar().setVisible(false);
+                dialog.getBtnRegistrar().setVisible(true);
+            }
+            return resolucion;
+        } catch(Exception e){ backoffice.showError(e.getMessage()); return null; }
     }
 
     
