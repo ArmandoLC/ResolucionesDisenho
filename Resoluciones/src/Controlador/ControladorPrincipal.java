@@ -415,7 +415,9 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     @Override
     public boolean RegistrarResolucion(DTOResolucion resolucion) {
         try {
-            //El registro debe hacerse en la BD
+            DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
+            DB;
+            
             int nResolucion;
 
             nResolucion = Integer.parseInt(getPropiedad("nResolucionActual"));

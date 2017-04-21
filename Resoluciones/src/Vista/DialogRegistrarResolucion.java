@@ -2,8 +2,10 @@ package Vista;
 
 import DTOs.DTOResolucion;
 import DTOs.DTOSolicitud;
+import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Frame;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import org.jdesktop.swingx.JXEditorPane;
 
@@ -22,15 +24,15 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         btnIntroduccion.setSelected(true);
-        if(solicitud.getnResolucion() == 0 || solicitud.getnResolucion() == -1 ){
-            btnGuardar.setSelected(true);
-            
+        if(solicitud.getnResolucion() == -1 ){
+            btnGuardar.setVisible(false);
         }
         else {
-            btnRegistrar.setVisible(true);
-            txtEditor.setVisible(false);
+            btnRegistrar.setVisible(false);
+            txtEditor.setEditable(false);
         }
         uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
+        txtEditor.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         setLocationRelativeTo(null);
     }
 
@@ -52,6 +54,12 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        txtEditor.setBackground(new java.awt.Color(255, 255, 255));
+        txtEditor.setBorder(null);
+        txtEditor.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
+        txtEditor.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        txtEditor.setMargin(new java.awt.Insets(20, 20, 20, 20));
+        txtEditor.setOpaque(false);
         jScrollPane3.setViewportView(txtEditor);
 
         btnIntroduccion.setText("Introducción");
@@ -110,8 +118,7 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
                     .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 746, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,10 +136,7 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegistrar)
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane3)
-                .addGap(6, 6, 6))
+            .addComponent(jScrollPane3)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -98,51 +98,12 @@ public class FacadeCoordinador extends Facade implements ICoordinador{
 
     @Override
     public ArrayList<DTOPersona> ConsultarTopProfesores(int top) {
-        ArrayList<DTOPersona> p = new ArrayList<>();
-        DTOPersona p1 = new DTOPersona();
-        DTOPersona p2 = new DTOPersona();
-        DTOPersona p3 = new DTOPersona();
-        p1.setId("26525+256");
-        p2.setId("16545graeg415");
-        p3.setId("1536aersrg145");
-        p3.setId("15261gareg515");
-        p1.setNombre("betbreabo");
-        p2.setNombre("bebrato");
-        p3.setNombre("betbadaarbo");
-        p1.setTelefono("teleff");
-        p2.setTelefono("telfesff");
-        p3.setTelefono("tefeslf");
-        p1.setCorreo("serb@bstkb.com");
-        p2.setCorreo("serb@bstkb.com");
-        p3.setCorreo("serb@bstkb.com");
-        p.add(p1);p.add(p2);p.add(p3);
-        return p;
-        //return ctrl.ConsultarTopProfesores(top);
+        return ctrl.ConsultarTopProfesores(top);
     }
 
     @Override
     public ArrayList<DTOCurso> ConsultarTopCursos(int top) {
-        //datos de prueba
-        ArrayList<DTOCurso> c = new ArrayList<>();
-        DTOCurso d1 = new DTOCurso();
-        DTOCurso d2 = new DTOCurso();
-        DTOCurso d3 = new DTOCurso();
-        DTOCurso d4 = new DTOCurso();
-        d1.setId("IC12345");
-        d2.setId("IC498445");
-        d3.setId("IC78974");
-        d4.setId("IC89784");
-        d1.setNombre("curso d1");
-        d2.setNombre("curso d2");
-        d3.setNombre("curso d3");
-        d4.setNombre("curso d4");
-        d1.setCreditos(4);
-        d2.setCreditos(5);
-        d3.setCreditos(6);
-        d4.setCreditos(7);
-        c.add(d1);c.add(d2);c.add(d3);c.add(d4);
-        return c;
-        //return ctrl.ConsultarTopCursos(top);
+        return ctrl.ConsultarTopCursos(top);
     }
 
         

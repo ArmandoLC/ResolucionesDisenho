@@ -19,11 +19,10 @@ import javax.swing.JDialog;
  */
 public class UIBackofficeEstudiante extends Backoffice implements UIBackoffice{
 
-    private final FacadeEstudiante facade;
+    private static final FacadeEstudiante facade = new FacadeEstudiante();
     private final BackofficeEstudiante backoffice;
 
     public UIBackofficeEstudiante(Backoffice backoffice){
-        this.facade = new FacadeEstudiante();
         this.backoffice = (BackofficeEstudiante) backoffice;
     }
 

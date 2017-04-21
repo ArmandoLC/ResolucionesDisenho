@@ -16,12 +16,11 @@ import javax.swing.JFileChooser;
 
 public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
 
-    private final FacadeCoordinador facade;
+    private static final FacadeCoordinador facade = new FacadeCoordinador();
     private final BackofficeCoordinador backoffice;
 
     
     public UIBackofficeCoordinador(Backoffice backoffice){
-        this.facade = new FacadeCoordinador();
         this.backoffice = (BackofficeCoordinador) backoffice;
     }
    
@@ -148,7 +147,11 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
             String aclaracion = dialog.getTxtAclaracion().getText();
             int nSolicitud = dialog.getSolicitud().getId();
             boolean respuesta = facade.AnularSolicitud(nSolicitud, aclaracion);
-            if(respuesta){ backoffice.showMessage("Solicitud anulada"); ConsultarSolicitudes(); }
+            if(respuesta){ 
+                backoffice.showMessage("Solicitud anulada"); 
+                ConsultarSolicitudes(); 
+                dialog.setVisible(false);
+            }
             else backoffice.showMessage("No se ha podido realizar la acción");
         } catch(Exception e){ backoffice.showError(e.getMessage()); }   
     }
