@@ -33,10 +33,6 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Armando
- */
 public class ControladorPrincipal implements ISolicitud, ICoordinador {
 
     //Atributos propios del controlador
@@ -300,9 +296,8 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         try {
             //Se debe registrar en la BD y en memoria(atributo inconsistencias del controlador)
             inconsistencias.add(incosistencia);
-            DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
-            int res =DB.RegistrarInconsistencia(incosistencia);
-            return res != -1;    
+
+            return true;
         } catch (Exception e) {
             return false;
         }
@@ -327,14 +322,14 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         form.setRutaConexion(ruta);
         ArrayList<DTOSolicitud> dtoSolicitudes = form.ConsultarSolicitudes();
         
-        //Se hacen persistir en la base de datos
+        for(DTOSolicitud solicitud : dtoSolicitudes) { 
+            solicitud.setEstado(Estado.Pendiente.name());
+            solicitud.setRutaArchivoAdjunto("Solicutud por medio del formulario");
+        }
+
         DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
         DB.RegistrarSolicitudes(dtoSolicitudes);
-        
-        //Se cargan las solicitudes en el atributo "solicitudes" del controlador
-        //para que se actualicen en memoria
-        ConsultarSolicitudes();
-        
+
         return true;
     }
 
