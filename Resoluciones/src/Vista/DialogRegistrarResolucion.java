@@ -15,7 +15,6 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
     private final UIBackofficeCoordinador uibackoffice;
     
     private DTOSolicitud solicitud;
-    private DTOResolucion resolucion;
     private String introduccion = " ";
     private String resultado = " ";
     private String considerandos = " ";
@@ -208,7 +207,7 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        Dialog dialog  = new DialogGuardarResolucion((Frame) this.getParent(), true, resolucion);
+        Dialog dialog  = new DialogGuardarResolucion((Frame) this.getParent(), true, solicitud);
         dialog.setVisible(true);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -271,14 +270,6 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
 
     public void setSolicitud(DTOSolicitud solicitud) {
         this.solicitud = solicitud;
-    }
-
-    public DTOResolucion getResolucion() {
-        return resolucion;
-    }
-
-    public void setResolucion(DTOResolucion resolucion) {
-        this.resolucion = resolucion;
     }
 
     public JButton getBtnGuardar() {

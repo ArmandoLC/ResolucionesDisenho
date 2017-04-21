@@ -29,7 +29,7 @@ public interface ICoordinador extends IEstadisticas {
     
     public DTOResolucion ConsultarResolucion(int nSolicitud);
     
-    public boolean GuardarResolucion(DTOResolucion resolucion, Formato formato, String ruta);  
+    public boolean GuardarResolucion(int idSolicitud, Formato formato, String ruta);  
     
     public DTOPersona ConsultarProfesor(int nSolicitud);
 

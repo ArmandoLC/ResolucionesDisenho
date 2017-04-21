@@ -1,6 +1,7 @@
 package Vista;
 
 import DTOs.DTOResolucion;
+import DTOs.DTOSolicitud;
 import Enums.Formato;
 import java.io.File;
 import javax.swing.JComboBox;
@@ -9,16 +10,16 @@ import javax.swing.JTextField;
 
 public class DialogGuardarResolucion extends javax.swing.JDialog {
 
-    private DTOResolucion resolucion; 
+    private DTOSolicitud solicitud; 
     
     private final UIBackofficeCoordinador uibackoffice;
     
-    public DialogGuardarResolucion(java.awt.Frame parent, boolean modal, DTOResolucion resolucion) {
+    public DialogGuardarResolucion(java.awt.Frame parent, boolean modal, DTOSolicitud solicitud) {
         super(parent, modal);
         initComponents();
         setFormatos();
         uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
-        this.resolucion = resolucion;
+        this.solicitud = solicitud;
         setLocationRelativeTo(null);
     }
     
@@ -125,6 +126,7 @@ public class DialogGuardarResolucion extends javax.swing.JDialog {
         chooser.setCurrentDirectory(new java.io.File("."));
         chooser.setDialogTitle("Guardar resolución");
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setVisible(true);
         File ruta = chooser.getCurrentDirectory();
         txtRuta.setText(ruta.getAbsolutePath());
     }//GEN-LAST:event_btnRutaActionPerformed
@@ -156,13 +158,15 @@ public class DialogGuardarResolucion extends javax.swing.JDialog {
         this.txtRuta = txtRuta;
     }
 
-    public DTOResolucion getResolucion() {
-        return resolucion;
+    public DTOSolicitud getSolicitud() {
+        return solicitud;
     }
 
-    public void setResolucion(DTOResolucion resolucion) {
-        this.resolucion = resolucion;
+    public void setSolicitud(DTOSolicitud solicitud) {
+        this.solicitud = solicitud;
     }
+
+    
 
     
 

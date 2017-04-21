@@ -272,11 +272,11 @@ public class DAOMySQL extends DAOSolicitud{
             
             CallableStatement conexionSP = obtenerConexionSP("{call consultarResolucion(?)}");
             
-            conexionSP.setInt("id", idSolicitud);
+            conexionSP.setInt("pidSolicitud", idSolicitud);
             
             rs = conexionSP.executeQuery();
             
-            while (rs.next() )
+            while ( rs.next() )
             {
                 resolucion.setnResolucion(rs.getInt("nResolucion"));
                 resolucion.setFecha(rs.getDate("fecha"));

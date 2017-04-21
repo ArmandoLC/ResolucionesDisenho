@@ -206,7 +206,7 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
         try{  DialogGuardarResolucion dialog = (DialogGuardarResolucion) pdialog;
             Formato formato = Formato.valueOf((String) dialog.getCbFormatos().getSelectedItem());
             String ruta = dialog.getTxtRuta().getText();
-            boolean respuesta = facade.GuardarResolucion(dialog.getResolucion(), formato, ruta);
+            boolean respuesta = facade.GuardarResolucion( dialog.getSolicitud().getId(), formato, ruta);
             if(respuesta) backoffice.showMessage("Resolución guardada en " + ruta); 
             else backoffice.showMessage("No se ha podido realizar la acción");  
         } catch(Exception e){ backoffice.showMessage(e.getMessage()); }
@@ -222,6 +222,7 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
                 dialog.setResultado(resolucion.getResultado());
                 dialog.getBtnGuardar().setVisible(true);
                 dialog.getBtnRegistrar().setVisible(false);
+                dialog.getTxtEditor().setText(resolucion.getIntroduccion());
             }         
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }

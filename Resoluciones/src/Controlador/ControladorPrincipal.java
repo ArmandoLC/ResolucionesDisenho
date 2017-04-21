@@ -449,23 +449,25 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
 
     @Override
     public DTOResolucion ConsultarResolucion(int nSolicitud) {
-        DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
+        
         Solicitud solicitud = getSolicitud(nSolicitud);
-        Resolucion res = DB.ConsultarResolucion(nSolicitud);
-        DTOResolucion resolucion = crearDTOResolucion(res, nSolicitud);
-        return resolucion;
+
+        if(solicitud.getResolucion() != null)
+            return crearDTOResolucion(solicitud.getResolucion(), nSolicitud);
+        else
+            return new DTOResolucion();
         
     }
 
     @Override
-    public boolean GuardarResolucion(DTOResolucion resolucion, Formato formato, String ruta) {
+    public boolean GuardarResolucion(int idSolicitud, Formato formato, String ruta) {
         if (formato.equals(Formato.HTML)) {
             estrategiaGeneracion = new GeneradorResolucionHTML();
         } else {
             estrategiaGeneracion = new GeneradorResolucionPDF();
         }
 
-        Solicitud solicitud = getSolicitud(resolucion.getIdSolicitud());
+        Solicitud solicitud = getSolicitud(idSolicitud);
         return estrategiaGeneracion.Generar(solicitud.getResolucion(), ruta);
     }
 
