@@ -27,6 +27,7 @@ public class DialogRegistrarSolicitud extends javax.swing.JDialog {
         }
         this.setLocationRelativeTo(null);
         initConsultas();
+        setLocationRelativeTo(null);
     }
     
     private void initConsultas(){

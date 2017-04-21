@@ -13,6 +13,7 @@ public class DialogEstadisticas extends javax.swing.JDialog {
         initComponents();
         uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
         initEstadisticas();
+        setLocationRelativeTo(null);
     }
     
     private void initEstadisticas(){

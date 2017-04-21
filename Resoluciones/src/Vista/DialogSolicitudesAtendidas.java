@@ -8,6 +8,7 @@ public class DialogSolicitudesAtendidas extends javax.swing.JDialog {
     public DialogSolicitudesAtendidas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     public JXEditorPane getEditor() {

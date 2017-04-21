@@ -20,6 +20,7 @@ public class DialogGuardarResolucion extends javax.swing.JDialog {
         this.resolucion = resolucion;
         uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
         this.resolucion = resolucion;
+        setLocationRelativeTo(null);
     }
     
     private void setFormatos(){

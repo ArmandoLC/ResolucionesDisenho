@@ -16,6 +16,7 @@ public class DialogDetallesSolicitud extends javax.swing.JDialog {
         this.uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
         this.solicitud = solicitud;
         llenarCampos();
+        setLocationRelativeTo(null);
     }
     
     public void llenarCampos(){

@@ -16,6 +16,7 @@ public class DialogAclaracion extends javax.swing.JDialog {
         this.solicitud = solicitud;
         initComponents();
         initVariables();
+        setLocationRelativeTo(null);
     }
     
     public void initVariables(){

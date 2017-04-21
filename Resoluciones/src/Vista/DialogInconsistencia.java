@@ -11,6 +11,7 @@ public class DialogInconsistencia extends javax.swing.JDialog {
         super(parent, modal);
         uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     public JTextField getTxtRegistrarInconsistencia() {

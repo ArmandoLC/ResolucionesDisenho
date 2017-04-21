@@ -31,6 +31,7 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
             txtEditor.setVisible(false);
         }
         uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

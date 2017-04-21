@@ -2,6 +2,7 @@ package Vista;
 
 import Controlador.FacadeCoordinador;
 import DTOs.DTOCurso;
+import DTOs.DTOPersona;
 import DTOs.DTOResolucion;
 import DTOs.DTOSolicitud;
 import Enums.Estado;
@@ -118,7 +119,8 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
     public void ConsultarTopProfesores(JDialog pdialog) {
         try{  DialogEstadisticas dialog = (DialogEstadisticas) pdialog;
             TableModelProfesor model = new TableModelProfesor(dialog.getTabProfesores()); 
-            model.setPersonas( facade.ConsultarTopProfesores(3) );
+            ArrayList<DTOPersona> profs = facade.ConsultarTopProfesores(3);
+            model.setPersonas( profs );
             dialog.getTabProfesores().setModel(model);
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
@@ -126,7 +128,8 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
     public void ConsultarTopCursos(JDialog pdialog) {
         try{  DialogEstadisticas dialog = (DialogEstadisticas) pdialog;
             TableModelCurso model = new TableModelCurso(dialog.getTabCursos()); 
-            model.setCursos( facade.ConsultarTopCursos(5) );
+            ArrayList<DTOCurso> top = facade.ConsultarTopCursos(5);
+            model.setCursos( top );
             dialog.getTabProfesores().setModel(model);
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
@@ -195,10 +198,6 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
     
     public void GuardarResolucion(JDialog pdialog) {
         try{  DialogGuardarResolucion dialog = (DialogGuardarResolucion) pdialog;
-            JFileChooser file = new JFileChooser();
-            file.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            file.showOpenDialog(backoffice);
-            dialog.setVisible(true);
             Formato formato = Formato.valueOf((String) dialog.getCbFormatos().getSelectedItem());
             String ruta = dialog.getTxtRuta().getText();
             boolean respuesta = facade.GuardarResolucion(dialog.getResolucion(), formato, ruta);
