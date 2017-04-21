@@ -1,10 +1,18 @@
 package Vista;
 
+import DTOs.DTOResolucion;
 import DTOs.DTOSolicitud;
+import java.awt.Dialog;
+import java.awt.Frame;
+import javax.swing.JButton;
+import org.jdesktop.swingx.JXEditorPane;
 
 public class DialogRegistrarResolucion extends javax.swing.JDialog {
 
+    private final UIBackofficeCoordinador uibackoffice;
+    
     private DTOSolicitud solicitud;
+    private DTOResolucion resolucion;
     private String introduccion = " ";
     private String resultado = " ";
     private String considerandos = " ";
@@ -14,7 +22,15 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         btnIntroduccion.setSelected(true);
-        //if(solicitud.getnResolucion() == 0 || solicitud.getnResolucion() == -1 )
+        if(solicitud.getnResolucion() == 0 || solicitud.getnResolucion() == -1 ){
+            btnGuardar.setSelected(true);
+            
+        }
+        else {
+            btnRegistrar.setVisible(true);
+            txtEditor.setVisible(false);
+        }
+        uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
     }
 
     @SuppressWarnings("unchecked")
@@ -66,8 +82,18 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
         });
 
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -170,6 +196,15 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnResuelvoActionPerformed
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        Dialog dialog  = new DialogGuardarResolucion((Frame) this.getParent(), true, resolucion);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        uibackoffice.RegistrarResolucion(this);
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnConsiderandos;
@@ -182,4 +217,81 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     private org.jdesktop.swingx.JXEditorPane txtEditor;
     // End of variables declaration//GEN-END:variables
+
+    public String getIntroduccion() {
+        return introduccion;
+    }
+
+    public void setIntroduccion(String introduccion) {
+        this.introduccion = introduccion;
+    }
+
+    public String getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
+    }
+
+    public String getConsiderandos() {
+        return considerandos;
+    }
+
+    public void setConsiderandos(String considerandos) {
+        this.considerandos = considerandos;
+    }
+
+    public String getResuelvo() {
+        return resuelvo;
+    }
+
+    public void setResuelvo(String resuelvo) {
+        this.resuelvo = resuelvo;
+    }
+
+    public JXEditorPane getTxtEditor() {
+        return txtEditor;
+    }
+
+    public void setTxtEditor(JXEditorPane txtEditor) {
+        this.txtEditor = txtEditor;
+    }
+
+    public DTOSolicitud getSolicitud() {
+        return solicitud;
+    }
+
+    public void setSolicitud(DTOSolicitud solicitud) {
+        this.solicitud = solicitud;
+    }
+
+    public DTOResolucion getResolucion() {
+        return resolucion;
+    }
+
+    public void setResolucion(DTOResolucion resolucion) {
+        this.resolucion = resolucion;
+    }
+
+    public JButton getBtnGuardar() {
+        return btnGuardar;
+    }
+
+    public void setBtnGuardar(JButton btnGuardar) {
+        this.btnGuardar = btnGuardar;
+    }
+
+    public JButton getBtnRegistrar() {
+        return btnRegistrar;
+    }
+
+    public void setBtnRegistrar(JButton btnRegistrar) {
+        this.btnRegistrar = btnRegistrar;
+    }
+    
+    
+    
+
+
 }

@@ -2,6 +2,7 @@ package Vista;
 
 import Controlador.FacadeCoordinador;
 import DTOs.DTOCurso;
+import DTOs.DTOResolucion;
 import DTOs.DTOSolicitud;
 import Enums.Estado;
 import Enums.Formato;
@@ -138,16 +139,32 @@ public class UIBackofficeCoordinador {
         } catch(Exception e){ backoffice.showError(e.getMessage()); }   
     }
     
-    public void GenerarResolucion(JDialog pdialog) {
-        try{  DialogGenerarResolucion dialog = (DialogGenerarResolucion) pdialog;
+    public void RegistrarResolucion(JDialog pdialog){
+        try{  DialogRegistrarResolucion dialog = (DialogRegistrarResolucion) pdialog;
+            DTOResolucion resolucion = new DTOResolucion();
+            resolucion.setIdSolicitud(dialog.getSolicitud().getId());
+            resolucion.setIntroduccion(dialog.getIntroduccion());
+            resolucion.setResultado(dialog.getResultado());
+            resolucion.setConsiderandos(dialog.getConsiderandos());
+            resolucion.setResuelvo(dialog.getResuelvo());
+            boolean respuesta = facade.RegistrarResolucion(resolucion);
+            if(respuesta) { 
+                backoffice.showMessage("Resolucion registrada"); 
+                dialog.getBtnGuardar().setSelected(false);
+                dialog.getBtnRegistrar().setSelected(true);
+            }
+            else backoffice.showMessage("No se ha podido realizar la acción");  
+        } catch(Exception e){ backoffice.showMessage(e.getMessage()); }
+    }
+    
+    public void GuardarResolucion(JDialog pdialog) {
+        try{  DialogGuardarResolucion dialog = (DialogGuardarResolucion) pdialog;
             Formato formato = Formato.valueOf((String) dialog.getCbFormatos().getSelectedItem());
             String ruta = dialog.getTxtRuta().getText();
             boolean respuesta = facade.GenerarResolucion(dialog.getResolucion(), formato, ruta);
             if(respuesta) backoffice.showMessage("Resolución guardada en " + ruta); 
-            else backoffice.showMessage("No se ha podido realizar la acción");
-            
-        }
-        catch(Exception e){ backoffice.showMessage(e.getMessage()); }
+            else backoffice.showMessage("No se ha podido realizar la acción");  
+        } catch(Exception e){ backoffice.showMessage(e.getMessage()); }
     }
 
     public void ConsultarResolucion(JDialog dialog) {

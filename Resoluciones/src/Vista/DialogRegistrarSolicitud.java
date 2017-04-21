@@ -12,7 +12,7 @@ import org.jdesktop.swingx.JXTextArea;
 
 public class DialogRegistrarSolicitud extends javax.swing.JDialog {
 
-    UIBackofficeCoordinador uibackoffice;
+    private final UIBackofficeCoordinador uibackoffice;
     
     public DialogRegistrarSolicitud(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

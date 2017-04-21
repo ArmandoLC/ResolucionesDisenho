@@ -217,6 +217,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         for (Oferta oferta : ofertaAcademica) {
             if (oferta.getCurso().getId().equals(dtoSolicitud.getCodigoCurso()) && oferta.getnGrupo() == dtoSolicitud.getnGrupo()) {
                 infoCurso = oferta;
+                break;
             }
         }
         DTOPersona dtoAfectado = crearDTOPersona(new Estudiante(dtoSolicitud.getIdAfectado(), dtoSolicitud.getNombreAfectado(), dtoSolicitud.getCorreoAfectado(), dtoSolicitud.getTelefonoAfectado()));

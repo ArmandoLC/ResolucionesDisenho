@@ -5,15 +5,18 @@ import Enums.Formato;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
-public class DialogGenerarResolucion extends javax.swing.JDialog {
+public class DialogGuardarResolucion extends javax.swing.JDialog {
 
     private DTOResolucion resolucion; 
     
-    public DialogGenerarResolucion(java.awt.Frame parent, boolean modal, DTOResolucion resolucion) {
+    private final UIBackofficeCoordinador uibackoffice;
+    
+    public DialogGuardarResolucion(java.awt.Frame parent, boolean modal, DTOResolucion resolucion) {
         super(parent, modal);
         initComponents();
         setFormatos();
         this.resolucion = resolucion;
+        uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
     }
     
     private void setFormatos(){
@@ -26,7 +29,7 @@ public class DialogGenerarResolucion extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnGenerarResolucion = new javax.swing.JButton();
+        btnGuardarResolucion = new javax.swing.JButton();
         cbFormatos = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -37,7 +40,12 @@ public class DialogGenerarResolucion extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnGenerarResolucion.setText("Generar resolución");
+        btnGuardarResolucion.setText("Generar resolución");
+        btnGuardarResolucion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarResolucionActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Formato: ");
 
@@ -54,7 +62,7 @@ public class DialogGenerarResolucion extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnGenerarResolucion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGuardarResolucion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -82,7 +90,7 @@ public class DialogGenerarResolucion extends javax.swing.JDialog {
                         .addComponent(txtRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnRuta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnGenerarResolucion)
+                .addComponent(btnGuardarResolucion)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -100,9 +108,13 @@ public class DialogGenerarResolucion extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnGuardarResolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarResolucionActionPerformed
+        uibackoffice.GuardarResolucion(this);
+    }//GEN-LAST:event_btnGuardarResolucionActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGenerarResolucion;
+    private javax.swing.JButton btnGuardarResolucion;
     private javax.swing.JButton btnRuta;
     private javax.swing.JComboBox<String> cbFormatos;
     private javax.swing.JLabel jLabel1;
