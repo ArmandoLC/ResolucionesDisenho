@@ -20,7 +20,7 @@ public class GeneradorResolucionHTML implements IGeneradorResolucion {
             
             String nResAct = prop.getProperty("nResolucionActual");
             
-            File file = new File("D:\\resolucion" + nResolucion + ".html");            
+            File file = new File(ruta+"\\resolucion" +nResAct + ".html");            
             FileWriter writer = new FileWriter(file);
             
             BufferedWriter buffer = new BufferedWriter(writer);

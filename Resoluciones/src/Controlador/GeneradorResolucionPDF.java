@@ -33,7 +33,7 @@ public class GeneradorResolucionPDF implements IGeneradorResolucion{
             
             Document document = new Document(PageSize.A4, 50, 50, 50, 50);
             PdfWriter writer = PdfWriter.getInstance(document, 
-                                                    new FileOutputStream("D:\\resolucion" +nResAct + ".pdf"));
+                                                    new FileOutputStream(ruta+"\\resolucion" +nResAct + ".pdf"));
             
             document.open();
             
