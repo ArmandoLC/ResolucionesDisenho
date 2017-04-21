@@ -2,7 +2,7 @@
 
 package Controlador;
 
-import DTOs.DTOSolicitud;
+import DTOs.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -136,6 +136,99 @@ public class DAOMySQL extends DAOSolicitud{
         
         int id = RegistrarSolicitud(dto);
         dto.setId(id);   
+    }
+    
+    public int RegistrarOferta(DTOferta dtoOferta) {      
+        
+        DTOferta dto = dtoOferta;
+        ResultSet rs; int lastID = -1;
+        
+        try {
+                       
+            CallableStatement conexionSP = obtenerConexionSP("{call registrarOferta(?,?,?,?,?,?)}");
+                        
+            conexionSP.setString("codCurso", dto.getIdCurso());
+            conexionSP.setString("idProfe", dto.getIdProfesor());
+            conexionSP.setInt("nGrupo", dto.getnGrupo());
+            conexionSP.setString("period", dto.getPeriodo());
+            conexionSP.setString("sched", dto.getHorario());
+            conexionSP.setString("class", dto.getAula());
+            
+            rs = conexionSP.executeQuery(); 
+
+            while (rs.next() )
+            {
+                lastID = rs.getInt("ultimoID");
+            }
+        } 
+        catch (Exception e) 
+        {
+            return -1;
+        }
+        return lastID;
+    }
+    
+    public void RegistrarCurso(DTOCurso dtoCurso) {      
+        
+        DTOCurso dto = dtoCurso;
+        ResultSet rs; 
+        
+        try {
+                       
+            CallableStatement conexionSP = obtenerConexionSP("{call registrarCurso(?,?,?)}");
+                        
+            conexionSP.setString("cod", dto.getId());
+            conexionSP.setString("nomb", dto.getNombre());
+            conexionSP.setInt("cred", dto.getCreditos());
+            
+            rs = conexionSP.executeQuery(); 
+
+        } 
+        catch (Exception e){}
+    }
+    
+    public int RegistrarInconsistencia(String nombre) {      
+        
+        ResultSet rs; int lastID = -1;
+        
+        try {
+                       
+            CallableStatement conexionSP = obtenerConexionSP("{call registrarInconsistencia(?)}");
+                        
+            conexionSP.setString("detail", nombre);
+            
+            rs = conexionSP.executeQuery(); 
+
+            while (rs.next() )
+            {
+                lastID = rs.getInt("ultimoID");
+            }
+        } 
+        catch (Exception e) 
+        {
+            return -1;
+        }
+        return lastID;
+    }
+    
+    public void RegistrarProfesor(DTOPersona dtoPersona) {      
+        
+        DTOPersona dto = dtoPersona;
+        ResultSet rs; int lastID = -1;
+        
+        try {
+                       
+            CallableStatement conexionSP = obtenerConexionSP("{call registrarProfesor(?,?,?,?)}");
+                        
+            conexionSP.setString("identif", dto.getId());
+            conexionSP.setString("nomb", dto.getNombre());
+            conexionSP.setString("mail", dto.getCorreo());
+            conexionSP.setString("tel", dto.getTelefono());
+            
+            rs = conexionSP.executeQuery(); 
+        } 
+        catch (Exception e) {}
+        
     }
     
     private CallableStatement obtenerConexionSP(String procAlmacenado) throws Exception {

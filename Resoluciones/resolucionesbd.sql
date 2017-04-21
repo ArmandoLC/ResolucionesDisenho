@@ -16,30 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `anotaciones`
---
-
-DROP TABLE IF EXISTS `anotaciones`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `anotaciones` (
-  `idSolicitud` int(11) NOT NULL,
-  `detalle` text,
-  PRIMARY KEY (`idSolicitud`),
-  CONSTRAINT `idsolic` FOREIGN KEY (`idSolicitud`) REFERENCES `solicitudes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `anotaciones`
---
-
-LOCK TABLES `anotaciones` WRITE;
-/*!40000 ALTER TABLE `anotaciones` DISABLE KEYS */;
-/*!40000 ALTER TABLE `anotaciones` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `cursos`
 --
 
@@ -49,6 +25,7 @@ DROP TABLE IF EXISTS `cursos`;
 CREATE TABLE `cursos` (
   `codigo` varchar(100) NOT NULL,
   `nombre` varchar(100) NOT NULL,
+  `creditos` int(11) DEFAULT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -59,7 +36,7 @@ CREATE TABLE `cursos` (
 
 LOCK TABLES `cursos` WRITE;
 /*!40000 ALTER TABLE `cursos` DISABLE KEYS */;
-INSERT INTO `cursos` VALUES ('s11','Diseño de Software');
+INSERT INTO `cursos` VALUES ('IC101','cursoIC',15);
 /*!40000 ALTER TABLE `cursos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,7 +52,7 @@ CREATE TABLE `inconsistencias` (
   `detalle` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,6 +61,7 @@ CREATE TABLE `inconsistencias` (
 
 LOCK TABLES `inconsistencias` WRITE;
 /*!40000 ALTER TABLE `inconsistencias` DISABLE KEYS */;
+INSERT INTO `inconsistencias` VALUES (1,'satan');
 /*!40000 ALTER TABLE `inconsistencias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,13 +79,15 @@ CREATE TABLE `ofertas` (
   `numeroGrupo` int(11) DEFAULT NULL,
   `periodo` varchar(100) DEFAULT NULL,
   `modalidad` varchar(100) DEFAULT NULL,
+  `horario` varchar(100) DEFAULT NULL,
+  `aula` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idoferta`),
   UNIQUE KEY `idoferta_UNIQUE` (`idoferta`),
   KEY `ofertaCurso_idx` (`codigoCurso`),
   KEY `ofertaProfesor_idx` (`idProfesor`),
   CONSTRAINT `ofertaCurso` FOREIGN KEY (`codigoCurso`) REFERENCES `cursos` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `ofertaProfesor` FOREIGN KEY (`idProfesor`) REFERENCES `profesores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +96,7 @@ CREATE TABLE `ofertas` (
 
 LOCK TABLES `ofertas` WRITE;
 /*!40000 ALTER TABLE `ofertas` DISABLE KEYS */;
-INSERT INTO `ofertas` VALUES (1,'s11','1',40,'2017','Bimestre');
+INSERT INTO `ofertas` VALUES (7,'IC101','CRC 101',15,'IS2017',NULL,'V - 10:30','10');
 /*!40000 ALTER TABLE `ofertas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -130,6 +110,8 @@ DROP TABLE IF EXISTS `profesores`;
 CREATE TABLE `profesores` (
   `id` varchar(100) NOT NULL,
   `nombre` varchar(100) NOT NULL,
+  `correo` varchar(100) DEFAULT NULL,
+  `telefono` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -140,7 +122,7 @@ CREATE TABLE `profesores` (
 
 LOCK TABLES `profesores` WRITE;
 /*!40000 ALTER TABLE `profesores` DISABLE KEYS */;
-INSERT INTO `profesores` VALUES ('1','Ericka Solano');
+INSERT INTO `profesores` VALUES ('CRC 101','Brondon','mail@mail.com','8591-7790');
 /*!40000 ALTER TABLE `profesores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,7 +195,6 @@ CREATE TABLE `solicitudes` (
 
 LOCK TABLES `solicitudes` WRITE;
 /*!40000 ALTER TABLE `solicitudes` DISABLE KEYS */;
-INSERT INTO `solicitudes` VALUES (1,1,'2017-04-19','INCLUSION','Dato de descripcion','1','solicitante ejemplo','1-1651','afectado 01','correo@afectado.com','73L3F0N0','ruta archivo','PENDIENTE','Sin aclaraciones'),(2,1,'2018-04-21','EXCLUSION','Descripcion xd','1','Solicitante anonónimo','1-1444','Juan Afectado','juan@afectado.com','11111112','File Url','PENDIENTE','Aclaracion#1');
 /*!40000 ALTER TABLE `solicitudes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -296,6 +277,126 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `registrarCurso` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarCurso`(
+IN cod VARCHAR(100), IN nomb VARCHAR(100), IN cred INT
+)
+BEGIN
+	IF NOT EXISTS (SELECT codigo FROM cursos WHERE codigo = cod)
+	THEN
+		INSERT INTO cursos 	(`codigo`, `nombre`, `creditos`)
+					VALUES	(cod, nomb, IFNULL(cred, 1) );
+                                
+	ELSE
+		SELECT codigo FROM cursos WHERE codigo = cod;
+	END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `registrarInconsistencia` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarInconsistencia`(
+IN detail VARCHAR(100)
+)
+BEGIN
+	IF NOT EXISTS (SELECT id FROM inconsistencias WHERE LOWER(detail) = LOWER(detalle) )
+	THEN
+		INSERT INTO inconsistencias	(`detalle`)
+					VALUES	(detail);
+                                
+		SELECT LAST_INSERT_ID() AS 'ultimoID';
+	ELSE
+		SELECT id FROM inconsistencias WHERE LOWER(detail) = LOWER(detalle);
+	END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `registrarOferta` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarOferta`( 
+IN codCurso VARCHAR(100), IN idProfe VARCHAR(100), IN nGrupo INT, 
+IN period VARCHAR(100), IN sched VARCHAR(100), IN class VARCHAR(100)
+)
+BEGIN
+	IF NOT EXISTS (SELECT idoferta FROM ofertas WHERE period = periodo AND codigoCurso = codCurso
+											AND numeroGrupo = nGrupo)
+	THEN
+		INSERT INTO ofertas (`codigoCurso`, `idProfesor`, `numeroGrupo`, `periodo`,
+							`horario`, `aula`)
+					VALUES	(codCurso, idProfe, nGrupo, period, IFNULL(sched, 'No definido'),
+							IFNULL(class, 'No definida'));
+                                
+		SELECT LAST_INSERT_ID() AS 'ultimoID';
+	ELSE
+		SELECT idoferta FROM ofertas WHERE period = periodo AND codigoCurso = codCurso
+											AND numeroGrupo = nGrupo;
+	END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `registrarProfesor` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarProfesor`(
+IN identif VARCHAR(100), IN nomb VARCHAR(100), IN mail VARCHAR(100), IN tel VARCHAR(100)
+)
+BEGIN
+	IF NOT EXISTS (SELECT id FROM profesores WHERE id = identif)
+	THEN
+		INSERT INTO profesores 	(`id`, `nombre`, `correo`, `telefono`)
+					VALUES	(identif, nomb, IFNULL(mail, 'Sin correo'), 
+							IFNULL(tel, 'Sin teléfono') );
+
+	ELSE
+		SELECT id FROM profesores WHERE id = identif;
+	END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `registrarSolicitud` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -347,4 +448,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-19 22:54:41
+-- Dump completed on 2017-04-20 20:48:20
