@@ -32,6 +32,7 @@ public class BackofficeEstudiante extends Backoffice {
     private void initComponents() {
 
         panelFondo = new javax.swing.JPanel();
+        panelFondo1 = new javax.swing.JPanel();
         btnRegistrarSolicitud = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabSolicitudes = new org.jdesktop.swingx.JXTable();
@@ -39,6 +40,8 @@ public class BackofficeEstudiante extends Backoffice {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panelFondo.setBackground(new java.awt.Color(255, 255, 255));
+
+        panelFondo1.setBackground(new java.awt.Color(255, 255, 255));
 
         btnRegistrarSolicitud.setText("Registrar");
         btnRegistrarSolicitud.addActionListener(new java.awt.event.ActionListener() {
@@ -60,25 +63,40 @@ public class BackofficeEstudiante extends Backoffice {
         ));
         jScrollPane1.setViewportView(tabSolicitudes);
 
-        javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
-        panelFondo.setLayout(panelFondoLayout);
-        panelFondoLayout.setHorizontalGroup(
-            panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFondoLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelFondo1Layout = new javax.swing.GroupLayout(panelFondo1);
+        panelFondo1.setLayout(panelFondo1Layout);
+        panelFondo1Layout.setHorizontalGroup(
+            panelFondo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFondo1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnRegistrarSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelFondo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelFondo1Layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(btnRegistrarSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 929, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
-        panelFondoLayout.setVerticalGroup(
-            panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFondoLayout.createSequentialGroup()
+        panelFondo1Layout.setVerticalGroup(
+            panelFondo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFondo1Layout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRegistrarSolicitud)
                 .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
+        panelFondo.setLayout(panelFondoLayout);
+        panelFondoLayout.setHorizontalGroup(
+            panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelFondo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        panelFondoLayout.setVerticalGroup(
+            panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFondoLayout.createSequentialGroup()
+                .addComponent(panelFondo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -107,6 +125,7 @@ public class BackofficeEstudiante extends Backoffice {
     private javax.swing.JButton btnRegistrarSolicitud;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelFondo;
+    private javax.swing.JPanel panelFondo1;
     private org.jdesktop.swingx.JXTable tabSolicitudes;
     // End of variables declaration//GEN-END:variables
 }
