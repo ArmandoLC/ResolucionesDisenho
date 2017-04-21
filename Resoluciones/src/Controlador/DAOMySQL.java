@@ -3,6 +3,7 @@
 package Controlador;
 
 import DTOs.*;
+import Modelo.Resolucion;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -262,6 +263,47 @@ public class DAOMySQL extends DAOSolicitud{
         } 
         catch (Exception e) {}
         
+    }
+    public void ConsultarResolucion(int idSolicitud ){
+    
+        ResultSet rs;
+        try{
+            
+            CallableStatement conexionSP = obtenerConexionSP("{call consultarResolucion(?)}");
+            
+            conexionSP.setInt("id", idSolicitud);
+            
+            rs = conexionSP.executeQuery();
+            
+        }
+        catch(Exception e){}
+        
+    }
+    
+    
+    public void RegistrarResolucion(int idSolicitud, Resolucion resolucion){
+        
+        Resolucion r = resolucion;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        ResultSet rs;
+        
+        try{
+            
+            CallableStatement conexionSP = obtenerConexionSP("{call registrarResolucion(?,?,?,?,?,?,?,?,?,?)}");
+            conexionSP.setInt("idSolicitud", idSolicitud);
+            conexionSP.setInt("nResolucion", r.getnResolucion());
+            conexionSP.setString("fecha", dateFormat.format(r.getFecha()));
+            conexionSP.setString("coordinador", r.getNombreCoordinador());
+            conexionSP.setString("directorEscuela", r.getNombreDirectorEscuela());
+            conexionSP.setString("directorAdmyReg", r.getNombreDirectorAdmYReg());
+            conexionSP.setString("introduccion", r.getIntroduccion());
+            conexionSP.setString("resultado", r.getResultado());
+            conexionSP.setString("considerandos", r.getConsiderandos());
+            conexionSP.setString("resuelvo", r.getResuelvo());
+            
+            
+        }
+        catch(Exception e){}
     }
     
     private CallableStatement obtenerConexionSP(String procAlmacenado) throws Exception {

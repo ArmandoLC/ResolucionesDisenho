@@ -416,7 +416,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     public boolean RegistrarResolucion(DTOResolucion resolucion) {
         try {
             DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
-            DB;
+            
             
             int nResolucion;
 
