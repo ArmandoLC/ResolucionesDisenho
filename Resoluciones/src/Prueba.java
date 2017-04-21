@@ -114,9 +114,11 @@ public class Prueba {
             for (DTOSolicitud solicitud : listSolicitudes) {
                 System.out.println(solicitud);
             }*/
-            System.out.println(CPrin.RegistrarSolicitud(s1));
+            //System.out.println(CPrin.RegistrarSolicitud(s1));
             
-            System.out.println("Solicitudes: "+ CPrin.ConsultarSolicitudes(Estado.Anulada));
+            //System.out.println("Solicitudes: "+ CPrin.ConsultarSolicitudes(Estado.Anulada));
+            System.out.println(CPrin.ConsultarInconsistencias());
+            System.out.println(CPrin.ConsultarSolicitudes());
             
             //for (Integer nGrupo1 : nGrupo) {
             //    System.out.println(nGrupo1);

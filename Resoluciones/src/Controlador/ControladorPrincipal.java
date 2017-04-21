@@ -300,8 +300,9 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         try {
             //Se debe registrar en la BD y en memoria(atributo inconsistencias del controlador)
             inconsistencias.add(incosistencia);
-
-            return true;
+            DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
+            int res =DB.RegistrarInconsistencia(incosistencia);
+            return res != -1;    
         } catch (Exception e) {
             return false;
         }
@@ -325,10 +326,15 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         DAOGoogleForm form = (DAOGoogleForm) factorySolicitudes.CrearDAOSolicitud(Recurso.GoogleForm);
         form.setRutaConexion(ruta);
         ArrayList<DTOSolicitud> dtoSolicitudes = form.ConsultarSolicitudes();
-
+        
+        //Se hacen persistir en la base de datos
         DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
         DB.RegistrarSolicitudes(dtoSolicitudes);
-
+        
+        //Se cargan las solicitudes en el atributo "solicitudes" del controlador
+        //para que se actualicen en memoria
+        ConsultarSolicitudes();
+        
         return true;
     }
 
