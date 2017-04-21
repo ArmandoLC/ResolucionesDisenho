@@ -33,10 +33,6 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Armando
- */
 public class ControladorPrincipal implements ISolicitud, ICoordinador {
 
     //Atributos propios del controlador
@@ -325,6 +321,11 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         DAOGoogleForm form = (DAOGoogleForm) factorySolicitudes.CrearDAOSolicitud(Recurso.GoogleForm);
         form.setRutaConexion(ruta);
         ArrayList<DTOSolicitud> dtoSolicitudes = form.ConsultarSolicitudes();
+        
+        for(DTOSolicitud solicitud : dtoSolicitudes) { 
+            solicitud.setEstado(Estado.Pendiente.name());
+            solicitud.setRutaArchivoAdjunto("Solicutud por medio del formulario");
+        }
 
         DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
         DB.RegistrarSolicitudes(dtoSolicitudes);

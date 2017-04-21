@@ -52,6 +52,7 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
             if(idSolicitud != -1) { 
                 backoffice.showMessage("La identificación de la solicitud es " + idSolicitud.toString());
                 ConsultarSolicitudes();
+                dialog.setVisible(false);
             } else backoffice.showError("No se ha podido registrar la solicitud");
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
@@ -169,7 +170,7 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
             backoffice.showMessage("Cargando solicitudes desde:\n"+archivo.getAbsolutePath());
             boolean respuesta = facade.RegistrarSolicitudes(archivo.getAbsolutePath());
             if(respuesta) {
-                backoffice.showMessage("Nueva inconsistencia registrada");
+                backoffice.showMessage("Solicitudes registradas");
                 ConsultarSolicitudes();
             }
             else backoffice.showMessage("No se ha podido registrar la inconsistencia");  
