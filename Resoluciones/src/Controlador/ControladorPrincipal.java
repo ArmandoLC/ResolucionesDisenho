@@ -338,7 +338,12 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         try {
             //Se debe tramitar en la BD y en memoria(atributo solicitud del controlador)
             getSolicitud(nSolicitud).setEstado(Estado.Tramitada);
-
+            DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
+            DB.TramitarSolicitud(nSolicitud);
+            
+            //Se actualizan en memoria las solicitudes
+            ConsultarSolicitudes();
+            
             return true;
         } catch (Exception e) {
             return false;
@@ -351,7 +356,13 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
             //Se debe anular en la BD y en memoria(atributo solicitud del controlador)
             getSolicitud(nSolicitud).setEstado(Estado.Anulada);
             getSolicitud(nSolicitud).setAclaracion(aclaracion);
-
+            
+            DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
+            DB.AnularSolicitud(nSolicitud, aclaracion);
+            
+            //Se actualizan en memoria las solicitudes
+            ConsultarSolicitudes();
+            
             return true;
         } catch (Exception e) {
             return false;
