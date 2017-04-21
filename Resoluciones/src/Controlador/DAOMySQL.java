@@ -257,17 +257,18 @@ public class DAOMySQL extends DAOSolicitud{
                        
             CallableStatement conexionSP = obtenerConexionSP("{call tramitarSolicitud(?)}");
                         
-            conexionSP.setInt("idS", idSolicitud);
+            conexionSP.setInt("idSolicitud", idSolicitud);
             
             rs = conexionSP.executeQuery(); 
         } 
         catch (Exception e) {}
         
     }
-    public void ConsultarResolucion(int idSolicitud ){
+    public Resolucion ConsultarResolucion(int idSolicitud ){
     
         ResultSet rs;
         try{
+            Resolucion resolucion = new Resolucion();
             
             CallableStatement conexionSP = obtenerConexionSP("{call consultarResolucion(?)}");
             
@@ -275,20 +276,35 @@ public class DAOMySQL extends DAOSolicitud{
             
             rs = conexionSP.executeQuery();
             
+            while (rs.next() )
+            {
+                resolucion.setnResolucion(rs.getInt("nResolucion"));
+                resolucion.setFecha(rs.getDate("fecha"));
+                resolucion.setNombreCoordinador(rs.getString("coordinador"));
+                resolucion.setNombreDirectorEscuela(rs.getString("directorEscuela"));
+                resolucion.setNombreDirectorAdmYReg(rs.getString("directorAdmyReg"));
+                resolucion.setIntroduccion(rs.getString("introduccion"));
+                resolucion.setResultado(rs.getString("resultado"));
+                resolucion.setConsiderandos(rs.getString("considerandos"));
+                resolucion.setResuelvo(rs.getString("resuelvo"));
+            }
+            
+            return resolucion;
         }
-        catch(Exception e){}
+        catch(Exception e){
+            return new Resolucion();
+        }
         
     }
     
     
-    public void RegistrarResolucion(int idSolicitud, Resolucion resolucion){
+    public boolean RegistrarResolucion(int idSolicitud, Resolucion resolucion){
         
         Resolucion r = resolucion;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         ResultSet rs;
         
-        try{
-            
+        try{           
             CallableStatement conexionSP = obtenerConexionSP("{call registrarResolucion(?,?,?,?,?,?,?,?,?,?)}");
             conexionSP.setInt("idSolicitud", idSolicitud);
             conexionSP.setInt("nResolucion", r.getnResolucion());
@@ -300,10 +316,13 @@ public class DAOMySQL extends DAOSolicitud{
             conexionSP.setString("resultado", r.getResultado());
             conexionSP.setString("considerandos", r.getConsiderandos());
             conexionSP.setString("resuelvo", r.getResuelvo());
-            
-            
+ 
+            rs = conexionSP.executeQuery();
+            return true;
         }
-        catch(Exception e){}
+        catch(Exception e){
+            return false;
+        }
     }
     
     private CallableStatement obtenerConexionSP(String procAlmacenado) throws Exception {

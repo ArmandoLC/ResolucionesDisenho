@@ -201,6 +201,7 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
         } catch(Exception e){ backoffice.showMessage(e.getMessage()); }
     }
     
+    
     public void GuardarResolucion(JDialog pdialog) {
         try{  DialogGuardarResolucion dialog = (DialogGuardarResolucion) pdialog;
             Formato formato = Formato.valueOf((String) dialog.getCbFormatos().getSelectedItem());
@@ -211,9 +212,17 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
         } catch(Exception e){ backoffice.showMessage(e.getMessage()); }
     }
 
-    public void ConsultarResolucion(JDialog dialog) {
-        try{
-            
+    public void ConsultarResolucion(JDialog pdialog) {
+        try{  DialogRegistrarResolucion dialog = (DialogRegistrarResolucion) pdialog;
+            DTOResolucion resolucion = facade.ConsultarResolucion(dialog.getSolicitud().getId());
+            if(resolucion != null){
+                dialog.setIntroduccion(resolucion.getIntroduccion());
+                dialog.setConsiderandos(resolucion.getConsiderandos());
+                dialog.setResuelvo(resolucion.getResuelvo());
+                dialog.setResultado(resolucion.getResultado());
+                dialog.getBtnGuardar().setVisible(true);
+                dialog.getBtnRegistrar().setVisible(false);
+            }         
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
 

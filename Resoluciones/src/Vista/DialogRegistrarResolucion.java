@@ -7,6 +7,7 @@ import java.awt.Dialog;
 import java.awt.Frame;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JToggleButton;
 import org.jdesktop.swingx.JXEditorPane;
 
 public class DialogRegistrarResolucion extends javax.swing.JDialog {
@@ -34,6 +35,7 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
         uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
         txtEditor.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         this.solicitud = solicitud;
+        uibackoffice.ConsultarResolucion(this);
         setLocationRelativeTo(null);
     }
 
@@ -55,7 +57,6 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtEditor.setBackground(new java.awt.Color(255, 255, 255));
         txtEditor.setBorder(null);
         txtEditor.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
         txtEditor.setDisabledTextColor(new java.awt.Color(255, 255, 255));
@@ -202,14 +203,14 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnResuelvoActionPerformed
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        uibackoffice.RegistrarResolucion(this);
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         Dialog dialog  = new DialogGuardarResolucion((Frame) this.getParent(), true, resolucion);
         dialog.setVisible(true);
     }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        uibackoffice.RegistrarResolucion(this);
-    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -294,6 +295,38 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
 
     public void setBtnRegistrar(JButton btnRegistrar) {
         this.btnRegistrar = btnRegistrar;
+    }
+
+    public JToggleButton getBtnConsiderandos() {
+        return btnConsiderandos;
+    }
+
+    public void setBtnConsiderandos(JToggleButton btnConsiderandos) {
+        this.btnConsiderandos = btnConsiderandos;
+    }
+
+    public JToggleButton getBtnIntroduccion() {
+        return btnIntroduccion;
+    }
+
+    public void setBtnIntroduccion(JToggleButton btnIntroduccion) {
+        this.btnIntroduccion = btnIntroduccion;
+    }
+
+    public JToggleButton getBtnResuelvo() {
+        return btnResuelvo;
+    }
+
+    public void setBtnResuelvo(JToggleButton btnResuelvo) {
+        this.btnResuelvo = btnResuelvo;
+    }
+
+    public JToggleButton getBtnResultado() {
+        return btnResultado;
+    }
+
+    public void setBtnResultado(JToggleButton btnResultado) {
+        this.btnResultado = btnResultado;
     }
     
     

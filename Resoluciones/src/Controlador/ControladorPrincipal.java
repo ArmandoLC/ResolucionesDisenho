@@ -431,8 +431,11 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
             String considerandos = resolucion.getConsiderandos();
             String resuelvo = resolucion.getResuelvo();
             
-            Resolucion resolucionResult = new Resolucion(nResolucion, fecha, nombreCoordinador, nombreDirectorEscuela, nombreDirectorAdmYReg, introduccion, resultado, considerandos, resuelvo);
+            Resolucion resolucionResult = new Resolucion(
+                    nResolucion, fecha, nombreCoordinador, nombreDirectorEscuela, 
+                    nombreDirectorAdmYReg, introduccion, resultado, considerandos, resuelvo);
             
+            DB.RegistrarResolucion(resolucion.getIdSolicitud(), resolucionResult);
             getSolicitud(resolucion.getIdSolicitud()).setResolucion(resolucionResult);
             
             return true;
@@ -444,8 +447,11 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
 
     @Override
     public DTOResolucion ConsultarResolucion(int nSolicitud) {
+        DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
         Solicitud solicitud = getSolicitud(nSolicitud);
+        DB.ConsultarResolucion(nSolicitud);
         return crearDTOResolucion(solicitud.getResolucion(), solicitud.getId());
+        
     }
 
     @Override
