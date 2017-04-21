@@ -16,7 +16,7 @@ import javax.swing.JFileChooser;
 
 public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
 
-    private static final FacadeCoordinador facade = new FacadeCoordinador();
+    private static FacadeCoordinador facade = new FacadeCoordinador();
     private final BackofficeCoordinador backoffice;
 
     

@@ -257,7 +257,7 @@ public class DAOMySQL extends DAOSolicitud{
                        
             CallableStatement conexionSP = obtenerConexionSP("{call tramitarSolicitud(?)}");
                         
-            conexionSP.setInt("idSolicitud", idSolicitud);
+            conexionSP.setInt("idS", idSolicitud);
             
             rs = conexionSP.executeQuery(); 
         } 
