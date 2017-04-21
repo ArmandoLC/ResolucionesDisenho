@@ -61,6 +61,34 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         this.CargarPremisas();
     }
 
+    public void CargarPremisas() {
+        try {
+            ArrayList<DTOCurso> listCursos = daoPremisa.ConsultarPlanEstudios();
+            ArrayList<DTOPersona> listDocentes = daoPremisa.ConsultarCarteraDocente();
+            ArrayList<DTOferta> listOferta = daoPremisa.ConsultarOfertaAcademica();
+            inconsistencias = daoPremisa.ConsultarInconsistencias();
+            
+            DAOMySQL BD = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
+            listCursos.stream().forEach((curso) -> {
+                BD.RegistrarCurso(curso);
+            });
+            listDocentes.stream().forEach((docente) -> {
+                BD.RegistrarProfesor(docente);
+            });
+            listOferta.stream().forEach((oferta) -> {
+                BD.RegistrarOferta(oferta);
+            });
+            inconsistencias.stream().forEach((inconsistencia) -> {
+                BD.RegistrarInconsistencia(inconsistencia);
+            });
+   
+            listCursos.forEach((DTOCurso) -> setPlanEstudios(DTOCurso));
+            listDocentes.forEach((DTOPersona) -> setCarteraDocentes(DTOPersona));
+            listOferta.forEach((DTOferta) -> setOfertaAcademica(DTOferta));
+        } catch (Exception e) {
+        }
+    }
+    
     private Curso getCurso(String idCurso) {
         for (int i = 0; i < planEstudios.size(); i++) {
             if (planEstudios.get(i).getId().equals(idCurso)) {
@@ -155,8 +183,13 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         dtoSolicitud.setNombreSolicitante(solicitud.getSolicitante().getNombre());
         dtoSolicitud.setInconsistencia(solicitud.getInconsistencia());
         dtoSolicitud.setRutaArchivoAdjunto(solicitud.getRutaArchivoAdjunto());
-        //dtoSolicitud.setnResolucion(solicitud.getResolucion().getnResolucion());
-
+        if(solicitud.getResolucion() == null){
+            dtoSolicitud.setnResolucion(-1);
+        }
+        else{
+            dtoSolicitud.setnResolucion(solicitud.getResolucion().getnResolucion());
+        }
+        
         return dtoSolicitud;
     }
 
@@ -174,41 +207,6 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         Oferta oferta = new Oferta(getCurso(dtoOferta.getIdCurso()), getProfesor(dtoOferta.getIdProfesor()),
                 dtoOferta.getPeriodo(), dtoOferta.getnGrupo(), dtoOferta.getHorario(), dtoOferta.getAula());
         ofertaAcademica.add(oferta);
-    }
-
-    public void CargarPremisas() {
-        try {
-            ArrayList<DTOCurso> listCursos = daoPremisa.ConsultarPlanEstudios();
-            ArrayList<DTOPersona> listDocentes = daoPremisa.ConsultarCarteraDocente();
-            ArrayList<DTOferta> listOferta = daoPremisa.ConsultarOfertaAcademica();
-            inconsistencias = daoPremisa.ConsultarInconsistencias();
-            
-            DAOMySQL BD = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
-            for(DTOCurso curso : listCursos) BD.RegistrarCurso(curso);
-            for(DTOPersona docente : listDocentes) BD.RegistrarProfesor(docente);
-            for(DTOferta oferta : listOferta) BD.RegistrarOferta(oferta);
-            for(String inconsistencia : inconsistencias ) BD.RegistrarInconsistencia(inconsistencia);
-   
-            listCursos.forEach((DTOCurso) -> setPlanEstudios(DTOCurso));
-            listDocentes.forEach((DTOPersona) -> setCarteraDocentes(DTOPersona));
-            listOferta.forEach((DTOferta) -> setOfertaAcademica(DTOferta));
-        } catch (Exception e) {
-        }
-    }
-
-    @Override
-    public ArrayList<DTOSolicitud> ConsultarSolicitudes() {
-        DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
-        ArrayList<DTOSolicitud> dtoSolicitudes = DB.ConsultarSolicitudes();
-        solicitudes = new ArrayList<>();
-        System.gc();
-        
-        //Actualizar solicitudes
-        for (DTOSolicitud dtoSolicitud : dtoSolicitudes) {
-            solicitudes.add(generarSolicitud(dtoSolicitud));
-        }
-        
-        return dtoSolicitudes;
     }
     
     private Solicitud generarSolicitud(DTOSolicitud dtoSolicitud){
@@ -238,6 +236,49 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
                 .create();
         
         return nuevaSolic;
+    }
+    
+    private String getPropiedad(String propiedad) throws IOException {
+        Properties prop = new Properties();
+        FileReader reader = new FileReader("src\\PropertiesFile.properties");
+        prop.load(reader);
+        return prop.getProperty(propiedad);
+    }
+
+    private void setPropiedad(String propiedad, String valor) throws IOException {
+        Properties prop = new Properties();
+        FileReader reader = new FileReader("src\\PropertiesFile.properties");
+        prop.load(reader);
+        prop.setProperty(propiedad, valor);
+    }
+
+    private void fillMap(String id, Map mapa) {
+        if (mapa.containsKey(id)) {
+            int valor = (int) mapa.get(id);
+            mapa.put(id, valor + 1);
+        } else {
+            mapa.put(id, 1);
+        }
+    }
+
+    private String getHigherIdFromMap(Map mapa) {
+
+        return (String) Collections.max(mapa.entrySet(), Map.Entry.comparingByValue()).getKey();
+    }
+
+    @Override
+    public ArrayList<DTOSolicitud> ConsultarSolicitudes() {
+        DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
+        ArrayList<DTOSolicitud> dtoSolicitudes = DB.ConsultarSolicitudes();
+        solicitudes = new ArrayList<>();
+        System.gc();
+        
+        //Actualizar solicitudes
+        for (DTOSolicitud dtoSolicitud : dtoSolicitudes) {
+            solicitudes.add(generarSolicitud(dtoSolicitud));
+        }
+        
+        return dtoSolicitudes;
     }
     
     @Override
@@ -371,20 +412,6 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         }
     }
 
-    private String getPropiedad(String propiedad) throws IOException {
-        Properties prop = new Properties();
-        FileReader reader = new FileReader("src\\PropertiesFile.properties");
-        prop.load(reader);
-        return prop.getProperty(propiedad);
-    }
-
-    private void setPropiedad(String propiedad, String valor) throws IOException {
-        Properties prop = new Properties();
-        FileReader reader = new FileReader("src\\PropertiesFile.properties");
-        prop.load(reader);
-        prop.setProperty(propiedad, valor);
-    }
-
     @Override
     public boolean RegistrarResolucion(DTOResolucion resolucion) {
         try {
@@ -502,19 +529,4 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         return resultado;
 
     }
-
-    private void fillMap(String id, Map mapa) {
-        if (mapa.containsKey(id)) {
-            int valor = (int) mapa.get(id);
-            mapa.put(id, valor + 1);
-        } else {
-            mapa.put(id, 1);
-        }
-    }
-
-    private String getHigherIdFromMap(Map mapa) {
-
-        return (String) Collections.max(mapa.entrySet(), Map.Entry.comparingByValue()).getKey();
-    }
-
 }
