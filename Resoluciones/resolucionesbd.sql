@@ -36,7 +36,7 @@ CREATE TABLE `cursos` (
 
 LOCK TABLES `cursos` WRITE;
 /*!40000 ALTER TABLE `cursos` DISABLE KEYS */;
-INSERT INTO `cursos` VALUES ('IC101','cursoIC',15);
+INSERT INTO `cursos` VALUES ('IC1802','Introducci�n a la Programaci�n',3),('IC1803','Taller de Programaci�n',3),('IC4301','Bases de Datos I',4),('IC5821','Requerimientos de Software',4),('IC6821','Dise�o de Software',4);
 /*!40000 ALTER TABLE `cursos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,7 +52,7 @@ CREATE TABLE `inconsistencias` (
   `detalle` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +61,7 @@ CREATE TABLE `inconsistencias` (
 
 LOCK TABLES `inconsistencias` WRITE;
 /*!40000 ALTER TABLE `inconsistencias` DISABLE KEYS */;
-INSERT INTO `inconsistencias` VALUES (1,'satan');
+INSERT INTO `inconsistencias` VALUES (2,'EXCLUSION_ACTA'),(3,'INCLUSION_ACTA');
 /*!40000 ALTER TABLE `inconsistencias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +87,7 @@ CREATE TABLE `ofertas` (
   KEY `ofertaProfesor_idx` (`idProfesor`),
   CONSTRAINT `ofertaCurso` FOREIGN KEY (`codigoCurso`) REFERENCES `cursos` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `ofertaProfesor` FOREIGN KEY (`idProfesor`) REFERENCES `profesores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `ofertas` (
 
 LOCK TABLES `ofertas` WRITE;
 /*!40000 ALTER TABLE `ofertas` DISABLE KEYS */;
-INSERT INTO `ofertas` VALUES (7,'IC101','CRC 101',15,'IS2017',NULL,'V - 10:30','10');
+INSERT INTO `ofertas` VALUES (8,'IC1802','5-5555-5555',1,'IS2017',NULL,'K-J 7:30-9:20','B3-08'),(9,'IC1803','5-5555-5555',1,'IS2017',NULL,'K-J 9:30-11:20','B3-08'),(10,'IC4301','2-2222-2222',1,'IS2017',NULL,'M-V 13:00-14:50','B3-06'),(11,'IC4301','4-4444-4444',2,'IS2017',NULL,'M-V 7:30-9:20','B3-06'),(12,'IC5821','2-2222-2222',1,'IS2017',NULL,'M-V 15:00-16:50','B3-06'),(13,'IC6821','1-1111-1111',1,'IS2017',NULL,'K-J 7:30-9:20','B3-07'),(14,'IC6821','1-1111-1111',2,'IS2017',NULL,'M-V 7:30-9:20','B3-07');
 /*!40000 ALTER TABLE `ofertas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +122,7 @@ CREATE TABLE `profesores` (
 
 LOCK TABLES `profesores` WRITE;
 /*!40000 ALTER TABLE `profesores` DISABLE KEYS */;
-INSERT INTO `profesores` VALUES ('CRC 101','Brondon','mail@mail.com','8591-7790');
+INSERT INTO `profesores` VALUES ('1-1111-1111','Ericka Solano Fern�ndez','ersolano@itcr.ac.cr','8111-1111'),('2-2222-2222','Alicia Salazar Hern�ndez','asalazar@itcr.ac.cr','8222-2222'),('3-3333-3333','Sa�l Calder�n Ram�rez','sacalderon@itcr.ac.cr','8333-3333'),('4-4444-4444','Franco Quir�s Ram�rez','fquiros@itcr.ac.cr','8444-4444'),('5-5555-5555','Ivannia Cerdas Quesada','iquesada@itcr.ac.cr','8555-5555'),('CRC 101','Brondon','mail@mail.com','8591-7790');
 /*!40000 ALTER TABLE `profesores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,7 +186,7 @@ CREATE TABLE `solicitudes` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `solicitudOferta_idx` (`idOferta`),
   CONSTRAINT `solicitudOferta` FOREIGN KEY (`idOferta`) REFERENCES `ofertas` (`idoferta`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,6 +195,7 @@ CREATE TABLE `solicitudes` (
 
 LOCK TABLES `solicitudes` WRITE;
 /*!40000 ALTER TABLE `solicitudes` DISABLE KEYS */;
+INSERT INTO `solicitudes` VALUES (12,8,'2014-02-02','asdf','asdf','asdf','sdf','asdf','asdf','asf','asdf','asdf','Anulada','Satanas en vida la anulo');
 /*!40000 ALTER TABLE `solicitudes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -226,6 +227,29 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'resolucionesbd'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `anularSolicitud` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `anularSolicitud`(
+IN idS INT, IN aclaration TEXT
+)
+BEGIN
+	UPDATE solicitudes
+    SET estado = 'Anulada', aclaracion = aclaration
+    WHERE id = idS;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `consultarSolicitudes` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -438,6 +462,29 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `tramitarSolicitud` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `tramitarSolicitud`(
+IN idS INT
+)
+BEGIN
+	UPDATE solicitudes
+    SET estado = 'Tramitada'
+    WHERE id = idS;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -448,4 +495,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-20 20:48:20
+-- Dump completed on 2017-04-20 23:52:11
