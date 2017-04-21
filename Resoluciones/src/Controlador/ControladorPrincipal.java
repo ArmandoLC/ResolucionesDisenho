@@ -336,6 +336,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     @Override
     public boolean TramitarSolicitud(int nSolicitud) {
         try {
+            ConsultarSolicitudes();
             //Se debe tramitar en la BD y en memoria(atributo solicitud del controlador)
             getSolicitud(nSolicitud).setEstado(Estado.Tramitada);
             DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
@@ -353,6 +354,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     @Override
     public boolean AnularSolicitud(int nSolicitud, String aclaracion) {
         try {
+            ConsultarSolicitudes();
             //Se debe anular en la BD y en memoria(atributo solicitud del controlador)
             getSolicitud(nSolicitud).setEstado(Estado.Anulada);
             getSolicitud(nSolicitud).setAclaracion(aclaracion);
