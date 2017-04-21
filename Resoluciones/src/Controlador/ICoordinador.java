@@ -14,13 +14,6 @@ import java.util.ArrayList;
  */
 public interface ICoordinador extends IEstadisticas {
     
-    public DTOCurso ConsultarCurso(int nSolicitud);    
-    
-    public ArrayList<DTOCurso> ConsultarCursos();
-    
-    public DTOPersona ConsultarProfesor(int nSolicitud);
-    
-    public ArrayList<String> ConsultarInconsistencias();
     
     public boolean RegistrarInconsistencia(String incosistencia);
     
@@ -36,8 +29,9 @@ public interface ICoordinador extends IEstadisticas {
     
     public DTOResolucion ConsultarResolucion(int nSolicitud);
     
-    public boolean GenerarResolucion(DTOResolucion resolucion, Formato formato, String ruta);  
+    public boolean GuardarResolucion(DTOResolucion resolucion, Formato formato, String ruta);  
     
-    public ArrayList<Integer> ConsultarGrupos(String codCurso);
+    public DTOPersona ConsultarProfesor(int nSolicitud);
+
     
 }

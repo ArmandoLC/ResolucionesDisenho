@@ -13,7 +13,7 @@ import java.util.Date;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 
-public class UIBackofficeCoordinador {
+public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
 
     private final FacadeCoordinador facade;
     private final BackofficeCoordinador backoffice;
@@ -23,7 +23,48 @@ public class UIBackofficeCoordinador {
         this.facade = new FacadeCoordinador();
         this.backoffice = (BackofficeCoordinador) backoffice;
     }
-
+   
+    @Override
+    public void RegistrarSolicitud( JDialog pdialog ) {
+        try{  DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) pdialog;
+            DTOSolicitud dtoSolicitud = new DTOSolicitud();
+            dtoSolicitud.setFecha(Calendar.getInstance().getTime()); 
+            dtoSolicitud.setIdSolicitante(dialog.getTxtIdSolicitante().getText());
+            dtoSolicitud.setNombreSolicitante(dialog.getTxtNombreSolicitante().getText());
+            String nPeriodo =  (String) dialog.getCbPeriodo().getSelectedItem();
+            String modalidad = (String) dialog.getCbModalidad().getSelectedItem();
+            String anho = dialog.getTxtAnho().getText();
+            String periodo = nPeriodo + String.valueOf(modalidad.charAt(0)) + anho;
+            dtoSolicitud.setPeriodo(periodo);
+            dtoSolicitud.setCodigoCurso((String) dialog.getCbCurso().getSelectedItem());
+            dtoSolicitud.setnGrupo(Integer.parseInt((String) dialog.getCbGrupo().getSelectedItem()));
+            dtoSolicitud.setIdAfectado(dialog.getTxtIdAfectado().getText());
+            dtoSolicitud.setNombreAfectado(dialog.getTxtNombreAfectado().getText());
+            dtoSolicitud.setCorreoAfectado(dialog.getTxtCorreoAfectado().getText());
+            dtoSolicitud.setTelefonoAfectado(dialog.getTxtTelefono().getText());
+            dtoSolicitud.setInconsistencia((String) dialog.getCbSituacion().getSelectedItem());         
+            dtoSolicitud.setDescripcionDetallada(dialog.getTxtDescripcion().getText());
+            dtoSolicitud.setRutaArchivoAdjunto(dialog.getTxtArchivoAdjunto().getText());
+            dtoSolicitud.setEstado(Estado.Pendiente.name());
+            dtoSolicitud.setAclaracion(" sin definir");
+            Integer idSolicitud = facade.RegistrarSolicitud(dtoSolicitud);
+            if(idSolicitud != -1) { 
+                backoffice.showMessage("La identificación de la solicitud es " + idSolicitud.toString());
+                ConsultarSolicitudes();
+            }
+            else backoffice.showMessage("No se ha podido registrar la solicitud");
+        } catch(Exception e){ backoffice.showError(e.getMessage()); }   
+    }
+    
+    @Override
+    public void ConsultarSituaciones(JDialog pdialog) {
+        try{  DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) pdialog;
+            ArrayList<String> situaciones = facade.ConsultarInconsistencias();
+            situaciones.forEach((situacion) -> { dialog.getCbSituacion().addItem(situacion); });
+        } catch(Exception e){ backoffice.showError(e.getMessage()); }
+    }
+    
+    @Override
     public void ConsultarSolicitudes() {
         try{  ArrayList<DTOSolicitud> solicitudes;
             String item = (String) backoffice.getCbEstado().getSelectedItem();
@@ -32,6 +73,25 @@ public class UIBackofficeCoordinador {
             backoffice.getTabModelSolicitudes().setSolicitudes(solicitudes);
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
+    
+    @Override
+    public void ConsultarCursos(JDialog pdialog) {
+        try{  DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) pdialog;
+            ArrayList<DTOCurso> cursos = facade.ConsultarCursos();
+            cursos.forEach((curso) -> { dialog.getCbCurso().addItem(curso.getId()); });
+        } catch(Exception e){ backoffice.showError(e.getMessage()); }
+    }
+
+    @Override
+    public void ConsultarGrupos(JDialog pdialog){
+        try{  DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) pdialog;
+            dialog.getCbGrupo().removeAllItems();
+            String codCurso = (String) dialog.getCbCurso().getSelectedItem();
+            ArrayList<Integer> grupos = facade.ConsultarGrupos(codCurso);
+            grupos.forEach((grupo) -> { dialog.getCbGrupo().addItem(grupo.toString()); });
+        } catch(Exception e){ backoffice.showError(e.getMessage()); }
+    }
+    
         
     public void ConsultarSolicitudesAtendidas(JDialog pdialog){
         try{  DialogSolicitudesAtendidas dialog = (DialogSolicitudesAtendidas) pdialog;
@@ -79,37 +139,7 @@ public class UIBackofficeCoordinador {
             else backoffice.showMessage("No se ha podido realizar la acción");
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
-    
-    public void RegistrarSolicitud(JDialog pdialog ) {
-        try{  DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) pdialog;
-            DTOSolicitud dtoSolicitud = new DTOSolicitud();
-            dtoSolicitud.setFecha(Calendar.getInstance().getTime()); 
-            dtoSolicitud.setIdSolicitante(dialog.getTxtIdSolicitante().getText());
-            dtoSolicitud.setNombreSolicitante(dialog.getTxtNombreSolicitante().getText());
-            String nPeriodo =  (String) dialog.getCbPeriodo().getSelectedItem();
-            String modalidad = (String) dialog.getCbModalidad().getSelectedItem();
-            String anho = dialog.getTxtAnho().getText();
-            String periodo = nPeriodo + String.valueOf(modalidad.charAt(0)) + anho;
-            dtoSolicitud.setPeriodo(periodo);
-            dtoSolicitud.setCodigoCurso((String) dialog.getCbCurso().getSelectedItem());
-            dtoSolicitud.setnGrupo(Integer.parseInt((String) dialog.getCbGrupo().getSelectedItem()));
-            dtoSolicitud.setIdAfectado(dialog.getTxtIdAfectado().getText());
-            dtoSolicitud.setNombreAfectado(dialog.getTxtNombreAfectado().getText());
-            dtoSolicitud.setCorreoAfectado(dialog.getTxtCorreoAfectado().getText());
-            dtoSolicitud.setTelefonoAfectado(dialog.getTxtTelefono().getText());
-            dtoSolicitud.setInconsistencia((String) dialog.getCbSituacion().getSelectedItem());         
-            dtoSolicitud.setDescripcionDetallada(dialog.getTxtDescripcion().getText());
-            dtoSolicitud.setRutaArchivoAdjunto(dialog.getTxtArchivoAdjunto().getText());
-            dtoSolicitud.setEstado(Estado.Pendiente.name());
-            dtoSolicitud.setAclaracion(" sin definir");
-            Integer idSolicitud = facade.RegistrarSolicitud(dtoSolicitud);
-            if(idSolicitud != -1) { 
-                backoffice.showMessage("La identificación de la solicitud es " + idSolicitud.toString());
-                ConsultarSolicitudes();
-            }
-            else backoffice.showMessage("No se ha podido registrar la solicitud");
-        } catch(Exception e){ backoffice.showError(e.getMessage()); }   
-    }
+   
   
     public void RegistrarInconsistencia(JDialog pdialog) {
         try{  DialogInconsistencia dialog = (DialogInconsistencia) pdialog;
@@ -161,7 +191,7 @@ public class UIBackofficeCoordinador {
         try{  DialogGuardarResolucion dialog = (DialogGuardarResolucion) pdialog;
             Formato formato = Formato.valueOf((String) dialog.getCbFormatos().getSelectedItem());
             String ruta = dialog.getTxtRuta().getText();
-            boolean respuesta = facade.GenerarResolucion(dialog.getResolucion(), formato, ruta);
+            boolean respuesta = facade.GuardarResolucion(dialog.getResolucion(), formato, ruta);
             if(respuesta) backoffice.showMessage("Resolución guardada en " + ruta); 
             else backoffice.showMessage("No se ha podido realizar la acción");  
         } catch(Exception e){ backoffice.showMessage(e.getMessage()); }
@@ -173,27 +203,5 @@ public class UIBackofficeCoordinador {
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
 
-    public void ConsultarCursos(JDialog pdialog) {
-        try{  DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) pdialog;
-            ArrayList<DTOCurso> cursos = facade.ConsultarCursos();
-            cursos.forEach((curso) -> { dialog.getCbCurso().addItem(curso.getId()); });
-        } catch(Exception e){ backoffice.showError(e.getMessage()); }
-    }
-    
-    public void ConsultarSituaciones(JDialog pdialog) {
-        try{  DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) pdialog;
-            ArrayList<String> situaciones = facade.ConsultarInconsistencias();
-            situaciones.forEach((situacion) -> { dialog.getCbSituacion().addItem(situacion); });
-        } catch(Exception e){ backoffice.showError(e.getMessage()); }
-    }
-    
-    public void ConsultarGrupos(JDialog pdialog){
-        try{  DialogRegistrarSolicitud dialog = (DialogRegistrarSolicitud) pdialog;
-            dialog.getCbGrupo().removeAllItems();
-            String codCurso = (String) dialog.getCbCurso().getSelectedItem();
-            ArrayList<Integer> grupos = facade.ConsultarGrupos(codCurso);
-            grupos.forEach((grupo) -> { dialog.getCbGrupo().addItem(grupo.toString()); });
-        } catch(Exception e){ backoffice.showError(e.getMessage()); }
-    }
     
 }

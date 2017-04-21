@@ -82,8 +82,8 @@ public class FacadeCoordinador extends Facade implements ICoordinador{
     }
 
     @Override
-    public boolean GenerarResolucion(DTOResolucion resolucion, Formato formato, String ruta) {
-        return ctrl.GenerarResolucion(resolucion, formato, ruta);
+    public boolean GuardarResolucion(DTOResolucion resolucion, Formato formato, String ruta) {
+        return ctrl.GuardarResolucion(resolucion, formato, ruta);
     }
     
     @Override

@@ -1,6 +1,6 @@
 package Vista;
 
-import DTOs.DTOCurso;
+
 import Enums.Modalidad;
 import java.awt.event.ItemEvent;
 import java.io.File;
@@ -12,13 +12,20 @@ import org.jdesktop.swingx.JXTextArea;
 
 public class DialogRegistrarSolicitud extends javax.swing.JDialog {
 
-    private final UIBackofficeCoordinador uibackoffice;
+    private final UIBackoffice uibackoffice;
     
     public DialogRegistrarSolicitud(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
         initModalidad();
+       
+        if(parent instanceof BackofficeCoordinador){
+           uibackoffice = (UIBackoffice) new UIBackofficeCoordinador(((Backoffice) parent));
+        }
+        else {
+           uibackoffice = (UIBackoffice) new UIBackofficeEstudiante(((Backoffice) parent));
+        }
+        this.setLocationRelativeTo(null);
         initConsultas();
     }
     

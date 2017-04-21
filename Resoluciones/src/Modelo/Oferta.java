@@ -1,27 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo;
 
-import java.util.Objects;
-
-/**
- *
- * @author Armando
- */
 public class Oferta {
     //Atributos de relación con otras clases
     private Curso curso;
     private Profesor profesor;
     
     //Atributos propios de la oferta
-    private String periodo;
-    private int nGrupo;
-    private String horario;
-    private String aula;
+    private String periodo = "";
+    private int nGrupo = 0;
+    private String horario = "";
+    private String aula = "";
 
+    public Oferta(){
+    
+    }
+    
     public Oferta(Curso curso, Profesor profesor, String periodo, int nGrupo, String horario, String aula) {
         this.curso = curso;
         this.profesor = profesor;

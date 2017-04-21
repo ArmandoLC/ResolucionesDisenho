@@ -21,7 +21,6 @@ import Enums.Recurso;
 import Modelo.Estudiante;
 import Modelo.Persona;
 import Modelo.Resolucion;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -215,9 +214,11 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         //dtoSolicitud.setId(dtoS);
         Oferta infoCurso = null;
         for (Oferta oferta : ofertaAcademica) {
-            if (oferta.getCurso().getId().equals(dtoSolicitud.getCodigoCurso()) && oferta.getnGrupo() == dtoSolicitud.getnGrupo()) {
+            Boolean b1 = oferta.getCurso().getId().equals(dtoSolicitud.getCodigoCurso());
+            Boolean b2 = oferta.getnGrupo() == dtoSolicitud.getnGrupo();
+            System.out.println(b1 + " " + b2);
+            if (b1 && b2) {
                 infoCurso = oferta;
-                break;
             }
         }
         DTOPersona dtoAfectado = crearDTOPersona(new Estudiante(dtoSolicitud.getIdAfectado(), dtoSolicitud.getNombreAfectado(), dtoSolicitud.getCorreoAfectado(), dtoSolicitud.getTelefonoAfectado()));
@@ -240,9 +241,9 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     @Override
     public int RegistrarSolicitud(DTOSolicitud dtoSolicitud) {
         //Se procede a guardar en la base de datos..
-        DAOMySQL BD = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
-        int identificador = BD.RegistrarSolicitud(dtoSolicitud);
-        dtoSolicitud.setId(identificador);
+        //DAOMySQL BD = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
+        //int identificador = BD.RegistrarSolicitud(dtoSolicitud);
+        //dtoSolicitud.setId(identificador);
         
         solicitudes.add(generarSolicitud(dtoSolicitud));
         
@@ -401,7 +402,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     }
 
     @Override
-    public boolean GenerarResolucion(DTOResolucion resolucion, Formato formato, String ruta) {
+    public boolean GuardarResolucion(DTOResolucion resolucion, Formato formato, String ruta) {
         if (formato.equals(Formato.HTML)) {
             estrategiaGeneracion = new GeneradorResolucionHTML();
         } else {
