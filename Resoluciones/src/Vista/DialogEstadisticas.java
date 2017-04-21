@@ -6,7 +6,7 @@ import org.jdesktop.swingx.JXTable;
 
 public class DialogEstadisticas extends javax.swing.JDialog {
 
-    UIBackofficeCoordinador uibackoffice;
+    private final UIBackofficeCoordinador uibackoffice;
 
     public DialogEstadisticas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

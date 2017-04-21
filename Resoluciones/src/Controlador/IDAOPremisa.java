@@ -13,5 +13,5 @@ public interface IDAOPremisa {
 
     public ArrayList<DTOferta> ConsultarOfertaAcademica() throws Exception;
 
-    public ArrayList<String> ConsultarSituaciones() throws Exception;
+    public ArrayList<String> ConsultarInconsistencias() throws Exception;
 }

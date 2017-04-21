@@ -4,11 +4,15 @@ import org.jdesktop.swingx.JXEditorPane;
 
 public class DialogSolicitudesAtendidas extends javax.swing.JDialog {
 
+    private final UIBackofficeCoordinador uibackoffice;
     
     public DialogSolicitudesAtendidas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        uibackoffice = new UIBackofficeCoordinador(((Backoffice) parent));
+        uibackoffice.ConsultarSolicitudesAtendidas(this);
         setLocationRelativeTo(null);
+        
     }
 
     public JXEditorPane getEditor() {

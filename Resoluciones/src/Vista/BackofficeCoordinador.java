@@ -167,7 +167,7 @@ public class BackofficeCoordinador extends Backoffice{
             }
         });
 
-        btnExtraerExcel.setText("Extraer solicitudes del Excel");
+        btnExtraerExcel.setText("Registrar desde CVS");
         btnExtraerExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExtraerExcelActionPerformed(evt);

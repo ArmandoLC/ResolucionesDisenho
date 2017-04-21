@@ -41,7 +41,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
 
     //Atributos propios del controlador
     private DAOSolicitud daoSolicitud;
-    private ArrayList<String> situaciones;
+    private ArrayList<String> inconsistencias;
 
     //Atributos de las relaciones con las otras clases (COMPOSICIONES)
     private IDAOPremisa daoPremisa;
@@ -185,8 +185,14 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
             ArrayList<DTOCurso> listCursos = daoPremisa.ConsultarPlanEstudios();
             ArrayList<DTOPersona> listDocentes = daoPremisa.ConsultarCarteraDocente();
             ArrayList<DTOferta> listOferta = daoPremisa.ConsultarOfertaAcademica();
-            situaciones = daoPremisa.ConsultarSituaciones();
-
+            inconsistencias = daoPremisa.ConsultarInconsistencias();
+            
+            DAOMySQL BD = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
+            for(DTOCurso curso : listCursos) BD.RegistrarCurso(curso);
+            for(DTOPersona docente : listDocentes) BD.RegistrarProfesor(docente);
+            for(DTOferta oferta : listOferta) BD.RegistrarOferta(oferta);
+            for(String inconsistencia : inconsistencias ) BD.RegistrarInconsistencia(inconsistencia);
+   
             listCursos.forEach((DTOCurso) -> setPlanEstudios(DTOCurso));
             listDocentes.forEach((DTOPersona) -> setCarteraDocentes(DTOPersona));
             listOferta.forEach((DTOferta) -> setOfertaAcademica(DTOferta));
@@ -286,14 +292,14 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
 
     @Override
     public ArrayList<String> ConsultarInconsistencias() {
-        return situaciones;
+        return inconsistencias;
     }
 
     @Override
     public boolean RegistrarInconsistencia(String incosistencia) {
         try {
-            //Se debe registrar en la BD y en memoria(atributo situaciones del controlador)
-            situaciones.add(incosistencia);
+            //Se debe registrar en la BD y en memoria(atributo inconsistencias del controlador)
+            inconsistencias.add(incosistencia);
 
             return true;
         } catch (Exception e) {
@@ -450,7 +456,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         }
         int count = 1;
 
-        while (count <= top) {
+        while (count <= top && !topList.isEmpty()) {
             String key = getHigherIdFromMap(topList);
             DTOPersona nuevo = new DTOPersona();
             nuevo.setId(key);
@@ -474,7 +480,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         }
         int count = 1;
 
-        while (count <= top) {
+        while (count <= top && !topList.isEmpty()) {
             String key = getHigherIdFromMap(topList);
             DTOCurso nuevo = new DTOCurso();
             nuevo.setId(key);

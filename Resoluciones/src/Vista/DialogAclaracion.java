@@ -7,8 +7,8 @@ import org.jdesktop.swingx.JXTextArea;
 
 public class DialogAclaracion extends javax.swing.JDialog {
 
-    DTOSolicitud solicitud; 
-    UIBackofficeCoordinador uibackoffice;
+    private DTOSolicitud solicitud; 
+    private UIBackofficeCoordinador uibackoffice;
 
     public DialogAclaracion(java.awt.Frame parent, boolean modal, DTOSolicitud solicitud) {
         super(parent, modal);
@@ -16,6 +16,7 @@ public class DialogAclaracion extends javax.swing.JDialog {
         this.solicitud = solicitud;
         initComponents();
         initVariables();
+        uibackoffice = new UIBackofficeCoordinador(((Backoffice) parent));
         setLocationRelativeTo(null);
     }
     

@@ -118,7 +118,7 @@ public class DAOPremisaExcel implements IDAOPremisa {
     }
 
     @Override
-    public ArrayList<String> ConsultarSituaciones() {
+    public ArrayList<String> ConsultarInconsistencias() {
         ArrayList<String> situaciones = new ArrayList<>();
 
         try {
