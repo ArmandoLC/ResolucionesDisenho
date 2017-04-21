@@ -450,13 +450,11 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     @Override
     public DTOResolucion ConsultarResolucion(int nSolicitud) {
         
-        return crearDTOResolucion(getSolicitud(nSolicitud).getResolucion(), nSolicitud);
-        
-        //DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
+        DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
         //Solicitud solicitud = getSolicitud(nSolicitud);
-        //DB.ConsultarResolucion(nSolicitud);
-        //return crearDTOResolucion(solicitud.getResolucion(), solicitud.getId());
-        
+        Resolucion res = DB.ConsultarResolucion(nSolicitud);
+        DTOResolucion resolucion = crearDTOResolucion(res, nSolicitud);
+        return resolucion;
     }
 
     @Override
