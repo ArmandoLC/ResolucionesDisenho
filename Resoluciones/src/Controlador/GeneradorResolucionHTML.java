@@ -86,11 +86,13 @@ public class GeneradorResolucionHTML implements IGeneradorResolucion {
             return true;
         }
         catch (Exception e){
+            System.out.println("No se pudo generar el documento HTML");
             return false;
         } 
         
-    }    public int Generar() {
+    }    
+    /*public int Generar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
     
 }

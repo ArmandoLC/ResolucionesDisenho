@@ -93,6 +93,7 @@ public class GeneradorResolucionPDF implements IGeneradorResolucion{
             return true;
         }
         catch (Exception e){
+            System.out.println("No se pudo generar el documento PDF");
             return false;
         } 
         

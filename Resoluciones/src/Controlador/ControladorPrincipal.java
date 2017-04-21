@@ -21,6 +21,8 @@ import Enums.Recurso;
 import Modelo.Estudiante;
 import Modelo.Persona;
 import Modelo.Resolucion;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -246,10 +248,15 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     }
 
     private void setPropiedad(String propiedad, String valor) throws IOException {
-        Properties prop = new Properties();
-        FileReader reader = new FileReader("src\\PropertiesFile.properties");
-        prop.load(reader);
-        prop.setProperty(propiedad, valor);
+         FileInputStream in = new FileInputStream("src\\PropertiesFile.properties");
+        Properties props = new Properties();
+        props.load(in);
+        in.close();
+
+        FileOutputStream out = new FileOutputStream("src\\PropertiesFile.properties");
+        props.setProperty(propiedad, valor);
+        props.store(out, null);
+        out.close();
     }
 
     private void fillMap(String id, Map mapa) {
@@ -439,7 +446,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
             //Se guarda en memoria
             getSolicitud(resolucion.getIdSolicitud()).setResolucion(resolucionResult);
             
-             
+            
             return true;
         } catch (IOException ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -468,6 +475,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         }
 
         Solicitud solicitud = getSolicitud(idSolicitud);
+        System.out.println("Solicitud: "+solicitud.toString());
         return estrategiaGeneracion.Generar(solicitud.getResolucion(), ruta);
     }
 
