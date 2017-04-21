@@ -19,4 +19,5 @@ public interface ISolicitud {
     
     public ArrayList<Integer> ConsultarGrupos(String codCurso);
     
+    public  ArrayList<DTOSolicitud> consultarSolicitudesEstudiante(String idEstudiante);
 }

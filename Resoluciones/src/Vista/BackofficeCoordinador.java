@@ -49,7 +49,7 @@ public class BackofficeCoordinador extends Backoffice{
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -30);
         dpDesde.setDate(calendar.getTime());
-        calendar.add(Calendar.DAY_OF_MONTH, 30);
+        calendar.add(Calendar.DAY_OF_MONTH, 31);
         dpHasta.setDate(calendar.getTime());
     }
     

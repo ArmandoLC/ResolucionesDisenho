@@ -35,5 +35,10 @@ public class FacadeEstudiante extends Facade{
     public ArrayList<DTOCurso> ConsultarCursos() {
         return ctrl.ConsultarCursos();
     }
+
+    @Override
+    public ArrayList<DTOSolicitud> consultarSolicitudesEstudiante(String idEstudiante) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

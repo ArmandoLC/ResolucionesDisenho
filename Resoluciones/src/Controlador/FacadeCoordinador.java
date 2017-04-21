@@ -106,5 +106,10 @@ public class FacadeCoordinador extends Facade implements ICoordinador{
         return ctrl.ConsultarTopCursos(top);
     }
 
+    @Override
+    public ArrayList<DTOSolicitud> consultarSolicitudesEstudiante(String idEstudiante) {
+        return ctrl.consultarSolicitudesEstudiante(idEstudiante);
+    }
+
         
 }
