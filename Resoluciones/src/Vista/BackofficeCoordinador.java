@@ -131,7 +131,7 @@ public class BackofficeCoordinador extends Backoffice{
 
         busyPainter1 = new org.jdesktop.swingx.painter.BusyPainter();
         panelFondo = new javax.swing.JPanel();
-        cbEstado = new javax.swing.JComboBox<>();
+        cbEstado = new javax.swing.JComboBox<String>();
         jLabel1 = new javax.swing.JLabel();
         btnRegistrarSolicitud = new javax.swing.JButton();
         btnExtraerExcel = new javax.swing.JButton();
@@ -146,12 +146,14 @@ public class BackofficeCoordinador extends Backoffice{
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mitemInconsistencia = new javax.swing.JMenuItem();
+        mitemConsultarSolicitudEstudiante = new javax.swing.JMenuItem();
         mitemSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panelFondo.setBackground(new java.awt.Color(255, 255, 255));
 
+        cbEstado.setToolTipText("Filtrar las solicitudes por estado");
         cbEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbEstadoActionPerformed(evt);
@@ -161,13 +163,14 @@ public class BackofficeCoordinador extends Backoffice{
         jLabel1.setText("Filtrar por estado:");
 
         btnRegistrarSolicitud.setText("Registrar");
+        btnRegistrarSolicitud.setToolTipText("Registro de solicitudes");
         btnRegistrarSolicitud.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarSolicitudActionPerformed(evt);
             }
         });
 
-        btnExtraerExcel.setText("Registrar desde CVS");
+        btnExtraerExcel.setText("Importar solicitudes CSV");
         btnExtraerExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExtraerExcelActionPerformed(evt);
@@ -269,6 +272,14 @@ public class BackofficeCoordinador extends Backoffice{
         });
         jMenu1.add(mitemInconsistencia);
 
+        mitemConsultarSolicitudEstudiante.setText("Consultar solicitudes estudiante");
+        mitemConsultarSolicitudEstudiante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitemConsultarSolicitudEstudianteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mitemConsultarSolicitudEstudiante);
+
         mitemSalir.setText("Salir");
         mitemSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,6 +340,11 @@ public class BackofficeCoordinador extends Backoffice{
         // TODO add your handling code here:
     }//GEN-LAST:event_cbEstadoActionPerformed
 
+    private void mitemConsultarSolicitudEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemConsultarSolicitudEstudianteActionPerformed
+        JDialog dialog = new DialogFiltrarSolicitudEstudiante(this, true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_mitemConsultarSolicitudEstudianteActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExtraerExcel;
     private javax.swing.JButton btnRegistrarSolicitud;
@@ -344,6 +360,7 @@ public class BackofficeCoordinador extends Backoffice{
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXHyperlink linkEstadisticas;
     private org.jdesktop.swingx.JXHyperlink linkReporteSolicitudes;
+    private javax.swing.JMenuItem mitemConsultarSolicitudEstudiante;
     private javax.swing.JMenuItem mitemInconsistencia;
     private javax.swing.JMenuItem mitemSalir;
     private javax.swing.JPanel panelFondo;

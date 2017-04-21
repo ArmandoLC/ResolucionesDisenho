@@ -19,6 +19,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mitemInconsistenciaActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mitemConsultarSolicitudEstudiante">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Consultar solicitudes estudiante"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mitemConsultarSolicitudEstudianteActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mitemSalir">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salir"/>
@@ -141,6 +149,9 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JComboBox" name="cbEstado">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Filtrar las solicitudes por estado"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEstadoActionPerformed"/>
           </Events>
@@ -156,6 +167,7 @@
         <Component class="javax.swing.JButton" name="btnRegistrarSolicitud">
           <Properties>
             <Property name="text" type="java.lang.String" value="Registrar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Registro de solicitudes"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarSolicitudActionPerformed"/>
@@ -163,7 +175,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnExtraerExcel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Registrar desde CVS"/>
+            <Property name="text" type="java.lang.String" value="Importar solicitudes CSV"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExtraerExcelActionPerformed"/>

@@ -241,6 +241,9 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
         try{  ArrayList<DTOSolicitud> solicitudes;
             solicitudes = facade.consultarSolicitudesEstudiante(idEstudiante);
             backoffice.getTabModelSolicitudes().setSolicitudes(solicitudes);
+            if(solicitudes.isEmpty()){
+                backoffice.showMessage("No se encontraron resultados en la consulta");
+            }
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
 
