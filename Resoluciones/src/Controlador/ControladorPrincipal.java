@@ -415,6 +415,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     @Override
     public boolean RegistrarResolucion(DTOResolucion resolucion) {
         try {
+            DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
             int nResolucion;
             nResolucion = Integer.parseInt(getPropiedad("nResolucionActual"));
             setPropiedad("nResolucionActual", String.valueOf(nResolucion + 1));
@@ -432,13 +433,13 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
                     nResolucion, fecha, nombreCoordinador, nombreDirectorEscuela, 
                     nombreDirectorAdmYReg, introduccion, resultado, considerandos, resuelvo);
             
+            //Se guarda en la base de datos
             DB.RegistrarResolucion(resolucion.getIdSolicitud(), resolucionResult);
+            
+            //Se guarda en memoria
             getSolicitud(resolucion.getIdSolicitud()).setResolucion(resolucionResult);
             
-            //Se guarda en la base de datos
-            DAOMySQL DB = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
-            DB.RegistrarResolucion(resolucion.getIdSolicitud(), resolucionResult);
-            
+             
             return true;
         } catch (IOException ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
