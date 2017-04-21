@@ -236,5 +236,13 @@ public class UIBackofficeCoordinador extends Backoffice implements UIBackoffice{
         } catch(Exception e){ backoffice.showError(e.getMessage()); return null; }
     }
 
+    @Override
+    public void ConsultarSolicitudesEstudiante(String idEstudiante) {
+        try{  ArrayList<DTOSolicitud> solicitudes;
+            solicitudes = facade.consultarSolicitudesEstudiante(idEstudiante);
+            backoffice.getTabModelSolicitudes().setSolicitudes(solicitudes);
+        } catch(Exception e){ backoffice.showError(e.getMessage()); }
+    }
+
     
 }

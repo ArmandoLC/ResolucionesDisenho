@@ -558,4 +558,16 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         return resultado;
 
     }
+
+    @Override
+    public ArrayList<DTOSolicitud> consultarSolicitudesEstudiante(String idEstudiante) {
+        ArrayList<DTOSolicitud> dtoSolicitudes = new ArrayList<>();
+        
+        for (Solicitud solicitud : solicitudes) {
+            if(solicitud.getAfectado().getId().equals(idEstudiante)){
+                dtoSolicitudes.add(crearDTOSolicitud(solicitud));
+            }
+        }
+        return dtoSolicitudes;
+    }
 }

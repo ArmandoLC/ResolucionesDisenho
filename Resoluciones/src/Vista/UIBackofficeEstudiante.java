@@ -91,6 +91,11 @@ public class UIBackofficeEstudiante extends Backoffice implements UIBackoffice{
             grupos.forEach((grupo) -> { dialog.getCbGrupo().addItem(grupo.toString()); });
         } catch(Exception e){ backoffice.showError(e.getMessage()); }
     }
+
+    @Override
+    public void ConsultarSolicitudesEstudiante(String idEstudiante) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }
