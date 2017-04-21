@@ -231,6 +231,39 @@ public class DAOMySQL extends DAOSolicitud{
         
     }
     
+    public void AnularSolicitud(int idSolicitud, String aclaracion) {      
+        
+        ResultSet rs;
+        
+        try {
+                       
+            CallableStatement conexionSP = obtenerConexionSP("{call anularSolicitud(?,?)}");
+                        
+            conexionSP.setInt("idS", idSolicitud);
+            conexionSP.setString("aclaration", aclaracion);
+            
+            rs = conexionSP.executeQuery(); 
+        } 
+        catch (Exception e) {}
+        
+    }
+    
+    public void TramitarSolicitud(int idSolicitud) {      
+        
+        ResultSet rs;
+        
+        try {
+                       
+            CallableStatement conexionSP = obtenerConexionSP("{call tramitarSolicitud(?)}");
+                        
+            conexionSP.setInt("idS", idSolicitud);
+            
+            rs = conexionSP.executeQuery(); 
+        } 
+        catch (Exception e) {}
+        
+    }
+    
     private CallableStatement obtenerConexionSP(String procAlmacenado) throws Exception {
         
         Class.forName("com.mysql.jdbc.Driver");
