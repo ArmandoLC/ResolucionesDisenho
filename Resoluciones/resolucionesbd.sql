@@ -157,6 +157,7 @@ CREATE TABLE `resoluciones` (
 
 LOCK TABLES `resoluciones` WRITE;
 /*!40000 ALTER TABLE `resoluciones` DISABLE KEYS */;
+INSERT INTO `resoluciones` VALUES (12,15,'2014-12-12','esta','esta','esta','estaesta','esta','esta','esta');
 /*!40000 ALTER TABLE `resoluciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -454,11 +455,11 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarResolucion`(
 IN idSolicitud INT(11), IN nResolucion INT(11),  IN fecha DATE, IN coordinador VARCHAR(100), 
-in directorEscuela VARCHAR(100), in directorAdmyReg text, in introduccion text, 
+in directorEscuela VARCHAR(100), in directorAdmyReg VARCHAR(100), in introduccion text, 
 in resultado text, in considerandos text, in resuelvo text
 )
 BEGIN
-	IF NOT EXISTS (select idS from resoluciones where idS = resoluciones.idSolicitud)
+	IF NOT EXISTS (select idSolicitud from resoluciones where idSolicitud = resoluciones.idSolicitud)
 	THEN
 		insert into resoluciones (`idSolicitud`, `numeroResolucion`, `fecha`, `coordinador`, `directorEscuela`,
 					`directorAdmYReg`, `introduccion`, `resultado`,`considerandos`,`resuelvo`)  
@@ -546,4 +547,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-21  4:16:11
+-- Dump completed on 2017-04-21  5:08:57
