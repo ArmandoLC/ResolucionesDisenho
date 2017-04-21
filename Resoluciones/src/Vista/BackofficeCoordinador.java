@@ -98,10 +98,9 @@ public class BackofficeCoordinador extends Backoffice{
     
     public void setPopupOptionsSolicitudTramitada(DTOSolicitud solicitud){
         JMenuItem item = new JMenuItem();
-        if(solicitud.getnResolucion() == 0) item.setText("Registrar resolución");
-        else item.setText("Visualizar resolución");
+        item.setText("Resolución");
         item.addActionListener((ActionEvent e) -> {
-            Dialog dialog = new DialogResolucion(this, true, solicitud);
+            Dialog dialog = new DialogRegistrarResolucion(this, true, solicitud);
             dialog.setVisible(true);
         }); popup.add(item);
     }

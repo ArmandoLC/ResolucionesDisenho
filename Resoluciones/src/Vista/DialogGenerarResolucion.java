@@ -1,13 +1,19 @@
 package Vista;
 
+import DTOs.DTOResolucion;
 import Enums.Formato;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
 
 public class DialogGenerarResolucion extends javax.swing.JDialog {
 
-    public DialogGenerarResolucion(java.awt.Frame parent, boolean modal) {
+    private DTOResolucion resolucion; 
+    
+    public DialogGenerarResolucion(java.awt.Frame parent, boolean modal, DTOResolucion resolucion) {
         super(parent, modal);
         initComponents();
         setFormatos();
+        this.resolucion = resolucion;
     }
     
     private void setFormatos(){
@@ -104,4 +110,31 @@ public class DialogGenerarResolucion extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtRuta;
     // End of variables declaration//GEN-END:variables
+
+    public JComboBox<String> getCbFormatos() {
+        return cbFormatos;
+    }
+
+    public void setCbFormatos(JComboBox<String> cbFormatos) {
+        this.cbFormatos = cbFormatos;
+    }
+
+    public JTextField getTxtRuta() {
+        return txtRuta;
+    }
+
+    public void setTxtRuta(JTextField txtRuta) {
+        this.txtRuta = txtRuta;
+    }
+
+    public DTOResolucion getResolucion() {
+        return resolucion;
+    }
+
+    public void setResolucion(DTOResolucion resolucion) {
+        this.resolucion = resolucion;
+    }
+
+    
+
 }

@@ -4,6 +4,7 @@ import Controlador.FacadeCoordinador;
 import DTOs.DTOCurso;
 import DTOs.DTOSolicitud;
 import Enums.Estado;
+import Enums.Formato;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -137,13 +138,16 @@ public class UIBackofficeCoordinador {
         } catch(Exception e){ backoffice.showError(e.getMessage()); }   
     }
     
-    public void GenerarResolucion(JDialog dialog) {
-        try{
+    public void GenerarResolucion(JDialog pdialog) {
+        try{  DialogGenerarResolucion dialog = (DialogGenerarResolucion) pdialog;
+            Formato formato = Formato.valueOf((String) dialog.getCbFormatos().getSelectedItem());
+            String ruta = dialog.getTxtRuta().getText();
+            boolean respuesta = facade.GenerarResolucion(dialog.getResolucion(), formato, ruta);
+            if(respuesta) backoffice.showMessage("Resolución guardada en " + ruta); 
+            else backoffice.showMessage("No se ha podido realizar la acción");
             
         }
-        catch(Exception e){
-            backoffice.showMessage(e.getMessage());
-        }
+        catch(Exception e){ backoffice.showMessage(e.getMessage()); }
     }
 
     public void ConsultarResolucion(JDialog dialog) {
