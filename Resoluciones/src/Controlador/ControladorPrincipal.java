@@ -472,9 +472,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
 
         while (count <= top && !topList.isEmpty()) {
             String key = getHigherIdFromMap(topList);
-            DTOPersona nuevo = new DTOPersona();
-            nuevo.setId(key);
-            resultado.add(nuevo);
+            resultado.add( crearDTOPersona( getProfesor(key)));
             topList.remove(key);
             count++;
         }
@@ -488,7 +486,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
         ArrayList<DTOCurso> resultado = new ArrayList<>();
         Map<String, Integer> topList = new HashMap<>();
 
-        solicitudes.forEach((curso) -> fillMap(curso.getInfoCurso().getProfesor().getId(), topList));
+        solicitudes.forEach((solic) -> fillMap(solic.getInfoCurso().getCurso().getId(), topList));
         if (top < 1) {
             top = 1;
         }
@@ -496,9 +494,7 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
 
         while (count <= top && !topList.isEmpty()) {
             String key = getHigherIdFromMap(topList);
-            DTOCurso nuevo = new DTOCurso();
-            nuevo.setId(key);
-            resultado.add(nuevo);
+            resultado.add( crearDTOCurso( getCurso(key)));
             topList.remove(key);
             count++;
         }
