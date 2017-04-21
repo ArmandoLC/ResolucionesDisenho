@@ -241,9 +241,9 @@ public class ControladorPrincipal implements ISolicitud, ICoordinador {
     @Override
     public int RegistrarSolicitud(DTOSolicitud dtoSolicitud) {
         //Se procede a guardar en la base de datos..
-        //DAOMySQL BD = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
-        //int identificador = BD.RegistrarSolicitud(dtoSolicitud);
-        //dtoSolicitud.setId(identificador);
+        DAOMySQL BD = (DAOMySQL) factorySolicitudes.CrearDAOSolicitud(Recurso.MySQL);
+        int identificador = BD.RegistrarSolicitud(dtoSolicitud);
+        dtoSolicitud.setId(identificador);
         
         solicitudes.add(generarSolicitud(dtoSolicitud));
         
