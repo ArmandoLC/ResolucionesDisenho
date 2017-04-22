@@ -15,31 +15,31 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
     private final UIBackofficeCoordinador uibackoffice;
     
     private DTOSolicitud solicitud;
-    private String introduccion = " <b>{ Hora y fecha }</b>, el suscrito <b>{ " + 
-                        "Nombre del Director }</b>, Director de la Escuela de Ingeniería en Computación en " +
-                        "atención al caso de <b>{ Situacion de inconsistencia }</b> del estudiante <b>{ Nombre del afectado }</b>" +
-                        ", carné <b>{ carné del afectado }</b> , sobre el curso <b>{ código y nombre del curso }</b> " +
-                        ", grupo <b>{ Número de grupo }</b>, del <b>{ Semestre }</b> , resuelvo:";
+    private String introduccion = "{ Hora y fecha }, el suscrito { " + 
+                        "Nombre del Director }, Director de la Escuela de Ingeniería en Computación en " +
+                        "atención al caso de { Situacion de inconsistencia } del estudiante{ Nombre del afectado }" +
+                        ", carné { carné del afectado } , sobre el curso { código y nombre del curso } " +
+                        ", grupo { Número de grupo }, del { Semestre } , resuelvo:";
     
-    private String resultado =   "Por un error involuntario, no se tramitó la inclusión del estudiante <b>{ Nombre del estudiante }</b>" +
-                        "con identificación <b>{ carné del estudiante }</b> en el curso <b>{ código y nombre del curso }</b>" +
-                        ", grupo <b>{ Número de grupo }</b> impartido por el " +
-                        "profesor <b>{ Nombre del profesor }</b> en el <b>{ Semestre }</b>, " + 
+    private String resultado =   "Por un error involuntario, no se tramitó la inclusión del estudiante { Nombre del estudiante }" +
+                        "con identificación { carné del estudiante } en el curso { código y nombre del curso }" +
+                        ", grupo { Número de grupo } impartido por el " +
+                        "profesor { Nombre del profesor } en el { Semestre }, " + 
                         "el profesor no pudo registrar en el acta la calificación obtenida\n" +
                         "por el estudiante.  ";
     
     private String considerandos = "Después de haber realizado la investigación del caso, y consultado al profesor" +
-                        "<b>{ Nombre del profesor }</b>, quien impartió el curso <b>{ código y nombre del curso }</b>" +
-                        ", <b>{ Número de grupo }</b>, del <b>{ Semestre }</b> " +
-                        " se logra comprobar que el estudiante <b>{ Nombre del afectado }</b>," +
-                        "carné <b>{ carné del estudiante }</b>, efectivamente aprobó el curso con una nota de noventa y cinco" +
+                        "{ Nombre del profesor }, quien impartió el curso { código y nombre del curso }" +
+                        ", { Número de grupo }, del { Semestre } " +
+                        " se logra comprobar que el estudiante { Nombre del afectado }," +
+                        "carné { carné del estudiante }, efectivamente aprobó el curso con una nota de noventa y cinco" +
                         "(95), por lo que esta Dirección solicita gestionar la modificación del acta\n" +
                         "correspondiente. ";
     
-    private String resuelvo =   " Autorizar la modificación del acta del curso  <b>{ código y nombre del curso }</b>" +
-                        " grupo <b>{ Número de grupo }</b> en el <b>{ Semestre }</b>" +
-                        "impartido por el profesor <b>{ Nombre del profesor }</b> para inc,luir al estudiante" +
-                        "<b>{ Nombre del afectado }</b>, carné <b>{ carné del estudiante }</b> con una nota de aprobación" +
+    private String resuelvo =   " Autorizar la modificación del acta del curso  { código y nombre del curso }" +
+                        " grupo { Número de grupo } en el { Semestre }" +
+                        "impartido por el profesor { Nombre del profesor } para inc,luir al estudiante" +
+                        "{ Nombre del afectado }, carné { carné del estudiante } con una nota de aprobación" +
                         "de noventa y cinco (95). ";
     
     public DialogRegistrarResolucion(java.awt.Frame parent, boolean modal, DTOSolicitud solicitud) {
@@ -49,7 +49,6 @@ public class DialogRegistrarResolucion extends javax.swing.JDialog {
         uibackoffice = new UIBackofficeCoordinador((Backoffice) parent);
         txtEditor.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         
-        txtEditor.setContentType("text/html");
         txtEditor.setText(introduccion);
         btnIntroduccion.setSelected(true);
         this.solicitud = solicitud;
